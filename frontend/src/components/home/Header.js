@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import casual from '../../assets/home/casual.jpg'
 
 const Welcome = styled.div`
-  background-url: url(${casual});
+  background-image: url(${casual});
   background-size: cover;
+  min-height: 700px;
 `
 
 export default () => <Welcome />

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import logo from '../../assets/logo/logowhite.png'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
   width: 100vw;
@@ -16,14 +17,51 @@ const Container = styled.div`
 `
 
 const Logo = styled.img`
-  height: 40px;
+  height: 20px;
+  margin: 1em;
 `
+
+const Menu = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  & + & {
+    margin-left: 1em;
+  }
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    color: white;
+    text-decoration: none;
+  }
+`
+
+const menus = [
+  { name: 'Home', path: '/' },
+  { name: 'Register', path: '/register' },
+  { name: 'Login', path: '/login' },
+]
 
 class Navbar extends React.PureComponent {
   render() {
     return (
       <Container>
         <Logo src={logo} alt="curt." />
+        <Menu>
+          {menus.map(menu => (
+            <StyledLink key={menu.name} to={menu.path}>
+              {menu.name}
+            </StyledLink>
+          ))}
+        </Menu>
       </Container>
     )
   }
