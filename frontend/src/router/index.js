@@ -9,20 +9,22 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: Home
+    component: Home,
   },
   {
     path: '/redux',
-    component: DemoRedux
+    component: DemoRedux,
   },
   {
     path: '/route-component/:number', // URL params
-    component: DemoRouteComponent
-  }
+    component: DemoRouteComponent,
+  },
 ]
 
 export default () => (
   <Fragment>
-    {routes.map((route, i) => <Route key={i} {...route} />)}
+    {routes.map((route, i) => (
+      <Route key={i} {...route} />
+    ))}
   </Fragment>
 )
