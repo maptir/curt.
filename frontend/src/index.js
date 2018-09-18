@@ -12,6 +12,7 @@ injectGlobal`
   body {
     margin: 0;
     padding: 0;
+    position: relative;
   }
 `
 

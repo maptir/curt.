@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Header from '../components/home/Header'
 
 class Home extends React.Component {
   state = {
@@ -13,9 +14,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-          <i className="fa fa-home" aria-hidden="true" /> {this.state.msg}
-        </h1>
+        <Header />
       </div>
     )
   }
