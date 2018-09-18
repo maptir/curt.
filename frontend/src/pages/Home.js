@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 class Home extends React.Component {
   state = {
-    msg: 'Home'
+    msg: 'Home',
   }
 
   componentDidMount = () => {} // fetch data here
@@ -14,7 +14,7 @@ class Home extends React.Component {
     return (
       <div>
         <h1>
-          <i className="fa fa-home" aria-hidden="true"></i> { this.state.msg }
+          <i className="fa fa-home" aria-hidden="true" /> {this.state.msg}
         </h1>
       </div>
     )
