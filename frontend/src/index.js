@@ -9,6 +9,9 @@ import 'font-awesome/css/font-awesome.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
 injectGlobal`
+  * {
+    font-family: 'Nunito Sans', sans-serif;
+  }
   body {
     margin: 0;
     padding: 0;
@@ -22,5 +25,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )
