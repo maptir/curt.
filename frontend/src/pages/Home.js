@@ -20,7 +20,8 @@ class Home extends React.Component {
         <Header />
         <News />
         <Shop />
-        <ProductSlider />
+        <News />
+        {/* <ProductSlider /> */}
       </div>
     )
   }
