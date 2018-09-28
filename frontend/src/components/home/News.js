@@ -14,7 +14,7 @@ const Button = styled.button`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1em;
 `
 
@@ -27,7 +27,10 @@ const NewsTitle = styled.div`
 class News extends React.Component {
   render() {
     return (
-      <div style={{ maxWidth: '1000px', margin: 'auto' }} className="container mt-5 mb-5">
+      <div
+        style={{ maxWidth: '1000px', margin: 'auto' }}
+        className="container mt-5 mb-5"
+      >
         <div className="text-center">
           UNIQUE IS THE NEW COOLS ! <br />
           EXPRESS YOURSELF <br />
