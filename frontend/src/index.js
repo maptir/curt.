@@ -21,10 +21,11 @@ injectGlobal`
 
   button {
     border: none;
+    cursor: pointer;
   }
 
   button:focus {
-    outline: none;
+    outline: 0 !important;
   }
 `
 
