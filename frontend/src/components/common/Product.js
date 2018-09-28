@@ -1,20 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
+import StyledLink from '../common/StyledLink'
 
 const Image = styled.div`
   background: url(${props => props.imageUrl}) center center / cover no-repeat;
   width: 100%;
   padding-top: 100%;
   max-height: 200px;
-`
-
-const StyledLink = styled(Link)`
-  color: black !important;
-  text-decoration: none;
-  :hover {
-    text-decoration: none;
-  }
 `
 
 const Title = styled.div`
@@ -33,7 +26,7 @@ const Desc = styled.div`
 
 const Product = props => {
   return (
-    <div>
+    <div {...props}>
       <StyledLink to="/">
         <Image className="img-fluid" imageUrl={props.imageUrl} />
       </StyledLink>

@@ -8,6 +8,9 @@ import { Provider } from 'react-redux'
 import 'font-awesome/css/font-awesome.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+
 injectGlobal`
   * {
     font-family: 'Nunito Sans', sans-serif;
