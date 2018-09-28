@@ -31,9 +31,10 @@ const Menu = styled.div`
 
 const StyledLink = styled(Link)`
   color: white;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 700;
   text-decoration: none;
-  margin: 1.2em 0;
+  margin: 1.6em 0;
   & + & {
     margin-left: 1em;
   }
@@ -49,9 +50,9 @@ const StyledLink = styled(Link)`
 `
 
 const menus = [
-  { name: 'Home', path: '/' },
-  { name: 'Register', path: '/register' },
-  { name: 'Login', path: '/login' },
+  { name: 'HOME', path: '/' },
+  { name: 'REGISTER', path: '/register' },
+  { name: 'LOGIN', path: '/login' },
 ]
 
 class Navbar extends React.PureComponent {

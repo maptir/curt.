@@ -4,12 +4,13 @@ import Product from '../common/Product'
 import firstNews from '../../assets/home/new1.jpg'
 import secondNews from '../../assets/home/new2.jpg'
 import thirdNews from '../../assets/home/new3.jpg'
+import text from '../../assets/text/home-text.png'
 
 const Button = styled.button`
   border-radius: 50px !important;
   padding-right: 30px !important;
   padding-left: 30px !important;
-  font-size: 10px !important;
+  font-size: 14px !important;
 `
 
 const Grid = styled.div`
@@ -23,6 +24,14 @@ const NewsTitle = styled.div`
   font-weight: 900;
   font-size: 36px;
 `
+const ImageContainer = styled.div`
+  max-width: 400px;
+  margin: auto;
+`
+
+const Margin = styled.div`
+  margin: 1em 0;
+`
 
 class News extends React.Component {
   render() {
@@ -32,8 +41,11 @@ class News extends React.Component {
         className="container mt-5 mb-5"
       >
         <div className="text-center">
-          UNIQUE IS THE NEW COOLS ! <br />
-          EXPRESS YOURSELF <br />
+          {/* UNIQUE IS THE NEW COOLS !  */}
+          <ImageContainer>
+            <img className="img-fluid" src={text} alt="" />
+          </ImageContainer>
+          <Margin>EXPRESS YOURSELF</Margin>
           <Button className="btn btn-dark">CREATE YOUR OWN SHOES</Button>
           <NewsTitle>New This Week</NewsTitle>
           <Grid>
