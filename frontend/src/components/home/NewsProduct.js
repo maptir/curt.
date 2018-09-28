@@ -13,17 +13,39 @@ const Padding = styled.div`
   padding: 20px;
 `
 
+const StyledLink = styled(Link)`
+  color: black !important;
+  text-decoration: none;
+  :hover {
+    text-decoration: none;
+  }
+`
+
+const Title = styled.div`
+  margin: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+`
+
+const Desc = styled.div`
+  margin: 5px;
+  color: grey;
+  font-size: 13px;
+`
+
 const NewsProduct = props => {
   return (
-    <Link to="/">
-      <div {...props}>
-        <Padding>
-          <Image className="img-fluid" imageUrl={props.imageUrl} />
-        </Padding>
-        <div className="font-weight-bold m-1">{props.title}</div>
-        <div className="m-1">{props.desc}</div>
-      </div>
-    </Link>
+    <Padding {...props}>
+      <StyledLink to="/">
+        <Image className="img-fluid" imageUrl={props.imageUrl} />
+      </StyledLink>
+      <StyledLink to="/">
+        <Title>{props.title}</Title>
+      </StyledLink>
+      <StyledLink to="/">
+        <Desc>{props.desc}</Desc>
+      </StyledLink>
+    </Padding>
   )
 }
 
