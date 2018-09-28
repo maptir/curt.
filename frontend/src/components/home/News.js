@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import NewsProduct from './NewsProduct'
+import Product from '../common/Product'
 import firstNews from '../../assets/home/new1.jpg'
 import secondNews from '../../assets/home/new2.jpg'
 import thirdNews from '../../assets/home/new3.jpg'
@@ -15,7 +15,7 @@ const Button = styled.button`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 1em;
+  grid-gap: 2em;
 `
 
 const NewsTitle = styled.div`
@@ -37,20 +37,23 @@ class News extends React.Component {
           <Button className="btn btn-dark">CREATE YOUR OWN SHOES</Button>
           <NewsTitle>New This Week</NewsTitle>
           <Grid>
-            <NewsProduct
+            <Product
               imageUrl={firstNews}
               title="BEAUTIFUL IN YOUR WAY"
               desc="FITS FOR ANY DRESS AND OUTFITS WITH THE NEW VANS"
+              align="center"
             />
-            <NewsProduct
+            <Product
               imageUrl={secondNews}
               title="NAVY & SOLDIER"
               desc="BE YOURSELF & COOL WITH THE NEW NIKE"
+              align="center"
             />
-            <NewsProduct
+            <Product
               imageUrl={thirdNews}
               title="BACK TO BASIC"
               desc="EVERYTHING FITS FOR SIMPLE CONVERSE"
+              align="center"
             />
           </Grid>
         </div>

@@ -9,10 +9,6 @@ const Image = styled.div`
   max-height: 200px;
 `
 
-const Padding = styled.div`
-  padding: 20px;
-`
-
 const StyledLink = styled(Link)`
   color: black !important;
   text-decoration: none;
@@ -25,28 +21,30 @@ const Title = styled.div`
   margin: 5px;
   margin-top: 10px;
   font-weight: bold;
+  text-align: ${props => props.align || 'left'};
 `
 
 const Desc = styled.div`
   margin: 5px;
   color: grey;
   font-size: 13px;
+  text-align: ${props => props.align || 'left'};
 `
 
-const NewsProduct = props => {
+const Product = props => {
   return (
-    <Padding {...props}>
+    <div>
       <StyledLink to="/">
         <Image className="img-fluid" imageUrl={props.imageUrl} />
       </StyledLink>
       <StyledLink to="/">
-        <Title>{props.title}</Title>
+        <Title align={props.align}>{props.title}</Title>
       </StyledLink>
       <StyledLink to="/">
-        <Desc>{props.desc}</Desc>
+        <Desc align={props.align}>{props.desc}</Desc>
       </StyledLink>
-    </Padding>
+    </div>
   )
 }
 
-export default NewsProduct
+export default Product

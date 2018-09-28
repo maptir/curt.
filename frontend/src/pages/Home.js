@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Header from '../components/home/Header'
 import News from '../components/home/News'
 import Shop from '../components/home/Shop'
+import ProductSlider from '../components/home/ProductSlider'
 
 class Home extends React.Component {
   state = {
@@ -19,6 +20,7 @@ class Home extends React.Component {
         <Header />
         <News />
         <Shop />
+        <ProductSlider />
       </div>
     )
   }
