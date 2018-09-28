@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import NewsProduct from './NewsProduct'
 
 const Button = styled.button`
   border-radius: 50px !important;
@@ -16,8 +17,8 @@ class News extends React.Component {
           UNIQUE IS THE NEW COOLS ! <br />
           EXPRESS YOURSELF <br />
           <Button className="btn btn-dark">CREATE YOUR OWN SHOES</Button>
-
           <div className="m-5 font-weight-bold">New This Week</div>
+          <NewsProduct imageUrl="" title="" desc=""/>
         </div>
       </div>
     )
