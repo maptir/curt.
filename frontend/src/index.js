@@ -12,10 +12,19 @@ injectGlobal`
   * {
     font-family: 'Nunito Sans', sans-serif;
   }
+
   body {
     margin: 0;
     padding: 0;
     position: relative;
+  }
+
+  button {
+    border: none;
+  }
+
+  button:focus {
+    outline: none;
   }
 `
 
