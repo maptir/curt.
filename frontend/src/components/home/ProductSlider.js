@@ -84,7 +84,7 @@ class ProductSlider extends React.Component {
   render() {
     const settings = {
       centerMode: true,
-      dots: false,
+      dots: true,
       infinite: true,
       autoplay: true,
       autoplaySpeed: 1500,
