@@ -27,6 +27,7 @@ const NewsTitle = styled.div`
 const ImageContainer = styled.div`
   max-width: 400px;
   margin: auto;
+  padding: 0 1em;
 `
 
 const Margin = styled.div`
