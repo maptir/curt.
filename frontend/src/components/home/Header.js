@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import casual from '../../assets/home/casual.jpg'
+import pic from '../../assets/home/header-pic.jpg'
 import Menu from './Menu'
 
 const Welcome = styled.div`
-  background-position: center center;
-  background-image: url(${casual});
+  background-position: center 70% ;
+  background-image: url(${pic});
   background-size: cover;
-  min-height: 700px;
+  ${'' /* min-height: 700px; */}
+  min-height: 80vh;
   padding-top: 60px;
 `
 

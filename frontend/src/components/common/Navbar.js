@@ -14,6 +14,8 @@ const Container = styled.div`
   left: 0;
   background: initial;
   padding: 0 1em;
+  padding-right: 2em;
+  transition: background 300ms, box-shadow 300ms;
 `
 
 const Logo = styled.img`
@@ -29,7 +31,9 @@ const Menu = styled.div`
 
 const StyledLink = styled(Link)`
   color: white;
+  font-size: 18px;
   text-decoration: none;
+  margin: 1.2em 0;
   & + & {
     margin-left: 1em;
   }
@@ -51,9 +55,28 @@ const menus = [
 ]
 
 class Navbar extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.navbar = React.createRef()
+  }
+
+  componentDidMount = () => {
+    const alterNavbar = () => {
+      if (window.scrollY > 40) {
+        this.navbar.current.style.background = 'rgba(0, 0, 0, 0.8)'
+        this.navbar.current.style.boxShadow = '0 0 4px rgba(0, 0, 0, 0.1)'
+      } else {
+        this.navbar.current.style.background = 'initial'
+        this.navbar.current.style.boxShadow = 'initial'
+      }
+    }
+    window.addEventListener('scroll', alterNavbar)
+    alterNavbar()
+  }
+
   render() {
     return (
-      <Container>
+      <Container innerRef={this.navbar}>
         <Logo src={logo} alt="curt." />
         <Menu>
           {menus.map(menu => (

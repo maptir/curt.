@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const Container = styled.div`
   text-algin: left;
   padding-left: 2em;
+  margin-top: 2em;
 `
 
 const Gender = styled.div`
@@ -19,6 +20,8 @@ const Gender = styled.div`
 const Brand = styled.div`
   font-size: 16px;
   font-weight: bold;
+  margin: 0.2em 0;
+
   > a {
     color: white;
   }
