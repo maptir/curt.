@@ -1,13 +1,15 @@
 import React from 'react'
-import Rodal from 'rodal'
 import styled from 'styled-components'
 import LogoImage from '../../assets/logo/logoblack.png'
-import 'rodal/lib/rodal.css'
+import { Link } from 'react-router-dom'
 
 const Center = styled.div`
   text-align: center;
-  margin: 50px;
   font-size: 18px;
+  color: black;
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
 `
 
 const Logo = styled.img`
@@ -16,16 +18,13 @@ const Logo = styled.img`
 `
 
 const LoginSlogan = styled.div`
-  margin-top : 15px;
-  font-size : 15px;
-  font-weight: bold
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: bold;
 `
-const LoginCenter = styled.div`
-  text-align: center;
-  padding-left: 35%;
-  padding-right: 35%;
+const LoginCenter = styled.form`
   text-align: left;
-  `
+`
 
 const LoginButton = styled.button`
   color:white;
@@ -34,63 +33,55 @@ const LoginButton = styled.button`
   background-color :#545454
   padding: 5px 23px;
 `
-const InputDes = styled.div`
-  font-size : 15px;
-  padding-top : 10px;
-  margin-right : 15%;
+const InputDescription = styled.div`
+  font-size: 15px;
+  padding-top: 10px;
+  margin-right: 15%;
 `
 const SignupLink = styled.div`
-  font-size : 11px;
-  padding-top : 10px;
+  font-size: 11px;
+  padding-top: 10px;
   color: black;
   text-decoration: none;
+  margin-top: 0.5em;
 `
 const Input = styled.input`
-  border-color:black;
+  border-color: black;
   border-width: 1.5px;
+  padding: 0.5em;
   width: 100%;
 `
 
-
-class LoginPage extends React.Component {
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { visible: false };
-  // }
-
-  // show() {
-  //   this.setState({ visible: true });
-  // }
-
-  // hide() {
-  //   this.setState({ visible: false })
-  // }
-
+class LoginPage extends React.PureComponent {
+  onSubmit = e => {
+    e.preventDefault()
+    alert('logged in')
+  }
   render() {
     return (
-      // <div>
-      //   <button onClick={this.show.bind(this)}>show</button>
-      //   <Rodal visible={this.state.visible} onClose={this.hide.bind(this)} >
-      <div>
-        <Center>
-          <Logo src={LogoImage} alt="" />
-          <LoginSlogan>ONE ACCOUNT <br></br>FOR EVERY CURT.</LoginSlogan>
-          <LoginCenter>
-            <InputDes>Username</InputDes>
-            <Input type="text" />
-            <InputDes>Password</InputDes>
-            <Input type="text" />
-          </LoginCenter>
-          <br></br>
-          <LoginButton>Login</LoginButton>
-          <SignupLink>Don't have account? <a href="register"> <u>Sign Up</u></a></SignupLink>
-        </Center>
-      </div>
-
-      //   </Rodal>
-      // </div>
-    );
+      <Center>
+        <Logo src={LogoImage} alt="" />
+        <LoginSlogan>
+          ONE ACCOUNT <br />
+          FOR EVERY CURT.
+        </LoginSlogan>
+        <LoginCenter onSubmit={this.onSubmit}>
+          <InputDescription>Username</InputDescription>
+          <Input type="text" />
+          <InputDescription>Password</InputDescription>
+          <Input type="password" />
+          <div className="text-center">
+            <LoginButton type="submit">Login</LoginButton>
+            <SignupLink>
+              Don't have account?{' '}
+              <Link to="/register">
+                <u>Sign Up</u>
+              </Link>
+            </SignupLink>
+          </div>
+        </LoginCenter>
+      </Center>
+    )
   }
 }
 
