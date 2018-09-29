@@ -51,17 +51,13 @@ const menus = [
 export default () => (
   <Container>
     {menus.map(item => (
-      <div>
+      <div key={item.title.text}>
         <Gender>
-          <a key={item.title.text} href={item.title.to}>
-            {item.title.text}
-          </a>
+          <a href={item.title.to}>{item.title.text}</a>
         </Gender>
         {item.list.map(subitem => (
-          <Brand>
-            <a key={subitem.text} href={subitem.to}>
-              {subitem.text}
-            </a>
+          <Brand key={subitem.text}>
+            <a href={subitem.to}>{subitem.text}</a>
           </Brand>
         ))}
       </div>

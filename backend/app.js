@@ -11,7 +11,10 @@ var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 
 // MongoDB
-mongoose.connect('mongodb://localhost/curt', { useNewUrlParser: true })
+mongoose.connect(
+  'mongodb://localhost/curt',
+  { useNewUrlParser: true },
+)
 var db = mongoose.connection
 db.once('open', () => console.log('connected to MongoDB.'))
 db.on('error', console.error.bind(console, 'connection error:'))
@@ -21,8 +24,8 @@ var app = express()
 // Passport Config
 require('./config/passport')(passport)
 // Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(logger('dev'))
 app.use(express.json())
@@ -39,7 +42,7 @@ app.use('/users', usersRouter)
 // })
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
