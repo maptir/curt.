@@ -3,11 +3,24 @@ import styled from 'styled-components'
 
 import StyledLink from '../common/StyledLink'
 
+const Overlay = styled.div`
+  display: none;
+`
+
 const Image = styled.div`
   background: url(${props => props.imageUrl}) center center / cover no-repeat;
   width: 100%;
   padding-top: 100%;
   max-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :hover {
+    ${Overlay} {
+      display: block;
+    }
+  }
 `
 
 const Title = styled.div`
@@ -28,7 +41,11 @@ const Product = props => {
   return (
     <div {...props}>
       <StyledLink to="/">
-        <Image className="img-fluid" imageUrl={props.imageUrl} />
+        <Image className="img-fluid" imageUrl={props.imageUrl}>
+          <Overlay>
+            <h1> asdf </h1>
+          </Overlay>
+        </Image>
       </StyledLink>
       <StyledLink to="/">
         <Title align={props.align}>{props.title}</Title>
