@@ -10,7 +10,7 @@ const ShoeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    photoUrl: {
+    imageUrl: {
         type: String,
         required: true
     },
@@ -20,6 +20,10 @@ const ShoeSchema = mongoose.Schema({
     },
     brand: {
         type: String,
+        required: true
+    },
+    size: {
+        type: Number,
         required: true
     },
     quantity: {
