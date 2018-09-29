@@ -19,7 +19,6 @@ const Container = styled.div`
   background: initial;
   padding: 0 1em;
   padding-right: 2em;
-  color: white;
   transition: color 500ms, background 500ms, box-shadow 500ms;
 `
 
@@ -32,17 +31,20 @@ const Menu = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  > * + * {
+    margin-left: 1em !important;
+  }
 `
 
 const StyledLink = styled(Link)`
   color: inherit;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: inherit;
+  font-weight: inherit;
   text-decoration: none;
   margin: 1.6em 0;
-  & + & {
-    margin-left: 1em;
-  }
 
   &:focus,
   &:hover,
@@ -54,10 +56,21 @@ const StyledLink = styled(Link)`
   }
 `
 
+const Login = styled.div`
+  cursor: pointer;
+`
+
+const rodalStyle = {
+  width: '90%',
+  height: 'fit-content',
+  maxWidth: '500px',
+  boxSizing: 'border-box',
+  padding: '2em 1em',
+}
+
 const menus = [
   { name: 'HOME', path: '/' },
   { name: 'REGISTER', path: '/register' },
-  { name: 'LOGIN', path: '/login' },
 ]
 
 class Navbar extends React.PureComponent {
@@ -127,9 +140,15 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
+          <Login onClick={() => this.setState({ isModalOpen: true })}>
+            LOGIN
+          </Login>
         </Menu>
-        <div onClick={() => this.setState({ isModalOpen: true })}>Login</div>
-        <Rodal visible={this.state.isModalOpen} onClose={this.onModalClose}>
+        <Rodal
+          customStyles={rodalStyle}
+          visible={this.state.isModalOpen}
+          onClose={this.onModalClose}
+        >
           <LoginPage />
         </Rodal>
       </Container>
