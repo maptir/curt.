@@ -12,7 +12,7 @@ const Overlay = styled(StyledLink)`
   right: 0;
   bottom: 0;
   transition: all 300ms;
-
+  color: white !important;
   justify-content: center;
   align-items: flex-end;
   padding-bottom: 1em;
@@ -21,6 +21,10 @@ const Overlay = styled(StyledLink)`
     rgba(0, 0, 0, 0),
     rgba(0, 0, 0, 0.6)
   );
+
+  :hover {
+    text-decoration: none;
+  }
 `
 
 const Image = styled.div`
@@ -52,7 +56,7 @@ const Desc = styled.div`
 `
 
 const Text = styled.div`
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   color: white;
   transition: all 300ms;

@@ -4,7 +4,13 @@ import News from '../components/home/News'
 import Shop from '../components/home/Shop'
 import ProductSlider from '../components/common/ProductSlider'
 import Slogan from '../components/home/Slogan'
+import styled from 'styled-components'
 
+const Container = styled.div`
+  max-width: 1000px;
+  margin: auto;
+  padding: 1em;
+`
 class Home extends React.Component {
   state = {
     msg: 'Home',
@@ -18,9 +24,13 @@ class Home extends React.Component {
     return (
       <div>
         <Header />
-        <News />
+        <Container>
+          <News />
+        </Container>
         <Shop />
-        <ProductSlider title="PRODUCTS" />
+        <Container>
+          <ProductSlider title="PRODUCTS" />
+        </Container>
         <Slogan />
       </div>
     )
