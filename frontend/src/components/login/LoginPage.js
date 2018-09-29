@@ -48,6 +48,7 @@ const SignupLink = styled.div`
 const Input = styled.input`
   border-color: black;
   border-width: 1.5px;
+  padding: 0.5em;
   width: 100%;
 `
 
@@ -68,13 +69,12 @@ class LoginPage extends React.PureComponent {
           <InputDescription>Username</InputDescription>
           <Input type="text" />
           <InputDescription>Password</InputDescription>
-          <Input type="text" />
+          <Input type="password" />
           <div className="text-center">
             <LoginButton type="submit">Login</LoginButton>
             <SignupLink>
               Don't have account?{' '}
-              <Link to="register">
-                {' '}
+              <Link to="/register">
                 <u>Sign Up</u>
               </Link>
             </SignupLink>

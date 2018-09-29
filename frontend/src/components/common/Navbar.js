@@ -33,14 +33,13 @@ const Menu = styled.div`
   align-items: center;
   font-size: 14px;
   font-weight: 700;
-  color: white;
+  color: inherit;
   > * + * {
     margin-left: 1em !important;
   }
 `
 
 const StyledLink = styled(Link)`
-  color: inherit;
   font-size: inherit;
   font-weight: inherit;
   text-decoration: none;
