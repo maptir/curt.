@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import ProductDetail from '../pages/ProductDetail'
+import Login from '../pages/Login'
 
 const routes = [
   {
@@ -14,6 +15,12 @@ const routes = [
     path: '/product/:id',
     component: ProductDetail,
   },
+
+  {
+    path: '/login',
+    exact: true,
+    component: Login,
+  }
 ]
 
 export default () => (

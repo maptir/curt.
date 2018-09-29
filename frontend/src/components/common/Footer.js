@@ -37,7 +37,6 @@ const StyledLink = styled(Link)`
   &:link,
   &:active {
     color: #bbb;
-    text-decoration: none;
   }
 `
 

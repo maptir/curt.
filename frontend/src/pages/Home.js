@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import Header from '../components/home/Header'
 import News from '../components/home/News'
 import Shop from '../components/home/Shop'
-import ProductSlider from '../components/home/ProductSlider'
+import ProductSlider from '../components/common/ProductSlider'
+import Slogan from '../components/home/Slogan'
 
 class Home extends React.Component {
   state = {
@@ -21,6 +21,7 @@ class Home extends React.Component {
         <News />
         <Shop />
         <ProductSlider />
+        <Slogan />
       </div>
     )
   }
