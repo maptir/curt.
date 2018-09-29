@@ -4,6 +4,9 @@ import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
 
+import Rodal from 'rodal'
+import LoginPage from '../login/LoginPage'
+
 const Container = styled.div`
   width: 100vw;
   display: flex;
@@ -65,6 +68,7 @@ class Navbar extends React.PureComponent {
 
   state = {
     logo: logoWhite,
+    isModalOpen: false,
   }
 
   alterNavbar = () => {
@@ -105,6 +109,12 @@ class Navbar extends React.PureComponent {
     window.addEventListener('scroll', this.alterNavbar)
   }
 
+  onModalClose = () => {
+    this.setState({
+      isModalOpen: false,
+    })
+  }
+
   render() {
     return (
       <Container innerRef={this.navbar}>
@@ -118,6 +128,10 @@ class Navbar extends React.PureComponent {
             </StyledLink>
           ))}
         </Menu>
+        <div onClick={() => this.setState({ isModalOpen: true })}>Login</div>
+        <Rodal visible={this.state.isModalOpen} onClose={this.onModalClose}>
+          <LoginPage />
+        </Rodal>
       </Container>
     )
   }
