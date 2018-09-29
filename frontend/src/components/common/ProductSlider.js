@@ -16,8 +16,7 @@ const PaddedProduct = styled(Product)`
 const Title = styled.span`
   font-weight: 900;
   font-size: 24px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: .5em 0;
 `
 
 const Link = styled(StyledLink)`
@@ -95,7 +94,7 @@ class ProductSlider extends React.Component {
       slidesToScroll: 5,
     }
     return (
-      <div style={{ padding: '2em' }}>
+      <div>
         <div>
           <Title>{this.props.title}</Title>
           <Link to="/catalogs">View more.</Link>

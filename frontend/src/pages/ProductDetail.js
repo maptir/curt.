@@ -2,7 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import Detail from '../components/product-detail/Detail'
 
-
+const Container = styled.div`
+  max-width: 1000px;
+  margin: auto;
+`
 
 class ProductDetail extends React.Component {
   state = {
@@ -17,9 +20,9 @@ class ProductDetail extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <Detail />
-      </div>
+      </Container>
     )
   }
 }

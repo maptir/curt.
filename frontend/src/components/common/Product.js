@@ -52,7 +52,7 @@ const Desc = styled.div`
 `
 
 const Text = styled.div`
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   color: white;
   transition: all 300ms;
