@@ -1,15 +1,20 @@
 const mongoose = require('mongoose')
 
 // Purchase Schema
-const PurchaseSchema = mongoose.Schema({
+const PurchaseSchema = mongoose.Schema(
+  {
     state: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     products: {
-        type: Array,
-        required: true
+      type: Array,
+      required: true
     }
-})
+  },
+  {
+    timestamp: true
+  }
+)
 
-const Purchase = module.exports = mongoose.model('Purchase', PurchaseSchema)
+module.exports = mongoose.model('Purchase', PurchaseSchema)

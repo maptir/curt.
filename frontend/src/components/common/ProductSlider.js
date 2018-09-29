@@ -97,7 +97,7 @@ class ProductSlider extends React.Component {
     return (
       <div style={{ padding: '2em' }}>
         <div>
-          <Title>PRODUCTS</Title>
+          <Title>{this.props.title}</Title>
           <Link to="/catalogs">View more.</Link>
         </div>
         <Slider {...settings}>
