@@ -5,16 +5,16 @@ const PurchaseSchema = mongoose.Schema(
   {
     state: {
       type: String,
-      required: true
+      required: true,
     },
     products: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   {
-    timestamp: true
-  }
+    timestamp: true,
+  },
 )
 
 module.exports = mongoose.model('Purchase', PurchaseSchema)
