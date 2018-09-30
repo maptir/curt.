@@ -40,7 +40,6 @@ class News extends React.Component {
   render() {
     return (
       <div className="mt-5 mb-5">
-        <Cart isOpen />
         <div className="text-center">
           {/* UNIQUE IS THE NEW COOLS !  */}
           <ImageContainer>
