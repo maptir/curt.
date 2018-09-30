@@ -38,7 +38,7 @@ const Padding = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 20px 0px 20px;
-  height: 100%;
+  min-height: 0;
 `
 
 const Head = styled.div`
@@ -58,10 +58,7 @@ const Promotion = styled.div`
 
 const ScrollItem = styled.div`
   flex: 1;
-
-  :hover {
-    overflow-y: auto;
-  }
+  overflow-y: auto;
 `
 
 const Close = styled.div`
