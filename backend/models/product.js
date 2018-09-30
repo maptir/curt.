@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-// Shoe Schema
-const ShoeSchema = mongoose.Schema({
+// Product Schema
+const ProductSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -32,4 +32,4 @@ const ShoeSchema = mongoose.Schema({
   },
 })
 
-module.exports = mongoose.model('Shoe', ShoeSchema)
+module.exports = mongoose.model('Product', ProductSchema)

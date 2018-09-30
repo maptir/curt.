@@ -32,9 +32,7 @@ router.post('/register', function(req, res) {
   let errors = req.validationErrors()
 
   if (errors) {
-    res.render('register', {
-      errors: errors,
-    })
+    res.send(400)
   } else {
     let newUser = new User({
       firstName: firstName,
@@ -54,10 +52,9 @@ router.post('/register', function(req, res) {
         newUser.password = hash
         newUser.save(function(err) {
           if (err) {
-            console.log(err)
-            return
+            res.send(400)
           } else {
-            res.redirect('/users/login')
+            res.send(201)
           }
         })
       })
