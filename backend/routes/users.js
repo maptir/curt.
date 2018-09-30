@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
+const jwt = require('jsonwebtoken')
 
 // Bring in User Models
 let User = require('../models/user')
@@ -56,7 +57,6 @@ router.post('/register', function(req, res) {
             console.log(err)
             return
           } else {
-            // req.flash('success', 'You are now registered and can log in')
             res.redirect('/users/login')
           }
         })
@@ -67,17 +67,19 @@ router.post('/register', function(req, res) {
 
 // Login Process
 router.post('/login', function(req, res, next) {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/login',
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      res.send(jwt.sign('fail', 'shhhhh'))
+    } else if (!user) {
+      let token = jwt.sign(user, 'shhhhh')
+      res.send(token)
+    }
   })(req, res, next)
 })
 
 // Logout
 router.get('/logout', function(req, res) {
   req.logout()
-  // req.flash('success', 'You are logged out')
-  res.redirect('/users/login')
 })
 
 module.exports = router

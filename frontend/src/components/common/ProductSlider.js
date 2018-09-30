@@ -16,13 +16,16 @@ const PaddedProduct = styled(Product)`
 const Title = styled.span`
   font-weight: 900;
   font-size: 24px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 0.5em 0;
 `
 
 const Link = styled(StyledLink)`
   color: grey !important;
   float: right;
+`
+
+const Container = styled.div`
+  margin-bottom: 2em;
 `
 
 class ProductSlider extends React.Component {
@@ -93,9 +96,25 @@ class ProductSlider extends React.Component {
       speed: 500,
       slidesToShow: 5,
       slidesToScroll: 5,
+      responsive: [
+        {
+          breakpoint: 780,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+          },
+        },
+      ],
     }
     return (
-      <div style={{ padding: '2em' }}>
+      <Container>
         <div>
           <Title>{this.props.title}</Title>
           <Link to="/catalogs">View more.</Link>
@@ -105,7 +124,7 @@ class ProductSlider extends React.Component {
             <PaddedProduct {...product} key={product.id} />
           ))}
         </Slider>
-      </div>
+      </Container>
     )
   }
 }

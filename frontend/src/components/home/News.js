@@ -6,6 +6,8 @@ import secondNews from '../../assets/home/new2.jpg'
 import thirdNews from '../../assets/home/new3.jpg'
 import text from '../../assets/text/home-text.png'
 
+import Cart from '../cart/Cart'
+
 const Button = styled.button`
   border-radius: 50px !important;
   padding-right: 30px !important;
@@ -15,7 +17,7 @@ const Button = styled.button`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 2em;
 `
 
@@ -37,10 +39,7 @@ const Margin = styled.div`
 class News extends React.Component {
   render() {
     return (
-      <div
-        style={{ maxWidth: '1000px', margin: 'auto' }}
-        className="container mt-5 mb-5"
-      >
+      <div className="mt-5 mb-5">
         <div className="text-center">
           {/* UNIQUE IS THE NEW COOLS !  */}
           <ImageContainer>

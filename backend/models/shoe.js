@@ -32,4 +32,4 @@ const ShoeSchema = mongoose.Schema({
   },
 })
 
-const Shoe = (module.exports = mongoose.model('Shoe', ShoeSchema))
+module.exports = mongoose.model('Shoe', ShoeSchema)
