@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import ImageSlider from 'react-slick'
 import ShoesDetail from '../product-detail/ShoesDetail'
 import ProductImage from '../product-detail/ProductImage'
 import ProductSlider from '../common/ProductSlider'
@@ -27,7 +26,7 @@ class Detail extends React.Component {
 
   render() {
     return (
-      <DetailContainer>
+      <DetailContainer className="container-fluid">
         <Container className="row">
           <div className="col-12 col-md-6">
             <ProductImage />

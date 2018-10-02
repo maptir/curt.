@@ -1,18 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import Limit from '../common/Limit'
 import RegisterImage from '../../assets/register/register-pic.jpg'
 
 const Picture = styled.img`
-  padding-left: 5em;
-  padding-right: 5em;
-  width: 50em;
-  height: 34em;
+  width: 100%;
 `
-const Grid = styled.div`
+const Grid = styled(Limit)`
   padding: 5em;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 2em;
+  grid-gap: 1em;
 `
 const Center = styled.div`
   text-align: left;
@@ -32,11 +30,11 @@ const CreateInfo = styled.div`
 const Info = styled.div`
   text-align: left;
   font-size: 18px;
-  font-weight: bold
+  font-weight: bold;
 `
 
 const Input = styled.input`
-  border-color:black;
+  border-color: black;
   border-width: 1.5px;
   width: 60%;
   height: 2.2em;
@@ -44,24 +42,24 @@ const Input = styled.input`
 `
 
 const InputDescription = styled.div`
-  font-size : 15px;
-  padding-top : 5px;
+  font-size: 15px;
+  padding-top: 5px;
   text-align: left;
 `
 const GenderInput = styled.input`
-  text-align: left
+  text-align: left;
   width: 1.5em;
 `
 const GenderLabel = styled.label`
-  font-size:10px;
+  font-size: 10px;
 `
 
 const SignUpButton = styled.button`
-  color:white;
-  font-size : 16px;
+  color: white;
+  font-size: 16px;
   margin-top: 20px;
-  background-color :#545454
-  padding: 5px 23px;+
+  background-color: #545454;
+  padding: 5px 23px;
 `
 
 class PersonInfo extends React.Component {
@@ -69,31 +67,32 @@ class PersonInfo extends React.Component {
     return (
       <Grid>
         <Center>
-           <CreateInfo>Create an account</CreateInfo>
-           <Info>Personal Information</Info>
-           <InputDescription >Name *</InputDescription>
-           <Input type="text" />
-           <InputDescription >Surname *</InputDescription>
-           <Input type="text" />
-           <InputDescription >Gender *</InputDescription>
-           <GenderInput type="radio" />
-           <GenderLabel>Male</GenderLabel>
-           <GenderInput type="radio" />
-           <GenderLabel>Female</GenderLabel>
-        <CenterAccount>
+          <CreateInfo>Create an account</CreateInfo>
+          <Info>Personal Information</Info>
+          <InputDescription>Name *</InputDescription>
+          <Input type="text" />
+          <InputDescription>Surname *</InputDescription>
+          <Input type="text" />
+          <InputDescription>Gender *</InputDescription>
+          <GenderInput type="radio" />
+          <GenderLabel>Male</GenderLabel>
+          <GenderInput type="radio" />
+          <GenderLabel>Female</GenderLabel>
+          <CenterAccount>
             <Info>Account Information</Info>
-            <InputDescription >Email Address *</InputDescription>
+            <InputDescription>Email Address *</InputDescription>
             <Input type="text" />
-            <InputDescription >Password *</InputDescription>
-            <Input type="text" /><br />
+            <InputDescription>Password *</InputDescription>
+            <Input type="text" />
+            <br />
             <SignUpButton>Sign Up </SignUpButton>
-        </CenterAccount>
+          </CenterAccount>
         </Center>
         <Center>
           <Picture src={RegisterImage} alt="" />
         </Center>
       </Grid>
-    );
+    )
   }
 }
 
