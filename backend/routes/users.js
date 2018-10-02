@@ -8,12 +8,12 @@ const jwt = require('jsonwebtoken')
 let User = require('../models/user')
 
 // Register Form
-router.get('/register', function(req, res) {
+router.get('/register', (req, res) => {
   res.render('register')
 })
 
 // Registration Process
-router.post('/register', function(req, res) {
+router.post('/register', (req, res) => {
   const firstName = req.body.firstName
   const lastName = req.body.lastName
   const email = req.body.email
@@ -32,7 +32,7 @@ router.post('/register', function(req, res) {
   let errors = req.validationErrors()
 
   if (errors) {
-    res.send(400)
+    res.send(errors)
   } else {
     let newUser = new User({
       firstName: firstName,
@@ -44,13 +44,13 @@ router.post('/register', function(req, res) {
       password: password,
     })
 
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
         if (err) {
-          console.log(err)
+          res.send(err)
         }
         newUser.password = hash
-        newUser.save(function(err) {
+        newUser.save(err => {
           if (err) {
             res.send(400)
           } else {
@@ -63,11 +63,13 @@ router.post('/register', function(req, res) {
 })
 
 // Login Process
-router.post('/login', function(req, res, next) {
+router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
+    console.log(err, user, info)
     if (err) {
       res.send(jwt.sign('fail', 'shhhhh'))
     } else if (!user) {
+      console.log(user)
       let token = jwt.sign(user, 'shhhhh')
       res.send(token)
     }
@@ -75,7 +77,7 @@ router.post('/login', function(req, res, next) {
 })
 
 // Logout
-router.get('/logout', function(req, res) {
+router.get('/logout', (req, res) => {
   req.logout()
 })
 
