@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import DeleteRodal from './DeleteRodal'
+import RemoveItem from './RemoveItem'
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1em 0;
+  margin: 1em 0 0;
 `
 
 const Image = styled.div`
@@ -36,20 +36,42 @@ const Price = styled.div`
   margin: 1em;
 `
 
-const CartItem = props => {
-  return (
-    <Container>
-      <Image imageUrl={props.imageUrl} />
-      <Detail>
-        <BoldText>{props.name}</BoldText>
-        <MiniText>Size: {props.size}</MiniText>
-      </Detail>
-      <Price>
-        <BoldText>{props.price.toLocaleString()} Baht</BoldText>
-        <DeleteRodal productId={props.id} />
-      </Price>
-    </Container>
-  )
+const RemoveButton = styled.div`
+  cursor: pointer;
+  color: grey;
+  font-size: 10px;
+`
+
+class CartItem extends React.Component {
+  state = {
+    removeClicked: false,
+  }
+
+  toggleShow = () => {
+    this.setState({ removeClicked: !this.state.removeClicked })
+  }
+
+  render() {
+    return (
+      <div>
+        <Container>
+          <Image imageUrl={this.props.imageUrl} />
+          <Detail>
+            <BoldText>{this.props.name}</BoldText>
+            <MiniText>Size: {this.props.size}</MiniText>
+          </Detail>
+          <Price>
+            <BoldText>{this.props.price.toLocaleString()} Baht</BoldText>
+            <RemoveButton onClick={this.toggleShow}>REMOVE</RemoveButton>
+          </Price>
+        </Container>
+        <RemoveItem
+          productId={this.props.id}
+          clicked={this.state.removeClicked}
+        />
+      </div>
+    )
+  }
 }
 
 export default CartItem
