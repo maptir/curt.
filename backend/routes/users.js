@@ -14,13 +14,6 @@ router.get('/register', (req, res) => {
 
 // Registration Process
 router.post('/register', (req, res) => {
-  const firstName = req.body.firstName
-  const lastName = req.body.lastName
-  const email = req.body.email
-  const facebookId = req.body.facebookId
-  const password = req.body.password
-  const password2 = req.body.password2
-
   req.checkBody('firstName', 'First name is required').notEmpty()
   req.checkBody('lastName', 'Last name is required').notEmpty()
   req.checkBody('email', 'Email is required').notEmpty()
@@ -34,6 +27,7 @@ router.post('/register', (req, res) => {
   if (errors) {
     res.send(errors)
   } else {
+    let { firstName, lastName, email, facebookId, password } = req.body
     let newUser = new User({
       firstName: firstName,
       lastName: lastName,
