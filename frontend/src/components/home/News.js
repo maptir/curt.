@@ -6,6 +6,8 @@ import secondNews from '../../assets/home/new2.jpg'
 import thirdNews from '../../assets/home/new3.jpg'
 import text from '../../assets/text/home-text.png'
 
+import Cart from '../cart/Cart'
+
 const Button = styled.button`
   border-radius: 50px !important;
   padding-right: 30px !important;

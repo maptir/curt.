@@ -60,10 +60,11 @@ const Login = styled.div`
 `
 
 const rodalStyle = {
-  width: '90%',
-  height: 'fit-content',
   maxWidth: '500px',
-  boxSizing: 'border-box',
+  width: '90%',
+  height: 'auto',
+  top: '50%',
+  transform: 'translateY(-50%)',
   padding: '2em 1em',
 }
 
@@ -80,7 +81,7 @@ class Navbar extends React.PureComponent {
 
   state = {
     logo: logoWhite,
-    isModalOpen: false,
+    isModalOpen: true,
   }
 
   alterNavbar = () => {
