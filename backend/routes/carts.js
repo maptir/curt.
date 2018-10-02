@@ -4,8 +4,7 @@ var router = express.Router()
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
 router.get('/', isAuthenticated, (req, res) => {
-  res.send('sucess')
-  // res.send(req.user.cart)
+  res.send(req.user.cart)
 })
 
 router.post('/', isAuthenticated, (req, res) => {
