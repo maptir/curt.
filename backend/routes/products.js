@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 })
 
 // POST new products to the database
-// Does it need to contain user for editting purpose
 router.post('/', (req, res) => {
   const name = req.body.name
   const base = req.body.base
@@ -25,6 +24,7 @@ router.post('/', (req, res) => {
   const brand = req.body.brand
   const size = req.body.size
   const quantity = req.body.quantity
+  const owner = req.body.email
 
   req.checkBody('name', 'Name is required').notEmpty()
   req.checkBody('base', 'Base is required').notEmpty()
@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
   req.checkBody('brand', 'Brand is required').notEmpty()
   req.checkBody('size', 'Size is required').notEmpty()
   req.checkBody('quantity', 'Quantity is required').notEmpty()
+  req.checkBody('owner', 'Email is required').notEmpty()
 
   let errors = req.validationErrors()
 
@@ -44,6 +45,7 @@ router.post('/', (req, res) => {
     let newProduct = new Product({
       name: name,
       base: base,
+      owner: owner,
       imageUrl: imageUrl,
       price: price,
       brand: brand,

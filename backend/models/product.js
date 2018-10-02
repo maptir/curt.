@@ -6,6 +6,10 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  owner: {
+    type: String,
+    required: true,
+  },
   base: {
     type: String,
     required: true,

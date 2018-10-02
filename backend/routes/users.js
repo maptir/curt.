@@ -50,11 +50,19 @@ router.post('/register', function(req, res) {
           console.log(err)
         }
         newUser.password = hash
-        newUser.save(function(err) {
-          if (err) {
-            res.send(400)
+
+        // Check if user already exist
+        User.find({ email: newUser.email }, (err, user) => {
+          if (user.length) {
+            res.send(409)
           } else {
-            res.send(201)
+            newUser.save(function(err) {
+              if (err) {
+                res.send(400)
+              } else {
+                res.send(201)
+              }
+            })
           }
         })
       })
