@@ -59,12 +59,17 @@ const Login = styled.div`
   cursor: pointer;
 `
 
+const Modal = styled(Rodal)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const rodalStyle = {
+  position: 'relative',
   maxWidth: '500px',
   width: '90%',
   height: 'auto',
-  top: '50%',
-  transform: 'translateY(-50%)',
   padding: '2em 1em',
 }
 
@@ -144,13 +149,13 @@ class Navbar extends React.PureComponent {
             LOGIN
           </Login>
         </Menu>
-        <Rodal
+        <Modal
           customStyles={rodalStyle}
           visible={this.state.isModalOpen}
           onClose={this.onModalClose}
         >
           <LoginPage />
-        </Rodal>
+        </Modal>
       </Container>
     )
   }
