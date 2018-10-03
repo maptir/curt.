@@ -46,9 +46,9 @@ router.post('/register', (req, res) => {
         newUser.password = hash
         newUser.save(err => {
           if (err) {
-            res.send(400)
+            res.sendStatus(400)
           } else {
-            res.send(201)
+            res.sendStatus(201)
           }
         })
       })
@@ -59,12 +59,10 @@ router.post('/register', (req, res) => {
 // Login Process
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
-    console.log(err, user, info)
     if (err) {
       res.send(jwt.sign('fail', 'shhhhh'))
-    } else if (!user) {
-      console.log(user)
-      let token = jwt.sign(user, 'shhhhh')
+    } else if (user) {
+      let token = jwt.sign({ id: user.toJSON()._id }, 'shhhhh')
       res.send(token)
     }
   })(req, res, next)

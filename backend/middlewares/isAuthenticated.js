@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
     req.headers['authorization'] && req.headers['authorization'].split(' ')[1],
     'shhhhh',
     (err, decoded) => {
+      console.log('Authenticated', req.headers['authorization'].split(' ')[1])
       if (err) {
         res.send(404)
       } else {

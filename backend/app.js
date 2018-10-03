@@ -24,12 +24,6 @@ db.on('error', console.error.bind(console, 'connection error:'))
 
 const app = express()
 
-// Passport Config
-require('./config/passport')(passport)
-// Passport Middleware
-app.use(passport.initialize())
-app.use(passport.session())
-
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -37,6 +31,12 @@ app.use(bodyParser.json())
 app.use(expressValidator())
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Passport Config
+require('./config/passport')(passport)
+// Passport Middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
