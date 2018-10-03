@@ -4,7 +4,6 @@ import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
 import * as authActions from '../../redux/modules/auth'
 
 import Rodal from 'rodal'
