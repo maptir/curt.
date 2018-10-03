@@ -5,6 +5,7 @@ import Home from '../pages/Home'
 import ProductDetail from '../pages/ProductDetail'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import Catalog from '../pages/Catalog'
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: '/register',
     exact: true,
     component: Register,
+  },
+  {
+    path: '/catalog',
+    exact: true,
+    component: Catalog,
   }
 ]
 

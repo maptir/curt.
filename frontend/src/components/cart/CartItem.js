@@ -5,7 +5,7 @@ import RemoveItem from './RemoveItem'
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1em 0 0;
+  margin: 1em 0 0 0;
 `
 
 const Image = styled.div`
