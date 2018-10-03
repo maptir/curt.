@@ -33,15 +33,16 @@ router.post('/', (req, res) => {
       errors: errors,
     })
   } else {
+    let { name, base, owner, imageUrl, price, brand, size, quantity } = req.body
     let newProduct = new Product({
-      name: req.body.name,
-      base: req.body.base,
-      owner: req.body.owner,
-      imageUrl: req.body.imageUrl,
-      price: req.body.price,
-      brand: req.body.brand,
-      size: req.body.size,
-      quantity: req.body.quantity,
+      name: name,
+      base: base,
+      owner: owner,
+      imageUrl: imageUrl,
+      price: price,
+      brand: brand,
+      size: size,
+      quantity: quantity,
     })
 
     newProduct.save(err => {

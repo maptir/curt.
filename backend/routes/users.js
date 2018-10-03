@@ -23,19 +23,20 @@ router.post('/register', (req, res) => {
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
   let errors = req.validationErrors()
+  console.log(123456788)
 
   if (errors) {
     res.send(errors)
   } else {
     let { firstName, lastName, email, facebookId, password } = req.body
     let newUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      facebookId: req.body.facebookId,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      facebookId: facebookId,
       cart: [],
       purchasedHistory: [],
-      password: req.body.password,
+      password: password,
     })
 
     bcrypt.genSalt(10, (err, salt) => {
