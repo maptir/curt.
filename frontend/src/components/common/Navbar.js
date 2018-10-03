@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import * as authActions from '../../redux/modules/auth'
 
 import Rodal from 'rodal'
 import LoginPage from '../login/LoginPage'
@@ -55,7 +58,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Login = styled.div`
+const NavItem = styled.div`
   cursor: pointer;
 `
 
@@ -86,7 +89,7 @@ class Navbar extends React.PureComponent {
 
   state = {
     logo: logoWhite,
-    isModalOpen: true,
+    isModalOpen: false,
   }
 
   alterNavbar = () => {
@@ -133,6 +136,15 @@ class Navbar extends React.PureComponent {
     })
   }
 
+  isLoggedIn = () => {
+    return this.props.token
+  }
+
+  logout = () => {
+    this.props.removeToken()
+    window.location.reload()
+  }
+
   render() {
     return (
       <Container innerRef={this.navbar}>
@@ -145,20 +157,38 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
-          <Login onClick={() => this.setState({ isModalOpen: true })}>
-            LOGIN
-          </Login>
+          {this.isLoggedIn() ? (
+            <NavItem onClick={this.logout}>LOGOUT</NavItem>
+          ) : (
+            <NavItem onClick={() => this.setState({ isModalOpen: true })}>
+              LOGIN
+            </NavItem>
+          )}
         </Menu>
         <Modal
           customStyles={rodalStyle}
-          visible={this.state.isModalOpen}
+          visible={!this.isLoggedIn() && this.state.isModalOpen}
           onClose={this.onModalClose}
         >
-          <LoginPage />
+          <LoginPage onLoggedIn={this.onModalClose} />
         </Modal>
       </Container>
     )
   }
 }
 
-export default withRouter(Navbar)
+const mapStateToProps = state => ({
+  ...state.auth,
+})
+
+const mapDispatchToProps = {
+  ...authActions,
+}
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withRouter,
+)(Navbar)
