@@ -64,6 +64,8 @@ router.post('/login', (req, res, next) => {
     } else if (user) {
       let token = jwt.sign({ id: user.toJSON()._id }, 'shhhhh')
       res.send(token)
+    } else {
+      res.sendStatus(401)
     }
   })(req, res, next)
 })
