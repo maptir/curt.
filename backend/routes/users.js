@@ -27,6 +27,7 @@ router.post('/register', (req, res) => {
   if (errors) {
     res.send(errors)
   } else {
+    let { firstName, lastName, email, facebookId, password } = req.body
     let newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,

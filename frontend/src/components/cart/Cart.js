@@ -59,6 +59,16 @@ const Promotion = styled.div`
 const ScrollItem = styled.div`
   flex: 1;
   overflow-y: auto;
+  visibility: hidden;
+
+  :hover,
+  :focus {
+    visibility: visible;
+  }
+`
+
+const ScrollItemContent = styled.div`
+  visibility: visible;
 `
 
 const Close = styled.div`
@@ -219,9 +229,11 @@ class Cart extends React.Component {
               FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
             </Promotion>
             <ScrollItem>
-              {this.state.cartItemList.map((item, index) => (
-                <CartItem {...item} cartIndex={index} />
-              ))}
+              <ScrollItemContent>
+                {this.state.cartItemList.map((item, index) => (
+                  <CartItem {...item} cartIndex={index} />
+                ))}
+              </ScrollItemContent>
             </ScrollItem>
           </Padding>
           <Checkout>
