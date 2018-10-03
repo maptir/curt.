@@ -43,16 +43,16 @@ const Padding = styled.div`
 
 const Head = styled.div`
   display: flex;
-  font-size: 20px;
-  font-weight: 900;
-  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 50px;
   text-align: left;
 `
 
 const Promotion = styled.div`
   border: 1px solid black !important;
   text-align: center;
-  padding: 25px;
+  padding: 20px 30px 20px 30px;
   font-size: 12px;
 `
 
@@ -90,11 +90,11 @@ const Price = styled.div`
 
 const SubTotal = styled.div`
   flex: 1;
-  font-size: 14px;
+  font-size: 11px;
 `
 
 const SumPrice = styled.div`
-  font-size: 20px;
+  font-size: 16px;
 `
 
 class Cart extends React.Component {
