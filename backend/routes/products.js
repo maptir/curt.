@@ -17,15 +17,6 @@ router.get('/', (req, res) => {
 
 // POST new products to the database
 router.post('/', (req, res) => {
-  const name = req.body.name
-  const base = req.body.base
-  const imageUrl = req.body.imageUrl
-  const price = req.body.price
-  const brand = req.body.brand
-  const size = req.body.size
-  const quantity = req.body.quantity
-  const owner = req.body.email
-
   req.checkBody('name', 'Name is required').notEmpty()
   req.checkBody('base', 'Base is required').notEmpty()
   req.checkBody('imageUrl', 'Image URL is required').notEmpty()
@@ -43,14 +34,14 @@ router.post('/', (req, res) => {
     })
   } else {
     let newProduct = new Product({
-      name: name,
-      base: base,
-      owner: owner,
-      imageUrl: imageUrl,
-      price: price,
-      brand: brand,
-      size: size,
-      quantity: quantity,
+      name: req.body.name,
+      base: req.body.base,
+      owner: req.body.owner,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+      brand: req.body.brand,
+      size: req.body.size,
+      quantity: req.body.quantity,
     })
 
     newProduct.save(err => {

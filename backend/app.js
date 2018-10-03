@@ -1,26 +1,28 @@
-var createError = require('http-errors')
-var express = require('express')
-var mongoose = require('mongoose')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
-var passport = require('passport')
-var config = require('./config/database')
+const createError = require('http-errors')
+const express = require('express')
+const mongoose = require('mongoose')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const passport = require('passport')
+const bodyParser = require('body-parser')
+const config = require('./config/database')
+const expressValidator = require('express-validator')
 
-var indexRouter = require('./routes/index')
-var usersRouter = require('./routes/users')
-var cartRouter = require('./routes/carts')
+const indexRouter = require('./routes/index')
+const usersRouter = require('./routes/users')
+const cartRouter = require('./routes/carts')
 
 // MongoDB
 mongoose.connect(
   'mongodb://localhost/curt',
   { useNewUrlParser: true },
 )
-var db = mongoose.connection
+const db = mongoose.connection
 db.once('open', () => console.log('connected to MongoDB.'))
 db.on('error', console.error.bind(console, 'connection error:'))
 
-var app = express()
+const app = express()
 
 // Passport Config
 require('./config/passport')(passport)
@@ -31,6 +33,8 @@ app.use(passport.session())
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(expressValidator())
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -44,7 +48,7 @@ app.use('/cart', cartRouter)
 // })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}

@@ -40,7 +40,7 @@ const SizeGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-  grid-gap: .5em;
+  grid-gap: 0.5em;
   @media (max-width: 600px) {
     max-width: 100%;
   }
@@ -93,7 +93,7 @@ const sizeList = [
 
 class ShoesDetail extends React.Component {
   state = {
-    size: 6
+    size: 6,
   }
 
   componentDidMount = () => {} // fetch data here
@@ -116,7 +116,7 @@ class ShoesDetail extends React.Component {
             </div>
           </div>
         </SneakerHeaderDetail>
-        <SizeSelection>
+        <SizeSelection className="container-fluid">
           <div className="row" style={{ marginBottom: '10px' }}>
             <div className="col-12">
               <Size>Select Size</Size>

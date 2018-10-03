@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import ProductDetail from '../pages/ProductDetail'
 import Login from '../pages/Login'
+import Register from '../pages/Register'
 
 const routes = [
   {
@@ -20,6 +21,12 @@ const routes = [
     path: '/login',
     exact: true,
     component: Login,
+  },
+  
+  {
+    path: '/register',
+    exact: true,
+    component: Register,
   }
 ]
 
