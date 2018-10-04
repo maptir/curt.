@@ -18,10 +18,18 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  cart: {
-    type: Array,
-    required: true,
-  },
+  cart: [
+    {
+      id: {
+        type: String,
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   purchasedHistory: {
     type: Array,
     required: true,

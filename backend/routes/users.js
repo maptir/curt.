@@ -58,14 +58,14 @@ router.post('/register', (req, res) => {
 
 // Login Process
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', (err, user) => {
     if (err) {
       res.send(jwt.sign('fail', 'shhhhh'))
     } else if (user) {
       let token = jwt.sign({ id: user.toJSON()._id }, 'shhhhh')
       res.send(token)
     } else {
-      res.sendStatus(401)
+      res.send('Incorrect username or password')
     }
   })(req, res, next)
 })
