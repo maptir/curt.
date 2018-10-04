@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import * as authActions from '../../redux/modules/auth'
 
 import Rodal from 'rodal'
 import LoginPage from '../login/LoginPage'
@@ -55,7 +57,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Login = styled.div`
+const NavItem = styled.div`
   cursor: pointer;
 `
 
@@ -86,32 +88,20 @@ class Navbar extends React.PureComponent {
 
   state = {
     logo: logoWhite,
-    isModalOpen: true,
+    isModalOpen: false,
   }
 
-  alterNavbar = () => {
-    if (this.props.location.pathname === '/') {
-      this.navbar.current.style.color = 'white'
-      this.navbar.current.style.position = 'fixed'
-      this.setState({ logo: logoWhite })
-      if (window.scrollY > 40) {
-        this.navbar.current.style.background = 'rgba(0, 0, 0, 0.7)'
-        this.navbar.current.style.boxShadow = '0 0 4px rgba(0, 0, 0, 0.1)'
-      } else {
-        this.navbar.current.style.background = 'initial'
-        this.navbar.current.style.boxShadow = 'initial'
-      }
-    } else {
-      this.setState({ logo: logoBlack }, () => {
-        this.navbar.current.style.color = 'black'
-        this.navbar.current.style.position = 'sticky'
-        this.navbar.current.style.background = 'white'
-        this.navbar.current.style.boxShadow = 'none'
-      })
-    }
+  componentDidMount = () => {
+    this.checkLogin()
+    this.alterNavbar()
+    window.addEventListener('scroll', this.alterNavbar)
   }
 
   componentDidUpdate = prevProps => {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.checkLogin()
+    }
+
     if (prevProps.location.pathname !== this.props.location.pathname) {
       this.alterNavbar()
       if (this.props.location.pathname === '/') {
@@ -122,15 +112,57 @@ class Navbar extends React.PureComponent {
     }
   }
 
-  componentDidMount = () => {
-    this.alterNavbar()
-    window.addEventListener('scroll', this.alterNavbar)
+  alterNavbar = () => {
+    if (this.props.location.pathname === '/') {
+      this.navbar.current.style.color = 'white'
+      this.navbar.current.style.position = 'fixed'
+      this.setState({ logo: logoWhite })
+      if (window.scrollY > 40) {
+        this.navbar.current.style.background = 'rgba(0, 0, 0, 0.7)'
+        this.navbar.current.style.boxShadow = 'none'
+      } else {
+        this.navbar.current.style.background = 'initial'
+        this.navbar.current.style.boxShadow = 'initial'
+      }
+    } else {
+      this.setState({ logo: logoBlack })
+
+      this.navbar.current.style.color = 'black'
+      this.navbar.current.style.position = 'sticky'
+      this.navbar.current.style.background = 'white'
+
+      if (window.scrollY > 40) {
+        this.navbar.current.style.boxShadow = '0 0 4px rgba(0, 0, 0, 0.2)'
+      } else {
+        this.navbar.current.style.boxShadow = 'none'
+      }
+    }
+  }
+
+  checkLogin = () => {
+    if (this.props.location.search === '?login=true') {
+      this.setState({
+        isModalOpen: true,
+      })
+    }
   }
 
   onModalClose = () => {
+    this.props.history.push({
+      search: '',
+    })
     this.setState({
       isModalOpen: false,
     })
+  }
+
+  isLoggedIn = () => {
+    return this.props.token
+  }
+
+  logout = () => {
+    this.props.removeToken()
+    window.location.reload()
   }
 
   render() {
@@ -145,20 +177,37 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
-          <Login onClick={() => this.setState({ isModalOpen: true })}>
-            LOGIN
-          </Login>
+          {this.isLoggedIn() ? (
+            <NavItem onClick={this.logout}>LOGOUT</NavItem>
+          ) : (
+            <NavItem onClick={() => this.setState({ isModalOpen: true })}>
+              LOGIN
+            </NavItem>
+          )}
         </Menu>
         <Modal
           customStyles={rodalStyle}
-          visible={this.state.isModalOpen}
+          visible={!this.isLoggedIn() && this.state.isModalOpen}
           onClose={this.onModalClose}
         >
-          <LoginPage />
+          <LoginPage onLoggedIn={this.onModalClose} />
         </Modal>
       </Container>
     )
   }
 }
 
-export default withRouter(Navbar)
+const mapStateToProps = state => ({
+  ...state.auth,
+})
+
+const mapDispatchToProps = {
+  ...authActions,
+}
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Navbar),
+)
