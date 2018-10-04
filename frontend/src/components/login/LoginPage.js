@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import LogoImage from '../../assets/logo/logoblack.png'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import * as authActions from '../../redux/modules/auth'
+import axios from 'axios'
 
 const Center = styled.div`
   text-align: center;
@@ -53,10 +56,30 @@ const Input = styled.input`
 `
 
 class LoginPage extends React.PureComponent {
-  onSubmit = e => {
-    e.preventDefault()
-    alert('logged in')
+  state = {
+    username: '',
+    password: '',
   }
+
+  onChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  onSubmit = async e => {
+    e.preventDefault()
+    const { data: token } = await axios.post(
+      'http://localhost:8000/users/login',
+      {
+        username: this.state.username,
+        password: this.state.password,
+      },
+    )
+    this.props.setToken(token)
+    this.props.onLoggedIn()
+  }
+
   render() {
     return (
       <Center>
@@ -67,9 +90,19 @@ class LoginPage extends React.PureComponent {
         </LoginSlogan>
         <LoginCenter onSubmit={this.onSubmit}>
           <InputDescription>Username</InputDescription>
-          <Input type="text" />
+          <Input
+            name="username"
+            onChange={this.onChange}
+            value={this.state.username}
+            type="text"
+          />
           <InputDescription>Password</InputDescription>
-          <Input type="password" />
+          <Input
+            name="password"
+            onChange={this.onChange}
+            value={this.state.password}
+            type="password"
+          />
           <div className="text-center">
             <LoginButton type="submit">Login</LoginButton>
             <SignupLink>
@@ -85,4 +118,15 @@ class LoginPage extends React.PureComponent {
   }
 }
 
-export default LoginPage
+const mapStateToProps = state => ({
+  ...state.auth,
+})
+
+const mapDispatchToProps = {
+  ...authActions,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginPage)

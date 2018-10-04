@@ -6,10 +6,11 @@ module.exports = (req, res, next) => {
     req.headers['authorization'] && req.headers['authorization'].split(' ')[1],
     'shhhhh',
     (err, decoded) => {
+      console.log('Authenticated', decoded)
       if (err) {
         res.send(404)
       } else {
-        User.findById(decoded.user.id, (err, user) => {
+        User.findById(decoded.id, (err, user) => {
           console.log(err, user)
           if (err) {
             res.send(401)

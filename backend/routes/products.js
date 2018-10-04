@@ -29,9 +29,7 @@ router.post('/', (req, res) => {
   let errors = req.validationErrors()
 
   if (errors) {
-    res.render('register', {
-      errors: errors,
-    })
+    res.render(errors)
   } else {
     let { name, base, owner, imageUrl, price, brand, size, quantity } = req.body
     let newProduct = new Product({

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "bootstrap": "^4.0.0",
     "eslint": "^5.6.0",
@@ -34,5 +35,8 @@
     "dev": "npm start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.5"
   }
 }

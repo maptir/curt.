@@ -6,11 +6,13 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "eslint": "^5.6.1",
     "eslint-config-prettier": "^3.1.0",
