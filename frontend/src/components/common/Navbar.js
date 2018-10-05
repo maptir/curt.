@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import * as authActions from '../../redux/modules/auth'
 
 import Rodal from 'rodal'
-import LoginPage from '../login/LoginPage'
+import LoginForm from '../login/LoginForm'
 
 const Container = styled.div`
   width: 100vw;
@@ -161,7 +161,7 @@ class Navbar extends React.PureComponent {
   }
 
   logout = () => {
-    this.props.removeToken()
+    this.props.logout()
     window.location.reload()
   }
 
@@ -190,7 +190,7 @@ class Navbar extends React.PureComponent {
           visible={!this.isLoggedIn() && this.state.isModalOpen}
           onClose={this.onModalClose}
         >
-          <LoginPage onLoggedIn={this.onModalClose} />
+          <LoginForm onLoggedIn={this.onModalClose} />
         </Modal>
       </Container>
     )
