@@ -24,7 +24,7 @@ const configureStore = () => {
 
   axios.interceptors.response.use(null, error => {
     if (error.response.status === 401) {
-      store.dispatch(authActions.removeToken())
+      store.dispatch(authActions.logout())
       window.location.reload()
     }
     return Promise.reject(error)
