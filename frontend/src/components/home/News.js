@@ -40,6 +40,7 @@ class News extends React.Component {
   render() {
     return (
       <div className="mt-5 mb-5">
+        {/* <Cart isOpen /> */}
         <div className="text-center">
           {/* UNIQUE IS THE NEW COOLS !  */}
           <ImageContainer>
@@ -50,18 +51,21 @@ class News extends React.Component {
           <NewsTitle>New This Week</NewsTitle>
           <Grid>
             <Product
+              to="/product/123"
               imageUrl={firstNews}
               title="BEAUTIFUL IN YOUR WAY"
               desc="FITS FOR ANY DRESS AND OUTFITS WITH THE NEW VANS"
               align="center"
             />
             <Product
+              to="/product/123"
               imageUrl={secondNews}
               title="NAVY & SOLDIER"
               desc="BE YOURSELF & COOL WITH THE NEW NIKE"
               align="center"
             />
             <Product
+              to="/product/123"
               imageUrl={thirdNews}
               title="BACK TO BASIC"
               desc="EVERYTHING FITS FOR SIMPLE CONVERSE"

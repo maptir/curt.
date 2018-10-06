@@ -4,7 +4,6 @@ import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
 import * as authActions from '../../redux/modules/auth'
 
 import Rodal from 'rodal'
@@ -92,29 +91,17 @@ class Navbar extends React.PureComponent {
     isModalOpen: false,
   }
 
-  alterNavbar = () => {
-    if (this.props.location.pathname === '/') {
-      this.navbar.current.style.color = 'white'
-      this.navbar.current.style.position = 'fixed'
-      this.setState({ logo: logoWhite })
-      if (window.scrollY > 40) {
-        this.navbar.current.style.background = 'rgba(0, 0, 0, 0.7)'
-        this.navbar.current.style.boxShadow = '0 0 4px rgba(0, 0, 0, 0.1)'
-      } else {
-        this.navbar.current.style.background = 'initial'
-        this.navbar.current.style.boxShadow = 'initial'
-      }
-    } else {
-      this.setState({ logo: logoBlack }, () => {
-        this.navbar.current.style.color = 'black'
-        this.navbar.current.style.position = 'sticky'
-        this.navbar.current.style.background = 'white'
-        this.navbar.current.style.boxShadow = 'none'
-      })
-    }
+  componentDidMount = () => {
+    this.checkLogin()
+    this.alterNavbar()
+    window.addEventListener('scroll', this.alterNavbar)
   }
 
   componentDidUpdate = prevProps => {
+    if (prevProps.location.search !== this.props.location.search) {
+      this.checkLogin()
+    }
+
     if (prevProps.location.pathname !== this.props.location.pathname) {
       this.alterNavbar()
       if (this.props.location.pathname === '/') {
@@ -125,12 +112,45 @@ class Navbar extends React.PureComponent {
     }
   }
 
-  componentDidMount = () => {
-    this.alterNavbar()
-    window.addEventListener('scroll', this.alterNavbar)
+  alterNavbar = () => {
+    if (this.props.location.pathname === '/') {
+      this.navbar.current.style.color = 'white'
+      this.navbar.current.style.position = 'fixed'
+      this.setState({ logo: logoWhite })
+      if (window.scrollY > 40) {
+        this.navbar.current.style.background = 'rgba(0, 0, 0, 0.7)'
+        this.navbar.current.style.boxShadow = 'none'
+      } else {
+        this.navbar.current.style.background = 'initial'
+        this.navbar.current.style.boxShadow = 'initial'
+      }
+    } else {
+      this.setState({ logo: logoBlack })
+
+      this.navbar.current.style.color = 'black'
+      this.navbar.current.style.position = 'sticky'
+      this.navbar.current.style.background = 'white'
+
+      if (window.scrollY > 40) {
+        this.navbar.current.style.boxShadow = '0 0 4px rgba(0, 0, 0, 0.2)'
+      } else {
+        this.navbar.current.style.boxShadow = 'none'
+      }
+    }
+  }
+
+  checkLogin = () => {
+    if (this.props.location.search === '?login=true') {
+      this.setState({
+        isModalOpen: true,
+      })
+    }
   }
 
   onModalClose = () => {
+    this.props.history.push({
+      search: '',
+    })
     this.setState({
       isModalOpen: false,
     })
@@ -185,10 +205,9 @@ const mapDispatchToProps = {
   ...authActions,
 }
 
-export default compose(
+export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  ),
-  withRouter,
-)(Navbar)
+  )(Navbar),
+)

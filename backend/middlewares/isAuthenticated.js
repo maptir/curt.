@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
         res.send(404)
       } else {
         User.findById(decoded.id, (err, user) => {
-          console.log(err, user)
           if (err) {
             res.send(401)
           } else {

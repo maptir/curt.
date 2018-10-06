@@ -8,9 +8,9 @@ let Image = require('../models/image')
 router.get('/', (req, res) => {
   Image.find({}, (err, images) => {
     if (err) {
-      res.send(404)
+      res.sendStatus(404)
     } else {
-      res.send(users)
+      res.send(images)
     }
   })
 })
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.get('/:name', (req, res) => {
   Image.find({ name: req.params.name }, (err, image) => {
     if (err) {
-      res.send(404)
+      res.sendStatus(404)
     } else {
       res.send(image)
     }
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
   let errors = req.validationErrors()
 
   if (errors) {
-    res.render(errors)
+    return res.send(errors)
   } else {
     let { name, imageUrl } = req.body
     let newImage = new Image({
@@ -44,9 +44,9 @@ router.post('/', (req, res) => {
 
     newImage.save(err => {
       if (err) {
-        res.send(400)
+        res.sendStatus(400)
       } else {
-        res.send(202)
+        res.sendStatus(201)
       }
     })
   }
