@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import RadioButton from '../common/RadioButton'
 
 const CatalogType = styled.div`
   font-size: 34px;
@@ -117,10 +118,13 @@ const Fixed = styled.div`
   top: 90px;
   left: 0;
   botoom: 0;
+  margin-right: 2em;
 `
 
 class Sidebar extends React.Component {
-  state = {}
+  state = {
+    selected: 1,
+  }
 
   componentDidMount = () => {} // fetch data here
 
@@ -140,8 +144,18 @@ class Sidebar extends React.Component {
           <SubItem>{item}</SubItem>
         ))}
         <Header>Price</Header>
-        {priceList.map(item => (
-          <SubItem>{item}</SubItem>
+        {priceList.map((item, index) => (
+          <SubItem>
+            <RadioButton
+              label={item}
+              group="price"
+              onClick={() =>
+                this.setState({
+                  selected: index,
+                })
+              }
+            />
+          </SubItem>
         ))}
         <Header>Color</Header>
         <ColorGrid>
