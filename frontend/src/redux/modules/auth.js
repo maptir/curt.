@@ -1,4 +1,5 @@
 import axios from 'axios'
+import curtApi from '../../lib/curApi'
 
 // Actions
 const SET_TOKEN = 'auth/SET_TOKEN'
@@ -20,6 +21,7 @@ export default (state = initialState, action = {}) => {
       return { ...state, token: action.payload }
     case REMOVE_TOKEN:
       localStorage.removeItem('token')
+      delete axios.defaults.headers.common['Authorization']
       return { ...initialState }
     default:
       return state
@@ -27,11 +29,14 @@ export default (state = initialState, action = {}) => {
 }
 
 // Action Creators
-export const setToken = payload => ({
+export const setToken = token => ({
   type: SET_TOKEN,
-  payload,
+  payload: token,
 })
 
-export const removeToken = () => ({
-  type: REMOVE_TOKEN,
-})
+export const login = ({ username, password }) => async dispatch => {
+  const token = await curtApi.auth.login({ username, password })
+  dispatch(setToken(token))
+}
+
+export const logout = () => ({ type: REMOVE_TOKEN })

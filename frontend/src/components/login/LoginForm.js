@@ -69,14 +69,10 @@ class LoginPage extends React.PureComponent {
 
   onSubmit = async e => {
     e.preventDefault()
-    const { data: token } = await axios.post(
-      'http://localhost:8000/users/login',
-      {
-        username: this.state.username,
-        password: this.state.password,
-      },
-    )
-    this.props.setToken(token)
+    this.props.login({
+      username: this.state.username,
+      password: this.state.password,
+    })
     this.props.onLoggedIn()
   }
 
