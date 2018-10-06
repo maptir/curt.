@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import CartItem from './CartItem'
 import Mock1 from '../../assets/shoes/mock1.jpg'
 import Mock2 from '../../assets/shoes/mock2.jpg'
 import Mock3 from '../../assets/shoes/mock3.jpg'
 import Mock4 from '../../assets/shoes/mock4.jpg'
+
+const Hidden = styled.div`
+  display: ${props => (props.isOpen ? 'block' : 'none')};
+`
 
 const Overlay = styled.div`
   display: ${props => (props.isOpen ? 'block' : 'none')};
@@ -28,6 +32,9 @@ const Container = styled.div`
   right: ${props => (props.isOpen ? '0' : '-400px')};
   background-color: white;
   z-index: 99999;
+  box-shadow: ${props =>
+    props.isOpen ? '0 -4px 5px rgba(0, 0, 0, 0.6);' : 'none'};
+
   transition: all 300ms;
   @media (max-width: 480px) {
     width: 90vw;
@@ -217,7 +224,7 @@ class Cart extends React.Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <Overlay isOpen={this.props.isOpen} onClick={this.props.onClose} />
         <Container isOpen={this.props.isOpen}>
           <Padding>
@@ -231,7 +238,7 @@ class Cart extends React.Component {
             <ScrollItem>
               <ScrollItemContent>
                 {this.state.cartItemList.map((item, index) => (
-                  <CartItem {...item} cartIndex={index} />
+                  <CartItem key={item.id} {...item} cartIndex={index} />
                 ))}
               </ScrollItemContent>
             </ScrollItem>
@@ -254,7 +261,7 @@ class Cart extends React.Component {
             </button>
           </Checkout>
         </Container>
-      </div>
+      </Fragment>
     )
   }
 }

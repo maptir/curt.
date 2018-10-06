@@ -26,8 +26,8 @@ export default (state = initialState, action = {}) => {
 }
 
 // Action Creators
-export const editItem = lineItem => async dispatch => {
-  const cart = await curtApi.cart.editItem(lineItem)
+export const editItem = (productId, quantity) => async dispatch => {
+  const cart = await curtApi.cart.editItem(productId, quantity)
   dispatch({
     type: UPDATE_CART,
     payload: cart,
