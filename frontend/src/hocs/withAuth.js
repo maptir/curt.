@@ -26,10 +26,10 @@ const mapDispatchToProps = {
 }
 
 export default compose(
-  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
+  withRouter,
   withAuth,
 )

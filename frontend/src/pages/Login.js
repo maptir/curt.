@@ -1,20 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import LoginPage from '../components/login/LoginPage'
+import LoginForm from '../components/login/LoginForm'
 
 class Login extends React.Component {
   state = {
     msg: 'LoginPage',
   }
 
-  componentDidMount = () => { } // fetch data here
+  componentDidMount = () => {} // fetch data here
 
-  componentWillUnmount = () => { }
+  componentWillUnmount = () => {}
 
   render() {
     return (
       <div>
-        <LoginPage />
+        <LoginForm />
       </div>
     )
   }
