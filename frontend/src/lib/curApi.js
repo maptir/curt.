@@ -15,8 +15,11 @@ class CurtApi {
   }
 
   cart = {
-    async editCartItem(lineItem) {
-      const { data: cart } = await axios.put(`${API_URL}/cart/edit`, lineItem)
+    async editCartItem(productId, quantity) {
+      const { data: cart } = await axios.put(`${API_URL}/cart/edit`, {
+        productId,
+        quantity,
+      })
       return cart
     },
     async removeCartItem(itemId) {
