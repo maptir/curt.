@@ -1,6 +1,7 @@
+import curtApi from '../../lib/curtApi'
+
 // Actions
-const REMOVE_ITEM = 'cart/REMOVE_ITEM'
-const EDIT_ITEM = 'cart/EDIT_ITEM'
+const UPDATE_CART = 'cart/UPDATE_CART'
 
 // Initial State
 /**
@@ -14,14 +15,10 @@ const initialState = {
 // Reducer
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case EDIT_ITEM:
-      return state
-    case REMOVE_ITEM:
+    case UPDATE_CART:
       return {
         ...state,
-        cart: state.cart.filter(
-          lineItem => lineItem.product.id === action.payload.id,
-        ),
+        cart: action.payload,
       }
     default:
       return state
@@ -29,12 +26,18 @@ export default (state = initialState, action = {}) => {
 }
 
 // Action Creators
-export const editItem = lineItem => ({
-  type: EDIT_ITEM,
-  payload: lineItem,
-})
+export const editItem = lineItem => async dispatch => {
+  const cart = await curtApi.cart.editItem(lineItem)
+  dispatch({
+    type: UPDATE_CART,
+    payload: cart,
+  })
+}
 
-export const removeItem = id => ({
-  type: REMOVE_ITEM,
-  payload: id,
-})
+export const removeItem = itemId => async dispatch => {
+  const cart = await curtApi.cart.remoteItem(itemId)
+  dispatch({
+    type: UPDATE_CART,
+    payload: cart,
+  })
+}
