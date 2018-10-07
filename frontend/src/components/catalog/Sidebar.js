@@ -117,7 +117,7 @@ const Fixed = styled.div`
   position: sticky;
   top: 90px;
   left: 0;
-  botoom: 0;
+  bottom: 0;
   margin-right: 2em;
 `
 

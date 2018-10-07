@@ -31,6 +31,33 @@ const ProductList = () => (
               desc={product.price + ' Baht'}
             />
           ))}
+          {productList.map(product => (
+            <Product
+              key={product._id}
+              to={'/product/' + product.slug}
+              imageUrl={product.imageUrl}
+              title={product.name}
+              desc={product.price + ' Baht'}
+            />
+          ))}
+          {productList.map(product => (
+            <Product
+              key={product._id}
+              to={'/product/' + product.slug}
+              imageUrl={product.imageUrl}
+              title={product.name}
+              desc={product.price + ' Baht'}
+            />
+          ))}
+          {productList.map(product => (
+            <Product
+              key={product._id}
+              to={'/product/' + product.slug}
+              imageUrl={product.imageUrl}
+              title={product.name}
+              desc={product.price + ' Baht'}
+            />
+          ))}
         </CatalogGrid>
       </CatalogContainer>
     )}
