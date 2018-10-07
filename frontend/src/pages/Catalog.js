@@ -31,33 +31,33 @@ const CatalogGrid = styled.div`
 const productMockList = [
   {
     imageUrl: Mock1,
-    title: "Mock1",
-    desc: "1,900 Baht"
+    title: 'Mock1',
+    desc: '1,900 Baht',
   },
   {
     imageUrl: Mock2,
-    title: "Mock2",
-    desc: "3,900 Baht"
+    title: 'Mock2',
+    desc: '3,900 Baht',
   },
   {
     imageUrl: Mock3,
-    title: "Mock3",
-    desc: "6,900 Baht"
+    title: 'Mock3',
+    desc: '6,900 Baht',
   },
   {
     imageUrl: Mock4,
-    title: "Mock4",
-    desc: "7,900 Baht"
+    title: 'Mock4',
+    desc: '7,900 Baht',
   },
   {
     imageUrl: Mock5,
-    title: "Mock5",
-    desc: "11,900 Baht"
+    title: 'Mock5',
+    desc: '11,900 Baht',
   },
   {
     imageUrl: Mock6,
-    title: "Mock6",
-    desc: "21,900 Baht"
+    title: 'Mock6',
+    desc: '21,900 Baht',
   },
 ]
 
@@ -70,28 +70,26 @@ class Catalog extends React.Component {
 
   render() {
     return (
-      <div>
-        <Container>
-          <div className="row no-gutters">
-            <div className="col-2">
-              <Sidebar />
-            </div>
-            <div className="col-10">
-              <CatalogContainer>
-                <CatalogGrid>
+      <Container>
+        <div className="row no-gutters">
+          <div className="col-2">
+            <Sidebar />
+          </div>
+          <div className="col-10">
+            <CatalogContainer>
+              <CatalogGrid>
                 {productMockList.map(mock => (
                   <Product
-                    imageUrl= {mock.imageUrl}
-                    title = {mock.title}
-                    desc = {mock.desc}
+                    imageUrl={mock.imageUrl}
+                    title={mock.title}
+                    desc={mock.desc}
                   />
                 ))}
-                </CatalogGrid>
-              </CatalogContainer>
-            </div>
+              </CatalogGrid>
+            </CatalogContainer>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     )
   }
 }

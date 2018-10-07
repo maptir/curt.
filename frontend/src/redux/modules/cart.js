@@ -41,3 +41,11 @@ export const removeItem = itemId => async dispatch => {
     payload: cart,
   })
 }
+
+export const fetchCart = () => async dispatch => {
+  const cart = await curtApi.cart.fetchCart()
+  dispatch({
+    type: UPDATE_CART,
+    payload: cart,
+  })
+}

@@ -12,7 +12,7 @@ const cors = require('cors')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
-const cartsRouter = require('./routes/carts')
+const cartRouter = require('./routes/cart')
 const productsRouter = require('./routes/products')
 
 // MongoDB
@@ -42,7 +42,7 @@ app.use(passport.initialize())
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
-app.use('/carts', cartsRouter)
+app.use('/cart', cartRouter)
 app.use('/products', productsRouter)
 
 // // catch 404 and forward to error handler
@@ -51,7 +51,7 @@ app.use('/products', productsRouter)
 // })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}

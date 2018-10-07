@@ -38,6 +38,7 @@ router.post('/add', (req, res) => {
       product.updateOne({ quantity: product.quantity + 1 }, err => {
         if (err) return res.sendStatus(404)
       })
+      console.log(product)
       res.sendStatus(201)
     } else {
       let newProduct = new Product({ ...addedProduct, quantity: 1 })
@@ -48,6 +49,20 @@ router.post('/add', (req, res) => {
           res.sendStatus(201)
         }
       })
+    }
+  })
+})
+
+router.get('/:id', (req, res) => {
+  console.log(req.params.id)
+
+  Product.find({ _id: req.params.id }, (err, product) => {
+    if (err) {
+      res.sendStatus(204)
+    } else {
+      console.log(product)
+
+      res.send(product)
     }
   })
 })

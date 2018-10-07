@@ -1,5 +1,5 @@
 import axios from 'axios'
-import curtApi from '../../lib/curApi'
+import curtApi from '../../lib/curtApi'
 
 // Actions
 const SET_TOKEN = 'auth/SET_TOKEN'

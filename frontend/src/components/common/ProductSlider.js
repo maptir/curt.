@@ -117,7 +117,7 @@ class ProductSlider extends React.Component {
       <Container>
         <div>
           <Title>{this.props.title}</Title>
-          <Link to="/catalogs">View more.</Link>
+          <Link to="/catalog">View more.</Link>
         </div>
         <Slider {...settings}>
           {this.state.products.map(product => (

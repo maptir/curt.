@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
   },
   cart: [
     {
-      id: {
+      productId: {
         type: String,
         required: true,
       },
