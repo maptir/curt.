@@ -8,7 +8,7 @@ import Rodal from 'rodal'
 import LoginForm from '../login/LoginForm'
 
 import Cart from '../cart/Cart'
-import AuthProvider from '../Provider/AuthProvider'
+import AuthProvider from '../providers/AuthProvider'
 
 const Container = styled.div`
   width: 100vw;
