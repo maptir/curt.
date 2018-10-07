@@ -4,10 +4,7 @@ import Slider from 'react-slick'
 
 import StyledLink from './StyledLink'
 import Product from './Product'
-import Mock1 from '../../assets/shoes/mock1.jpg'
-import Mock2 from '../../assets/shoes/mock2.jpg'
-import Mock3 from '../../assets/shoes/mock3.jpg'
-import Mock4 from '../../assets/shoes/mock4.jpg'
+import ProductProvider from '../providers/ProductProvider'
 
 const PaddedProduct = styled(Product)`
   padding: 1em;
@@ -29,59 +26,6 @@ const Container = styled.div`
 `
 
 class ProductSlider extends React.Component {
-  state = {
-    products: [
-      {
-        id: 1,
-        imageUrl: Mock1,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 2,
-        imageUrl: Mock2,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 3,
-        imageUrl: Mock3,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 4,
-        imageUrl: Mock4,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 1,
-        imageUrl: Mock1,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 2,
-        imageUrl: Mock2,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 3,
-        imageUrl: Mock3,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-      {
-        id: 4,
-        imageUrl: Mock4,
-        title: 'Mock1',
-        desc: 'Mock1 description',
-      },
-    ],
-  }
-
   componentDidMount = () => {} // fetch data here
 
   render() {
@@ -114,17 +58,21 @@ class ProductSlider extends React.Component {
       ],
     }
     return (
-      <Container>
-        <div>
-          <Title>{this.props.title}</Title>
-          <Link to="/catalogs">View more.</Link>
-        </div>
-        <Slider {...settings}>
-          {this.state.products.map(product => (
-            <PaddedProduct {...product} key={product.id} />
-          ))}
-        </Slider>
-      </Container>
+      <ProductProvider>
+        {({ productList }) => (
+          <Container>
+            <div>
+              <Title>{this.props.title}</Title>
+              <Link to="/catalog">View more.</Link>
+            </div>
+            <Slider {...settings}>
+              {productList.map(product => (
+                <PaddedProduct {...product} key={product.id} />
+              ))}
+            </Slider>
+          </Container>
+        )}
+      </ProductProvider>
     )
   }
 }

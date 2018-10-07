@@ -29,6 +29,21 @@ class CurtApi {
       )
       return cart
     },
+    async fetchCart() {
+      const { data: cart } = await axios.get(`${API_URL}/cart`)
+      return cart
+    },
+  }
+
+  products = {
+    async fetchAllProduct() {
+      const { data: productList } = await axios.get(`${API_URL}/products`)
+      return productList
+    },
+    async fetchProduct(slug) {
+      const { data: product } = await axios.get(`${API_URL}/products/${slug}`)
+      return product
+    },
   }
 }
 

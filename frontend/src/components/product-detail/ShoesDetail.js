@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import LoveIcon from '../../assets/icon/favourite.png'
+import CartProvider from '../providers/CartProvider'
 
 const SneakerType = styled.text`
   font-size: 18px;
@@ -66,10 +67,10 @@ const LoveButton = styled.button`
   align-items: center;
 `
 const Description = styled.div`
-  margin-top: 30px
+  margin-top: 30px;
   font-size: 14px;
   font-weight: 300;
-  letter-spacing: 1.4px;  
+  letter-spacing: 1.4px;
 `
 
 const sizeList = [
@@ -96,7 +97,7 @@ class ShoesDetail extends React.Component {
     size: 6,
   }
 
-  componentDidMount = () => {} // fetch data here
+  componentDidMount = () => {}
 
   componentWillUnmount = () => {}
 
@@ -109,26 +110,29 @@ class ShoesDetail extends React.Component {
           </div>
           <div className="d-flex flex-wrap align-items-center justify-content-between">
             <div className="">
-              <SneakerName>CONVERSE BASIC</SneakerName>
+              <SneakerName>{this.props.products[0].name}</SneakerName>
             </div>
             <div className="">
-              <SneakerPrice>1,900 Baht</SneakerPrice>
+              <SneakerPrice>
+                {this.props.products[0].price.toLocaleString()} Baht
+              </SneakerPrice>
             </div>
           </div>
         </SneakerHeaderDetail>
-        <SizeSelection className="container-fluid">
+        <SizeSelection>
           <div className="row" style={{ marginBottom: '10px' }}>
             <div className="col-12">
               <Size>Select Size</Size>
             </div>
           </div>
           <SizeGrid>
-            {sizeList.map(size => (
+            {this.props.products.map(product => product.size).map(size => (
               <SizeButton
                 onClick={() => this.setState({ size })}
                 className={`btn ${
                   this.state.size === size ? 'btn-dark' : 'btn-outline-dark'
                 }`}
+                key={size}
               >
                 {size}
               </SizeButton>
@@ -136,7 +140,16 @@ class ShoesDetail extends React.Component {
           </SizeGrid>
           <div className="d-flex" style={{ marginTop: '20px' }}>
             <div className="mr-2" style={{ flex: '1' }}>
-              <AddButton className="btn btn-dark">ADD TO CART</AddButton>
+              <CartProvider>
+                {({ editCartItem }) => (
+                  <AddButton
+                    onClick={() => editCartItem(this.props.id, 1)}
+                    className="btn btn-dark"
+                  >
+                    ADD TO CART
+                  </AddButton>
+                )}
+              </CartProvider>
             </div>
             <div>
               <LoveButton className="btn-dark">

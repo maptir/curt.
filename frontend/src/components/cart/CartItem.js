@@ -61,7 +61,7 @@ class CartItem extends React.Component {
             <MiniText>Size: {this.props.size}</MiniText>
           </Detail>
           <Price>
-            <BoldText>{this.props.price.toLocaleString()} Baht</BoldText>
+            <BoldText>{this.props.price} Baht</BoldText>
             <RemoveButton onClick={this.toggleShow}>REMOVE</RemoveButton>
           </Price>
         </Container>

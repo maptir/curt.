@@ -117,7 +117,7 @@ const Fixed = styled.div`
   position: sticky;
   top: 90px;
   left: 0;
-  botoom: 0;
+  bottom: 0;
   margin-right: 2em;
 `
 
@@ -136,16 +136,16 @@ class Sidebar extends React.Component {
         <CatalogType>MEN</CatalogType>
         <SeperateLine />
         <Header>Brand</Header>
-        {brandList.map(item => (
-          <SubItem>{item}</SubItem>
+        {brandList.map((item, index) => (
+          <SubItem key={index}>{item}</SubItem>
         ))}
         <Header>Type</Header>
-        {typeList.map(item => (
-          <SubItem>{item}</SubItem>
+        {typeList.map((item, index) => (
+          <SubItem key={index}>{item}</SubItem>
         ))}
         <Header>Price</Header>
         {priceList.map((item, index) => (
-          <SubItem>
+          <SubItem key={index}>
             <RadioButton
               label={item}
               group="price"
@@ -159,8 +159,12 @@ class Sidebar extends React.Component {
         ))}
         <Header>Color</Header>
         <ColorGrid>
-          {colorList.map(item => (
-            <CircleColor color={item.color} borderColor={item.borderColor} />
+          {colorList.map((item, index) => (
+            <CircleColor
+              key={index}
+              color={item.color}
+              borderColor={item.borderColor}
+            />
           ))}
         </ColorGrid>
       </Fixed>
