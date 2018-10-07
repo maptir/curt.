@@ -1,13 +1,10 @@
 import { connect } from 'react-redux'
 import * as productActions from '../../redux/modules/product'
 
-const ProductProvider = props => {
-  console.log(props)
-
-  return props.children({
+const ProductProvider = props =>
+  props.children({
     productList: props.productList,
   })
-}
 
 const mapStateToProps = state => ({ ...state.product })
 

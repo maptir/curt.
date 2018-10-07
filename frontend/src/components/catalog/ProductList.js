@@ -25,6 +25,7 @@ const ProductList = () => (
           {productList.map((product, index) => (
             <Product
               key={index}
+              to={'/product/' + index}
               imageUrl={product.imageUrl}
               title={product.name}
               desc={product.price + ' Baht'}

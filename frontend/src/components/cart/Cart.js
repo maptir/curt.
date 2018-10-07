@@ -1,15 +1,9 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import _ from 'lodash'
 import CartItem from './CartItem'
-import Mock1 from '../../assets/shoes/mock1.jpg'
-import Mock2 from '../../assets/shoes/mock2.jpg'
-import Mock3 from '../../assets/shoes/mock3.jpg'
-import Mock4 from '../../assets/shoes/mock4.jpg'
 import CartProvider from '../providers/CartProvider'
-
-const Hidden = styled.div`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
-`
+import ProductProvider from '../providers/ProductProvider'
 
 const Overlay = styled.div`
   display: ${props => (props.isOpen ? 'block' : 'none')};
@@ -108,167 +102,66 @@ const SumPrice = styled.div`
 `
 
 class Cart extends React.Component {
-  state = {
-    // cartItemList: [
-    //   {
-    //     id: 1,
-    //     name: 'Converse',
-    //     imageUrl: Mock1,
-    //     price: 1900,
-    //     size: '8',
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Nike',
-    //     imageUrl: Mock2,
-    //     price: 5900,
-    //     size: '4',
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Vans',
-    //     imageUrl: Mock3,
-    //     price: 19010,
-    //     size: '10',
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Adidas',
-    //     imageUrl: Mock4,
-    //     price: 100,
-    //     size: '5',
-    //   },
-    //   {
-    //     id: 1,
-    //     name: 'Converse',
-    //     imageUrl: Mock1,
-    //     price: 1900,
-    //     size: '8',
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Nike',
-    //     imageUrl: Mock2,
-    //     price: 5900,
-    //     size: '4',
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Vans',
-    //     imageUrl: Mock3,
-    //     price: 19010,
-    //     size: '10',
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Adidas',
-    //     imageUrl: Mock4,
-    //     price: 100,
-    //     size: '5',
-    //   },
-    //   {
-    //     id: 1,
-    //     name: 'Converse',
-    //     imageUrl: Mock1,
-    //     price: 1900,
-    //     size: '8',
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Nike',
-    //     imageUrl: Mock2,
-    //     price: 5900,
-    //     size: '4',
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Vans',
-    //     imageUrl: Mock3,
-    //     price: 19010,
-    //     size: '10',
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Adidas',
-    //     imageUrl: Mock4,
-    //     price: 100,
-    //     size: '5',
-    //   },
-    //   {
-    //     id: 1,
-    //     name: 'Converse',
-    //     imageUrl: Mock1,
-    //     price: 1900,
-    //     size: '8',
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Nike',
-    //     imageUrl: Mock2,
-    //     price: 5900,
-    //     size: '4',
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Vans',
-    //     imageUrl: Mock3,
-    //     price: 19010,
-    //     size: '10',
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Adidas',
-    //     imageUrl: Mock4,
-    //     price: 100,
-    //     size: '5',
-    //   },
-    // ],
-  }
-
   render() {
     return (
       <CartProvider>
         {({ cart }) => (
-          <Fragment>
-            <Overlay isOpen={this.props.isOpen} onClick={this.props.onClose} />
-            <Container isOpen={this.props.isOpen}>
-              <Padding>
-                <Head>
-                  <div style={{ flex: 1 }}>CART</div>
-                  <Close onClick={this.props.onClose}>CLOSE</Close>
-                </Head>
-                <Promotion>
-                  FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
-                </Promotion>
-                <ScrollItem>
-                  <ScrollItemContent>
-                    {cart.map((item, index) => {
-                      console.log(item)
-                      return (
-                        <CartItem key={index} {...item} cartIndex={index} />
-                      )
-                    })}
-                  </ScrollItemContent>
-                </ScrollItem>
-              </Padding>
-              <Checkout>
-                <Price>
-                  <SubTotal>
-                    SUB TOTAL ({cart.length.toLocaleString()} ITEMS)
-                  </SubTotal>
-                  <SumPrice>
-                    {cart
-                      .reduce((acc, cur) => acc + cur.price, 0)
-                      .toLocaleString()}
-                    &nbsp;Baht
-                  </SumPrice>
-                </Price>
-                <button className="btn btn-light btn-block rounded-0">
-                  CHECK OUT
-                </button>
-              </Checkout>
-            </Container>
-          </Fragment>
+          <ProductProvider>
+            {({ productList }) => {
+              const cartProductDetail = _.intersectionWith(
+                productList,
+                cart,
+                (product, cartItem) => product._id === cartItem.productId,
+              )
+              return (
+                <Fragment>
+                  <Overlay
+                    isOpen={this.props.isOpen}
+                    onClick={this.props.onClose}
+                  />
+                  <Container isOpen={this.props.isOpen}>
+                    <Padding>
+                      <Head>
+                        <div style={{ flex: 1 }}>CART</div>
+                        <Close onClick={this.props.onClose}>CLOSE</Close>
+                      </Head>
+                      <Promotion>
+                        FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
+                      </Promotion>
+                      <ScrollItem>
+                        <ScrollItemContent>
+                          {cartProductDetail.map((product, index) => (
+                            <CartItem
+                              key={index}
+                              {...product}
+                              cartIndex={index}
+                            />
+                          ))}
+                        </ScrollItemContent>
+                      </ScrollItem>
+                    </Padding>
+                    <Checkout>
+                      <Price>
+                        <SubTotal>
+                          SUB TOTAL ({cartProductDetail.length.toLocaleString()}{' '}
+                          ITEMS)
+                        </SubTotal>
+                        <SumPrice>
+                          {cartProductDetail
+                            .reduce((acc, cur) => acc + cur.price, 0)
+                            .toLocaleString()}
+                          &nbsp;Baht
+                        </SumPrice>
+                      </Price>
+                      <button className="btn btn-light btn-block rounded-0">
+                        CHECK OUT
+                      </button>
+                    </Checkout>
+                  </Container>
+                </Fragment>
+              )
+            }}
+          </ProductProvider>
         )}
       </CartProvider>
     )
