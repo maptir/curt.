@@ -8,6 +8,18 @@ const Container = styled.div`
   padding-right: 0;
 `
 
+const Grid = styled.div`
+  display: flex;
+
+  > :first-child {
+    flex: 0 0 240px;
+  }
+
+  > :last-child {
+    flex: 1;
+  }
+`
+
 class Catalog extends React.Component {
   state = {}
 
@@ -18,16 +30,10 @@ class Catalog extends React.Component {
   render() {
     return (
       <Container>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-2">
-              <Sidebar />
-            </div>
-            <div className="col-10">
-              <ProductList />
-            </div>
-          </div>
-        </div>
+        <Grid>
+          <Sidebar />
+          <ProductList />
+        </Grid>
       </Container>
     )
   }
