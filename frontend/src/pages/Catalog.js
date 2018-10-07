@@ -31,8 +31,12 @@ class Catalog extends React.Component {
     return (
       <Container>
         <Grid>
-          <Sidebar />
-          <ProductList />
+          <div>
+            <Sidebar />
+          </div>
+          <div>
+            <ProductList />
+          </div>
         </Grid>
       </Container>
     )
