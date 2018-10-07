@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "mock": "node script/register.js && node script/product.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
