@@ -36,7 +36,10 @@ router.put('/edit', isAuthenticated, (req, res) => {
     req.user.cart.push(req.body)
   }
   req.user.save(err => {
-    if (err) return res.sendStatus(404)
+    if (err) {
+      console.log(err)
+      return res.sendStatus(404)
+    }
   })
   res.send(req.user.cart)
   res.sendStatus(200)

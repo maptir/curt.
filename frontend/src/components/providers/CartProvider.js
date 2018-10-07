@@ -4,8 +4,8 @@ import * as cartActions from '../../redux/modules/cart'
 const CartProvider = props => {
   return props.children({
     cart: props.cart,
-    editItem: props.editItem,
-    removeItem: props.removeItem,
+    editCartItem: props.editCartItem,
+    removeCartItem: props.removeCartItem,
   })
 }
 

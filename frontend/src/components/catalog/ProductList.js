@@ -22,10 +22,10 @@ const ProductList = () => (
     {({ productList }) => (
       <CatalogContainer>
         <CatalogGrid>
-          {productList.map((product, index) => (
+          {productList.map(product => (
             <Product
-              key={index}
-              to={'/product/' + index}
+              key={product._id}
+              to={'/product/' + product.slug}
               imageUrl={product.imageUrl}
               title={product.name}
               desc={product.price + ' Baht'}

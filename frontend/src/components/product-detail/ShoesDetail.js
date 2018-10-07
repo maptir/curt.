@@ -97,7 +97,7 @@ class ShoesDetail extends React.Component {
     size: 6,
   }
 
-  componentDidMount = () => {} // fetch data here
+  componentDidMount = () => {}
 
   componentWillUnmount = () => {}
 
@@ -110,21 +110,23 @@ class ShoesDetail extends React.Component {
           </div>
           <div className="d-flex flex-wrap align-items-center justify-content-between">
             <div className="">
-              <SneakerName>CONVERSE BASIC</SneakerName>
+              <SneakerName>{this.props.products[0].name}</SneakerName>
             </div>
             <div className="">
-              <SneakerPrice>1,900 Baht</SneakerPrice>
+              <SneakerPrice>
+                {this.props.products[0].price.toLocaleString()} Baht
+              </SneakerPrice>
             </div>
           </div>
         </SneakerHeaderDetail>
-        <SizeSelection className="container-fluid">
+        <SizeSelection>
           <div className="row" style={{ marginBottom: '10px' }}>
             <div className="col-12">
               <Size>Select Size</Size>
             </div>
           </div>
           <SizeGrid>
-            {sizeList.map(size => (
+            {this.props.products.map(product => product.size).map(size => (
               <SizeButton
                 onClick={() => this.setState({ size })}
                 className={`btn ${
@@ -139,9 +141,9 @@ class ShoesDetail extends React.Component {
           <div className="d-flex" style={{ marginTop: '20px' }}>
             <div className="mr-2" style={{ flex: '1' }}>
               <CartProvider>
-                {({ editItem }) => (
+                {({ editCartItem }) => (
                   <AddButton
-                    onClick={editItem(this.props.id, 1)}
+                    onClick={() => editCartItem(this.props.id, 1)}
                     className="btn btn-dark"
                   >
                     ADD TO CART
