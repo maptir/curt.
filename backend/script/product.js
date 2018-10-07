@@ -21,6 +21,16 @@ const mocks = [
     size: 9,
   },
   {
+    name: 'Huarache Extreme X',
+    slug: 'huarache-extreme-x-men',
+    base: null,
+    imageUrl:
+      'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/hrqddqgfm9og2k4hddrh/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-huarache-extreme-4LNhnF.jpg',
+    price: 2900,
+    brand: 'Nike',
+    size: 7,
+  },
+  {
     name: 'Air Jordan 1 Mid Alt',
     slug: 'air-jordan-1-mid-alt-men',
     base: null,
