@@ -53,20 +53,6 @@ router.post('/add', (req, res) => {
   })
 })
 
-router.get('/:id', (req, res) => {
-  console.log(req.params.id)
-
-  Product.find({ _id: req.params.id }, (err, product) => {
-    if (err) {
-      res.sendStatus(204)
-    } else {
-      console.log(product)
-
-      res.send(product)
-    }
-  })
-})
-
 // GET all products with the given name
 router.get('/:name', (req, res) => {
   Product.find({ name: req.params.name }, (err, products) => {

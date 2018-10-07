@@ -34,6 +34,13 @@ class CurtApi {
       return cart
     },
   }
+
+  products = {
+    async fetchAllProduct() {
+      const { data: productList } = await axios.get(`${API_URL}/products`)
+      return productList
+    },
+  }
 }
 
 export default new CurtApi()
