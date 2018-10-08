@@ -27,7 +27,7 @@ router.get('/:name', (req, res) => {
 })
 
 // POST images to database
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
   req.checkBody('name', 'Name is required').notEmpty()
   req.checkBody('imageUrl', 'Image url is required').notEmpty()
 

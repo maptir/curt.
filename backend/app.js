@@ -14,6 +14,7 @@ const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const cartsRouter = require('./routes/carts')
 const productsRouter = require('./routes/products')
+const imagesRouter = require('./routes/images')
 
 // MongoDB
 mongoose.connect(
@@ -44,6 +45,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/carts', cartsRouter)
 app.use('/products', productsRouter)
+app.use('/images', imagesRouter)
 
 // // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
