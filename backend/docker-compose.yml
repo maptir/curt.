@@ -10,3 +10,12 @@ services:
     volumes:
       - ./db:/data/db
     restart: always
+  db-test:
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=curt
+    ports:
+      - 27018:27017
+    volumes:
+      - ./db-test:/data/db
+    restart: always

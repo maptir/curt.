@@ -6,7 +6,7 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  owner: {
+  slug: {
     type: String,
     required: true,
   },

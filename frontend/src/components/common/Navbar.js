@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import * as authActions from '../../redux/modules/auth'
 
 import Rodal from 'rodal'
 import LoginForm from '../login/LoginForm'
+
+import Cart from '../cart/Cart'
+import AuthProvider from '../providers/AuthProvider'
 
 const Container = styled.div`
   width: 100vw;
@@ -89,6 +90,7 @@ class Navbar extends React.PureComponent {
   state = {
     logo: logoWhite,
     isModalOpen: false,
+    isCartOpen: false,
   }
 
   componentDidMount = () => {
@@ -156,13 +158,15 @@ class Navbar extends React.PureComponent {
     })
   }
 
-  isLoggedIn = () => {
-    return this.props.token
-  }
-
   logout = () => {
     this.props.logout()
     window.location.reload()
+  }
+
+  toggleCart = isOpen => () => {
+    this.setState({
+      isCartOpen: isOpen,
+    })
   }
 
   render() {
@@ -177,37 +181,36 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
-          {this.isLoggedIn() ? (
-            <NavItem onClick={this.logout}>LOGOUT</NavItem>
-          ) : (
-            <NavItem onClick={() => this.setState({ isModalOpen: true })}>
-              LOGIN
-            </NavItem>
-          )}
+          <AuthProvider>
+            {({ isLoggedIn, logout }) =>
+              isLoggedIn ? (
+                <Fragment>
+                  <NavItem onClick={this.toggleCart(true)}>CART</NavItem>
+                  <NavItem onClick={logout}>LOGOUT</NavItem>
+                </Fragment>
+              ) : (
+                <NavItem onClick={() => this.setState({ isModalOpen: true })}>
+                  LOGIN
+                </NavItem>
+              )
+            }
+          </AuthProvider>
         </Menu>
-        <Modal
-          customStyles={rodalStyle}
-          visible={!this.isLoggedIn() && this.state.isModalOpen}
-          onClose={this.onModalClose}
-        >
-          <LoginForm onLoggedIn={this.onModalClose} />
-        </Modal>
+        <Cart isOpen={this.state.isCartOpen} onClose={this.toggleCart(false)} />
+        <AuthProvider>
+          {({ isLoggedIn }) => (
+            <Modal
+              customStyles={rodalStyle}
+              visible={!isLoggedIn && this.state.isModalOpen}
+              onClose={this.onModalClose}
+            >
+              <LoginForm onLoggedIn={this.onModalClose} />
+            </Modal>
+          )}
+        </AuthProvider>
       </Container>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  ...state.auth,
-})
-
-const mapDispatchToProps = {
-  ...authActions,
-}
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(Navbar),
-)
+export default withRouter(Navbar)

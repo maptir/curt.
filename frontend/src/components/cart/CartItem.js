@@ -5,7 +5,7 @@ import RemoveItem from './RemoveItem'
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1em 0 0;
+  margin: 1em 0 0 0;
 `
 
 const Image = styled.div`
@@ -61,7 +61,7 @@ class CartItem extends React.Component {
             <MiniText>Size: {this.props.size}</MiniText>
           </Detail>
           <Price>
-            <BoldText>{this.props.price.toLocaleString()} Baht</BoldText>
+            <BoldText>{this.props.price} Baht</BoldText>
             <RemoveButton onClick={this.toggleShow}>REMOVE</RemoveButton>
           </Price>
         </Container>

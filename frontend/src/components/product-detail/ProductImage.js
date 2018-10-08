@@ -2,16 +2,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Slider from 'react-slick'
-import mock1 from '../../assets/shoe-info/mock1.jpg'
-import mock2 from '../../assets/shoe-info/mock2.jpg'
-import mock3 from '../../assets/shoe-info/mock3.jpg'
-import mock4 from '../../assets/shoe-info/mock4.jpg'
-import mock5 from '../../assets/shoe-info/mock5.jpg'
-import mock6 from '../../assets/shoe-info/mock6.jpg'
-import mock7 from '../../assets/shoe-info/mock7.jpg'
-import mock8 from '../../assets/shoe-info/mock8.jpg'
-
-const imageList = [mock1, mock2, mock3, mock4, mock5, mock6, mock7, mock8]
 
 const FullImage = styled.div`
   background: url(${props => props.imageUrl}) center center / cover no-repeat;
@@ -21,7 +11,7 @@ const FullImage = styled.div`
 const Thumbnail = styled.div`
   cursor: pointer;
   background: url(${props => props.imageUrl}) center center / cover no-repeat;
-  grid-area: ${props => `a${props.a}`};
+  grid-area: ${props => `a${props.position}`};
   transition: all 200ms;
   :hover {
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -79,9 +69,10 @@ class ProductImage extends React.Component {
     return (
       <Container>
         <Grid>
-          {imageList.map((image, index) => (
+          {this.props.images.map((image, index) => (
             <Thumbnail
-              a={index + 1}
+              key={index}
+              position={index + 1}
               imageUrl={image}
               onClick={() =>
                 this.setState({
@@ -90,7 +81,7 @@ class ProductImage extends React.Component {
               }
             />
           ))}
-          <FullImage imageUrl={imageList[this.state.current]} />
+          <FullImage imageUrl={this.props.images[this.state.current]} />
         </Grid>
       </Container>
     )

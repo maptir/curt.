@@ -75,4 +75,11 @@ router.get('/logout', (req, res) => {
   req.logout()
 })
 
+router.post('/clearAll', (req, res) => {
+  User.remove({}, err => {
+    if (err) res.send(err)
+    else res.send(200)
+  })
+})
+
 module.exports = router

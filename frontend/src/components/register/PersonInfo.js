@@ -7,7 +7,7 @@ const Picture = styled.img`
   width: 100%;
 `
 const Grid = styled(Limit)`
-  padding: 5em;
+  ${'' /* padding: 5em; */}
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em;

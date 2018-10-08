@@ -15,8 +15,11 @@ class CurtApi {
   }
 
   cart = {
-    async editCartItem(lineItem) {
-      const { data: cart } = await axios.put(`${API_URL}/cart/edit`, lineItem)
+    async editCartItem(productId, quantity) {
+      const { data: cart } = await axios.put(`${API_URL}/cart/edit`, {
+        productId,
+        quantity,
+      })
       return cart
     },
     async removeCartItem(itemId) {
@@ -25,6 +28,21 @@ class CurtApi {
         itemId,
       )
       return cart
+    },
+    async fetchCart() {
+      const { data: cart } = await axios.get(`${API_URL}/cart`)
+      return cart
+    },
+  }
+
+  products = {
+    async fetchAllProduct() {
+      const { data: productList } = await axios.get(`${API_URL}/products`)
+      return productList
+    },
+    async fetchProduct(slug) {
+      const { data: product } = await axios.get(`${API_URL}/products/${slug}`)
+      return product
     },
   }
 }

@@ -26,16 +26,24 @@ export default (state = initialState, action = {}) => {
 }
 
 // Action Creators
-export const editItem = lineItem => async dispatch => {
-  const cart = await curtApi.cart.editItem(lineItem)
+export const editCartItem = (productId, quantity) => async dispatch => {
+  const cart = await curtApi.cart.editCartItem(productId, quantity)
   dispatch({
     type: UPDATE_CART,
     payload: cart,
   })
 }
 
-export const removeItem = itemId => async dispatch => {
-  const cart = await curtApi.cart.remoteItem(itemId)
+export const removeCartItem = itemId => async dispatch => {
+  const cart = await curtApi.cart.removeCartItem(itemId)
+  dispatch({
+    type: UPDATE_CART,
+    payload: cart,
+  })
+}
+
+export const fetchCart = () => async dispatch => {
+  const cart = await curtApi.cart.fetchCart()
   dispatch({
     type: UPDATE_CART,
     payload: cart,
