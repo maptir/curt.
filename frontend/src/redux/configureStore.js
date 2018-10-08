@@ -9,6 +9,7 @@ import * as cartActions from './modules/cart'
 import * as productActions from './modules/product'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import axios from 'axios'
+import curtApi from '../lib/curtApi'
 
 const reducer = combineReducers({
   counter,
@@ -18,18 +19,6 @@ const reducer = combineReducers({
 })
 
 const configureStore = () => {
-  const middlewares = [thunk]
-  const store = createStore(
-    reducer /* preloadedState, */,
-    composeWithDevTools(applyMiddleware(...middlewares)),
-  )
-
-  if (localStorage.getItem('token')) {
-    store.dispatch(authActions.setToken(localStorage.getItem('token')))
-    store.dispatch(cartActions.fetchCart())
-    store.dispatch(productActions.fetchAllProduct())
-  }
-
   axios.interceptors.response.use(null, error => {
     if (error.response && error.response.status === 401) {
       store.dispatch(authActions.logout())
@@ -37,6 +26,23 @@ const configureStore = () => {
     }
     return Promise.reject(error)
   })
+
+  const middlewares = [thunk]
+  const store = createStore(
+    reducer /* preloadedState, */,
+    composeWithDevTools(applyMiddleware(...middlewares)),
+  )
+
+  const token = localStorage.getItem('token')
+
+  if (token) {
+    store.dispatch(authActions.setToken(token))
+    curtApi.auth.verifyToken().then(() => {
+      store.dispatch(cartActions.fetchCart())
+    })
+  }
+
+  store.dispatch(productActions.fetchAllProduct())
 
   return store
 }

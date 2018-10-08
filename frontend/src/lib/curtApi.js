@@ -5,6 +5,10 @@ const API_URL =
 
 class CurtApi {
   auth = {
+    async verifyToken() {
+      const { data } = await axios.get(`${API_URL}/users/verify`)
+      return !!data.success
+    },
     async login({ username, password }) {
       const { data: token } = await axios.post(`${API_URL}/users/login`, {
         username,

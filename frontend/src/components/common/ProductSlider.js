@@ -4,7 +4,7 @@ import Slider from 'react-slick'
 
 import StyledLink from './StyledLink'
 import Product from './Product'
-import ProductProvider from '../providers/ProductProvider'
+import ProductProvider from '../../providers/ProductProvider'
 
 const PaddedProduct = styled(Product)`
   padding: 1em;
@@ -67,7 +67,12 @@ class ProductSlider extends React.Component {
             </div>
             <Slider {...settings}>
               {productList.map(product => (
-                <PaddedProduct {...product} key={product.id} />
+                <PaddedProduct
+                  title={product.name}
+                  desc={product.price.toLocaleString() + ' Baht.'}
+                  imageUrl={product.imageUrl}
+                  key={product._id}
+                />
               ))}
             </Slider>
           </Container>
