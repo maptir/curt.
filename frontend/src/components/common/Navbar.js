@@ -67,6 +67,7 @@ const NavItem = styled.div`
 const menus = [
   { name: 'HOME', path: '/' },
   { name: 'REGISTER', path: '/register' },
+  { name: 'CATALOG', path: '/catalog'},
 ]
 
 class Navbar extends React.PureComponent {
