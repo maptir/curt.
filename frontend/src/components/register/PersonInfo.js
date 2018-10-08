@@ -1,18 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import Limit from '../common/Limit'
+
+import curtApi from '../../lib/curtApi'
 import RegisterImage from '../../assets/register/register-pic.jpg'
 
-const Picture = styled.img`
-  width: 100%;
+const Picture = styled.div`
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `
-const Grid = styled(Limit)`
-  ${'' /* padding: 5em; */}
+const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 1em;
+  padding: 3em 6em 3em 6em;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    padding: 1em;
+  }
 `
 const Center = styled.div`
+  margin-left: 5em;
   text-align: left;
   font-size: 17px;
 `
@@ -36,14 +44,14 @@ const Info = styled.div`
 const Input = styled.input`
   border-color: black;
   border-width: 1.5px;
-  width: 60%;
+  width: 70%;
   height: 2.2em;
   text-align: left;
 `
 
 const InputDescription = styled.div`
   font-size: 15px;
-  padding-top: 5px;
+  padding-top: 1em;
   text-align: left;
 `
 const GenderInput = styled.input`
@@ -51,7 +59,7 @@ const GenderInput = styled.input`
   width: 1.5em;
 `
 const GenderLabel = styled.label`
-  font-size: 10px;
+  font-size: 15px;
 `
 
 const SignUpButton = styled.button`
@@ -63,6 +71,29 @@ const SignUpButton = styled.button`
 `
 
 class PersonInfo extends React.Component {
+  state = {
+    facebookId: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    password2: '',
+  }
+
+  inputChange = event => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
+  register = async () => {
+    const success = await curtApi.register.register(this.state)
+    if (success) {
+      window.location = '/register'
+    } else {
+      console.log('lese')
+      window.location = '/'
+    }
+  }
+
   render() {
     return (
       <Grid>
@@ -70,9 +101,19 @@ class PersonInfo extends React.Component {
           <CreateInfo>Create an account</CreateInfo>
           <Info>Personal Information</Info>
           <InputDescription>Name *</InputDescription>
-          <Input type="text" />
+          <Input
+            onChange={this.inputChange}
+            name="firstName"
+            type="text"
+            value={this.state.firstName}
+          />
           <InputDescription>Surname *</InputDescription>
-          <Input type="text" />
+          <Input
+            onChange={this.inputChange}
+            name="lastName"
+            type="text"
+            value={this.state.lastName}
+          />
           <InputDescription>Gender *</InputDescription>
           <GenderInput type="radio" />
           <GenderLabel>Male</GenderLabel>
@@ -81,16 +122,32 @@ class PersonInfo extends React.Component {
           <CenterAccount>
             <Info>Account Information</Info>
             <InputDescription>Email Address *</InputDescription>
-            <Input type="text" />
+            <Input
+              onChange={this.inputChange}
+              name="email"
+              type="email"
+              value={this.state.email}
+            />
             <InputDescription>Password *</InputDescription>
-            <Input type="text" />
-            <br />
-            <SignUpButton>Sign Up </SignUpButton>
+            <Input
+              onChange={this.inputChange}
+              name="password"
+              type="password"
+              value={this.state.password}
+            />
+            <InputDescription>Confirm Password *</InputDescription>
+            <Input
+              onChange={this.inputChange}
+              name="password2"
+              type="password"
+              value={this.state.password2}
+            />
           </CenterAccount>
+          <SignUpButton onClick={this.register}>Sign Up </SignUpButton>
         </Center>
-        <Center>
-          <Picture src={RegisterImage} alt="" />
-        </Center>
+        <Picture>
+          <img src={RegisterImage} alt="" width="100%" />
+        </Picture>
       </Grid>
     )
   }

@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import LoveIcon from '../../assets/icon/favourite.png'
-import CartProvider from '../providers/CartProvider'
+import CartProvider from '../../providers/CartProvider'
+import Protected from '../common/Protected'
 
 const SneakerType = styled.text`
   font-size: 18px;
@@ -94,12 +95,8 @@ const sizeList = [
 
 class ShoesDetail extends React.Component {
   state = {
-    size: 6,
+    size: this.props.products[0].size,
   }
-
-  componentDidMount = () => {}
-
-  componentWillUnmount = () => {}
 
   render() {
     return (
@@ -140,16 +137,27 @@ class ShoesDetail extends React.Component {
           </SizeGrid>
           <div className="d-flex" style={{ marginTop: '20px' }}>
             <div className="mr-2" style={{ flex: '1' }}>
-              <CartProvider>
-                {({ editCartItem }) => (
-                  <AddButton
-                    onClick={() => editCartItem(this.props.id, 1)}
-                    className="btn btn-dark"
-                  >
-                    ADD TO CART
-                  </AddButton>
-                )}
-              </CartProvider>
+                <CartProvider>
+                  {({ editCartItem, openCart, closeCart }) => (
+                    <Protected>
+                      <AddButton
+                        onClick={() => {
+                          editCartItem(
+                            this.props.products.find(
+                              item => item.size === this.state.size,
+                            )._id,
+                            1,
+                          )
+                          openCart()
+                          setTimeout(closeCart, 1000)
+                        }}
+                        className="btn btn-dark"
+                      >
+                        ADD TO CART
+                      </AddButton>
+                    </Protected>
+                  )}
+                </CartProvider>
             </div>
             <div>
               <LoveButton className="btn-dark">

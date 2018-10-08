@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
   },
   facebookId: {
     type: String,
-    required: true,
+    // required: true,
   },
   cart: [
     {

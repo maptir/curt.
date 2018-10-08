@@ -5,10 +5,6 @@ var router = express.Router()
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
 router.get('/', isAuthenticated, (req, res) => {
-  // const cart = req.user.cart.map(cartItem => {
-  //   Product.find({ _id: cartItem.productId }, (err, product) => {
-  //   })
-  // })
   res.send(req.user.cart)
 })
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Product from '../common/Product'
-import ProductProvider from '../providers/ProductProvider'
+import ProductProvider from '../../providers/ProductProvider'
 
 const CatalogContainer = styled.div`
   background-color: #fafafa;
@@ -28,7 +28,7 @@ const ProductList = () => (
               to={'/product/' + product.slug}
               imageUrl={product.imageUrl}
               title={product.name}
-              desc={product.price + ' Baht'}
+              desc={product.price.toLocaleString() + ' Baht'}
             />
           ))}
         </CatalogGrid>
