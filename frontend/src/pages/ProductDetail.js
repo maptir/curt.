@@ -7,7 +7,7 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props.match.params.id)
+    console.log(this.props.match.params.slug)
   } // fetch data here
 
   componentWillUnmount = () => {}

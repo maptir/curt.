@@ -23,14 +23,14 @@ router.post('/register', (req, res) => {
   req.checkBody('lastName', 'Last name is required').notEmpty()
   req.checkBody('email', 'Email is required').notEmpty()
   req.checkBody('email', 'Email is required').isEmail()
-  req.checkBody('facebookId', 'Facebook ID is required').notEmpty()
+  // req.checkBody('facebookId', 'Facebook ID is required').notEmpty()
   req.checkBody('password', 'Password is required').notEmpty()
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
   let errors = req.validationErrors()
 
   if (errors) {
-    res.send(errors)
+    return res.send(errors)
   } else {
     let { firstName, lastName, email, facebookId, password } = req.body
     let newUser = new User({

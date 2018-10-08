@@ -49,6 +49,16 @@ class CurtApi {
       return product
     },
   }
+
+  register = {
+    async register(registerInfo) {
+      const { data } = await axios.post(
+        `${API_URL}/users/register`,
+        registerInfo,
+      )
+      return data.success
+    },
+  }
 }
 
 export default new CurtApi()
