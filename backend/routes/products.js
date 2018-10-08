@@ -8,7 +8,7 @@ let Product = require('../models/product')
 router.get('/', (req, res) => {
   Product.find({}, (err, products) => {
     if (err) {
-      res.send(404)
+      res.sendStatus(404)
     } else {
       res.send(products)
     }
@@ -62,6 +62,13 @@ router.get('/:slug', (req, res) => {
     } else {
       res.send(product)
     }
+  })
+})
+
+router.post('/clearAll', (req, res) => {
+  Product.remove({}, err => {
+    if (err) res.send(err)
+    else res.send(200)
   })
 })
 
