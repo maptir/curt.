@@ -10,7 +10,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2em;
-  padding: 4em;
+  padding: 2em 7em 2em 7em;
 `
 
 class Checkout extends React.Component {
