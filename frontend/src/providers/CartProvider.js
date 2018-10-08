@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import * as cartActions from '../../redux/modules/cart'
+import * as cartActions from '../redux/modules/cart'
 
 const CartProvider = props => {
   return props.children({

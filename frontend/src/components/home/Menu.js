@@ -29,21 +29,21 @@ const Brand = styled.div`
 
 const menus = [
   {
-    title: { text: 'MEN', to: '/men' },
+    title: { text: 'MEN', to: '/catalog' },
     list: [
-      { text: 'NIKE', to: '/men?brand=nike' },
-      { text: 'ADIDAS', to: '/men?brand=adidas' },
-      { text: 'CONVERSE', to: '/men?brand=converse' },
-      { text: 'PUMA', to: '/men?brand=puma' },
+      { text: 'NIKE', to: '/catalog?brand=nike' },
+      { text: 'ADIDAS', to: '/catalog?brand=adidas' },
+      { text: 'CONVERSE', to: '/catalog?brand=converse' },
+      { text: 'PUMA', to: '/catalog?brand=puma' },
     ],
   },
   {
-    title: { text: 'WOMEN', to: '/women' },
+    title: { text: 'WOMEN', to: '/catalog' },
     list: [
-      { text: 'SKEECHER', to: '/women?brand=skeecher' },
-      { text: 'CONVERSE', to: '/women?brand=converse' },
-      { text: 'NIKE', to: '/women?brand=nike' },
-      { text: 'VANS', to: '/women?brand=vans' },
+      { text: 'SKEECHER', to: '/catalog?brand=skeecher' },
+      { text: 'CONVERSE', to: '/catalog?brand=converse' },
+      { text: 'NIKE', to: '/catalog?brand=nike' },
+      { text: 'VANS', to: '/catalog?brand=vans' },
     ],
   },
 ]

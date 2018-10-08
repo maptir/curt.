@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
+const isAuthenticated = require('../middlewares/isAuthenticated')
 
 // Bring in User Models
 let User = require('../models/user')
@@ -10,6 +11,10 @@ let User = require('../models/user')
 // Register Form
 router.get('/register', (req, res) => {
   res.render('register')
+})
+
+router.get('/verify', isAuthenticated, (req, res) => {
+  res.send({ success: true })
 })
 
 // Registration Process

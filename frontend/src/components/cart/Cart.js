@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 import CartItem from './CartItem'
-import CartProvider from '../providers/CartProvider'
-import ProductProvider from '../providers/ProductProvider'
+import CartProvider from '../../providers/CartProvider'
+import ProductProvider from '../../providers/ProductProvider'
 
 const Overlay = styled.div`
   display: ${props => (props.isOpen ? 'block' : 'none')};
