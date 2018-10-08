@@ -35,11 +35,21 @@ class Detail extends React.Component {
     products: [],
   }
 
-  componentDidMount = async () => {
+  fetchProduct = async () => {
     const products = await curtApi.products.fetchProduct(
       this.props.match.params.slug,
     )
     this.setState({ products })
+  }
+
+  componentDidMount = () => {
+    this.fetchProduct()
+  }
+
+  componentDidUpdate = prevState => {
+    if (prevState.products !== this.state.products) {
+      this.fetchProduct()
+    }
   }
 
   render() {

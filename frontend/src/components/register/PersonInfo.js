@@ -89,7 +89,6 @@ class PersonInfo extends React.Component {
   register = async () => {
     const success = await curtApi.auth.register(this.state)
     if (success) {
-      window.location = '/'
       this.props.login({
         username: this.state.email,
         password: this.state.password,

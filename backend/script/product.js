@@ -9,7 +9,18 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 6.5,
-  }, {
+  },
+  {
+    name: 'REDBULL RBR EVO CAT II',
+    slug: 'redbull-rbr-evo-cat-ii-men',
+    base: null,
+    imageUrl:
+      'https://www.pumaonlinethailand.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/3/0/30618801.jpg',
+    price: 4499,
+    brand: 'Puma',
+    size: 10,
+  },
+  {
     name: 'Air Max 97',
     slug: 'air-max-97-men',
     base: null,
@@ -18,7 +29,8 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 7,
-  }, {
+  },
+  {
     name: 'Air Max 97',
     slug: 'air-max-97-men',
     base: null,
@@ -27,7 +39,8 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 7.5,
-  }, {
+  },
+  {
     name: 'Air Max 97',
     slug: 'air-max-97-men',
     base: null,
@@ -36,7 +49,8 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 8.5,
-  }, {
+  },
+  {
     name: 'Air Max 97',
     slug: 'air-max-97-men',
     base: null,
@@ -45,7 +59,8 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 10,
-  }, {
+  },
+  {
     name: 'Air Max 97',
     slug: 'air-max-97-men',
     base: null,
@@ -192,16 +207,6 @@ const mocks = [
     imageUrl:
       'https://www.pumaonlinethailand.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/1/9/19129301-03.jpg',
     price: 4999,
-    brand: 'Puma',
-    size: 10,
-  },
-  {
-    name: 'REDBULL RBR EVO CAT II',
-    slug: 'redbull-rbr-evo-cat-ii-men',
-    base: null,
-    imageUrl:
-      'https://www.pumaonlinethailand.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/3/0/30618801.jpg',
-    price: 4499,
     brand: 'Puma',
     size: 10,
   },

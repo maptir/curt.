@@ -127,7 +127,7 @@ class ShoesDetail extends React.Component {
               <SizeButton
                 onClick={() => this.setState({ size })}
                 className={`btn ${
-                  this.state.size === size ? 'btn-dark' : 'btn-outline-dark'
+                  this.props.products[0].size === size ? 'btn-dark' : 'btn-outline-dark'
                 }`}
                 key={size}
               >
@@ -144,7 +144,7 @@ class ShoesDetail extends React.Component {
                       onClick={() => {
                         editCartItem(
                           this.props.products.find(
-                            item => item.size === this.state.size,
+                            item => item.size === this.props.products[0].size,
                           )._id,
                           1,
                         )

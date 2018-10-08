@@ -52,8 +52,6 @@ class CartItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.removable)
-
     return (
       <Fragment>
         <Container>

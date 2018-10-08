@@ -80,7 +80,7 @@ const Shop = props => {
         <Center>
           <div>
             <div>CASUAL</div>
-            <Button to="/men">SHOP NOW</Button>
+            <Button to="/catalog">SHOP NOW</Button>
           </div>
         </Center>
       </Item>
@@ -88,7 +88,7 @@ const Shop = props => {
         <Center>
           <div>
             <div>FORMAL</div>
-            <Button to="/men">SHOP NOW</Button>
+            <Button to="/catalog">SHOP NOW</Button>
           </div>
         </Center>
       </Item>

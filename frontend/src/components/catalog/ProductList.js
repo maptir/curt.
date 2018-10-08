@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Product from '../common/Product'
 import ProductProvider from '../../providers/ProductProvider'
+import _ from 'lodash'
 
 const CatalogContainer = styled.div`
   background-color: #fafafa;
@@ -22,7 +23,7 @@ const ProductList = () => (
     {({ productList }) => (
       <CatalogContainer>
         <CatalogGrid>
-          {productList.map(product => (
+          {_.uniqBy(productList, 'name').map(product => (
             <Product
               key={product._id}
               to={'/product/' + product.slug}
