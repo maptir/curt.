@@ -2,6 +2,8 @@ import curtApi from '../../lib/curtApi'
 
 // Actions
 const UPDATE_CART = 'cart/UPDATE_CART'
+const OPEN_CART = 'cart/OPEN_CART'
+const CLOSE_CART = 'cart/CLOSE_CART'
 
 // Initial State
 /**
@@ -10,6 +12,7 @@ const UPDATE_CART = 'cart/UPDATE_CART'
  */
 const initialState = {
   cart: [],
+  isCartOpen: false,
 }
 
 // Reducer
@@ -20,6 +23,10 @@ export default (state = initialState, action = {}) => {
         ...state,
         cart: action.payload,
       }
+    case OPEN_CART:
+      return { ...state, isCartOpen: true }
+    case CLOSE_CART:
+      return { ...state, isCartOpen: false }
     default:
       return state
   }
@@ -49,3 +56,7 @@ export const fetchCart = () => async dispatch => {
     payload: cart,
   })
 }
+
+
+export const openCart = () => ({ type: OPEN_CART })
+export const closeCart = () => ({ type: CLOSE_CART })

@@ -6,6 +6,9 @@ const CartProvider = props => {
     cart: props.cart,
     editCartItem: props.editCartItem,
     removeCartItem: props.removeCartItem,
+    isCartOpen: props.isCartOpen,
+    openCart: props.openCart,
+    closeCart: props.closeCart,
   })
 }
 

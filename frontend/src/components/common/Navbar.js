@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import logoWhite from '../../assets/logo/logowhite.png'
 import logoBlack from '../../assets/logo/logoblack.png'
 import { withRouter, Link } from 'react-router-dom'
+import Composer from 'react-composer'
 
 import LoginForm from '../login/LoginForm'
 
 import Cart from '../cart/Cart'
 import AuthProvider from '../../providers/AuthProvider'
+import CartProvider from '../../providers/CartProvider'
 import Modal from './Modal'
 
 const Container = styled.div`
@@ -15,7 +17,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 9999;
+  z-index: 99;
   position: fixed;
   top: 0;
   left: 0;
@@ -158,20 +160,19 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
-          <AuthProvider>
-            {({ isLoggedIn, logout, openModal }) =>
+          <Composer components={[<AuthProvider />, <CartProvider />]} >
+            {([{ isLoggedIn, logout, openModal }, { openCart }]) =>
               isLoggedIn ? (
                 <Fragment>
-                  <NavItem onClick={this.toggleCart(true)}>CART</NavItem>
+                  <NavItem onClick={openCart}>CART</NavItem>
                   <NavItem onClick={logout}>LOGOUT</NavItem>
                 </Fragment>
               ) : (
                 <NavItem onClick={openModal}>LOGIN</NavItem>
               )
             }
-          </AuthProvider>
+          </Composer>
         </Menu>
-        <Cart isOpen={this.state.isCartOpen} onClose={this.toggleCart(false)} />
       </Container>
     )
   }
