@@ -15,7 +15,7 @@ class Thankyou extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       window.location = '/'
-    }, 5000)
+    }, 3000)
   }
 
   render() {

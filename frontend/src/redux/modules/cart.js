@@ -4,6 +4,7 @@ import curtApi from '../../lib/curtApi'
 const UPDATE_CART = 'cart/UPDATE_CART'
 const OPEN_CART = 'cart/OPEN_CART'
 const CLOSE_CART = 'cart/CLOSE_CART'
+const CLEAR_CART = 'cart/CLEAR_CART'
 
 // Initial State
 /**
@@ -27,6 +28,8 @@ export default (state = initialState, action = {}) => {
       return { ...state, isCartOpen: true }
     case CLOSE_CART:
       return { ...state, isCartOpen: false }
+    case CLEAR_CART:
+      return { ...state, cart: action.payload }
     default:
       return state
   }
@@ -57,6 +60,13 @@ export const fetchCart = () => async dispatch => {
   })
 }
 
+export const clearCart = () => async dispatch => {
+  const cart = await curtApi.cart.clearCart()
+  dispatch({
+    type: CLEAR_CART,
+    payload: cart,
+  })
+}
 
 export const openCart = () => ({ type: OPEN_CART })
 export const closeCart = () => ({ type: CLOSE_CART })

@@ -36,6 +36,10 @@ class CurtApi {
       const { data: cart } = await axios.get(`${API_URL}/cart`)
       return cart
     },
+    async clearCart() {
+      const { data: cart } = await axios.post(`${API_URL}/cart/clearAll`)
+      return cart
+    }
   }
 
   products = {

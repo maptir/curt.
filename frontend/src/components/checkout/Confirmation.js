@@ -1,5 +1,6 @@
 import React from 'react'
-import { Step, Bold, FlexBox, StyledLink } from './Styled'
+import { Step, Bold, FlexBox } from './Styled'
+import curtApi from '../../lib/curtApi'
 
 class Confirmation extends React.Component {
   state = {}
@@ -7,6 +8,11 @@ class Confirmation extends React.Component {
   componentDidMount = () => {} // fetch data here
 
   componentWillUnmount = () => {}
+
+  completeCheckout = async () => {
+    await curtApi.cart.clearCart()    
+    window.location = '/checkout/complete'
+  }
 
   render() {
     return (
@@ -32,7 +38,7 @@ class Confirmation extends React.Component {
           </div>
           <button
             className="btn btn-dark rounded-0"
-            onClick={() => (window.location = '/checkout/complete')}
+            onClick={this.completeCheckout}
           >
             CONFIRM ORDER
           </button>
