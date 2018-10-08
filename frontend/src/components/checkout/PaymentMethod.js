@@ -55,12 +55,17 @@ class PaymentMethod extends React.Component {
           <Input type="text" />
         </InputBox>
         <FlexBox>
-          <StyledLink to="/catalog">&lt; RETURN TO CATALOG</StyledLink>
+          <div
+            onClick={() => this.props.continueTo('SHIPPINGINFORMATION')}
+            style={{ flex: 1, cursor: 'pointer' }}
+          >
+            &lt; RETURN TO SHIPPING
+          </div>
           <button
             className="btn btn-dark rounded-0"
-            onClick={this.props.continueTo}
+            onClick={() => this.props.continueTo('CONFIRMATION')}
           >
-            CONTINUE TO PAYMENT METHOD
+            CONTINUE TO CONFIRMATION
           </button>
         </FlexBox>
       </Fragment>

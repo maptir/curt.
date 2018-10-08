@@ -6,11 +6,15 @@ import Confirmation from '../components/checkout/Confirmation'
 import PaymentMethod from '../components/checkout/PaymentMethod'
 import Summary from '../components/checkout/Summary'
 
-const Grid = styled.div`
+const Flex = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 2em;
-  padding: 2em 7em 2em 7em;
+  grid-gap: 1em;
+  max-width: 1400px;
+  margin: 4em auto 3em auto;
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 class Checkout extends React.Component {
@@ -25,19 +29,11 @@ class Checkout extends React.Component {
   checkoutState = () => {
     switch (this.state.checkoutState) {
       case 'SHIPPINGINFORMATION':
-        return (
-          <ShippingInformation
-            continueTo={() => this.changeCheckoutState('PAYMENTMETHOD')}
-          />
-        )
+        return <ShippingInformation continueTo={this.changeCheckoutState} />
       case 'PAYMENTMETHOD':
-        return (
-          <PaymentMethod
-            continueTo={() => this.changeCheckoutState('CONFIRMATION')}
-          />
-        )
+        return <PaymentMethod continueTo={this.changeCheckoutState} />
       case 'CONFIRMATION':
-        return <Confirmation continueTo={() => this.changeCheckoutState()} />
+        return <Confirmation continueTo={this.changeCheckoutState} />
       default:
         return <div>WRONG CHECKOUT STATE</div>
     }
@@ -45,13 +41,13 @@ class Checkout extends React.Component {
 
   render() {
     return (
-      <Grid>
+      <Flex>
         <div>
           <img src={CheckoutImage} alt="" width="50%" />
           {this.checkoutState()}
         </div>
         <Summary />
-      </Grid>
+      </Flex>
     )
   }
 }

@@ -7,6 +7,7 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Catalog from '../pages/Catalog'
 import Checkout from '../pages/Checkout'
+import Thankyou from '../components/checkout/Thankyou'
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     path: '/checkout',
     exact: true,
     component: Checkout,
+  },
+  {
+    path: '/checkout/complete',
+    exact: true,
+    component: Thankyou,
   },
 ]
 

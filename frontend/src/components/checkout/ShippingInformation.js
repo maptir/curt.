@@ -54,7 +54,7 @@ class ShippingInformation extends React.Component {
           <StyledLink to="/catalog">&lt; RETURN TO CATALOG</StyledLink>
           <button
             className="btn btn-dark rounded-0"
-            onClick={this.props.continueTo}
+            onClick={() => this.props.continueTo('CONFIRMATION')}
           >
             CONTINUE TO PAYMENT METHOD
           </button>
