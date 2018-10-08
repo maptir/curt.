@@ -8,7 +8,52 @@ const mocks = [
       'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
     price: 4800,
     brand: 'Nike',
+    size: 6.5,
+  }, {
+    name: 'Air Max 97',
+    slug: 'air-max-97-men',
+    base: null,
+    imageUrl:
+      'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
+    price: 4800,
+    brand: 'Nike',
     size: 7,
+  }, {
+    name: 'Air Max 97',
+    slug: 'air-max-97-men',
+    base: null,
+    imageUrl:
+      'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
+    price: 4800,
+    brand: 'Nike',
+    size: 7.5,
+  }, {
+    name: 'Air Max 97',
+    slug: 'air-max-97-men',
+    base: null,
+    imageUrl:
+      'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
+    price: 4800,
+    brand: 'Nike',
+    size: 8.5,
+  }, {
+    name: 'Air Max 97',
+    slug: 'air-max-97-men',
+    base: null,
+    imageUrl:
+      'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
+    price: 4800,
+    brand: 'Nike',
+    size: 10,
+  }, {
+    name: 'Air Max 97',
+    slug: 'air-max-97-men',
+    base: null,
+    imageUrl:
+      'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
+    price: 4800,
+    brand: 'Nike',
+    size: 12,
   },
   {
     name: 'Cortez Basic SL',

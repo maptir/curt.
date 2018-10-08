@@ -53,7 +53,7 @@ router.post('/register', (req, res) => {
           if (err) {
             res.sendStatus(400)
           } else {
-            res.sendStatus(201)
+            res.status(201).send({ success: true })
           }
         })
       })

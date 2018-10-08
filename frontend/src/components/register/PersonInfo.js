@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import curtApi from '../../lib/curtApi'
 import RegisterImage from '../../assets/register/register-pic.jpg'
+import * as authActions from '../../redux/modules/auth'
 
 const Picture = styled.div`
   @media (max-width: 1000px) {
@@ -85,11 +87,15 @@ class PersonInfo extends React.Component {
   }
 
   register = async () => {
-    const success = await curtApi.register.register(this.state)
+    const success = await curtApi.auth.register(this.state)
     if (success) {
-      window.location = '/register'
-    } else {
       window.location = '/'
+      this.props.login({
+        username: this.state.email,
+        password: this.state.password,
+      })
+    } else {
+      window.location = '/register'
     }
   }
 
@@ -152,4 +158,11 @@ class PersonInfo extends React.Component {
   }
 }
 
-export default PersonInfo
+const mapStateToProps = state => ({ ...state.auth })
+
+const mapDispatchToProps = { ...authActions }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PersonInfo)

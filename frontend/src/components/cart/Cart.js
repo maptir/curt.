@@ -131,7 +131,7 @@ class Cart extends React.Component {
                       <ScrollItem>
                         <ScrollItemContent>
                           {cartProductDetail.map((product, index) => (
-                            <CartItem key={index} {...product} />
+                            <CartItem key={index} {...product} removable />
                           ))}
                         </ScrollItemContent>
                       </ScrollItem>

@@ -16,6 +16,13 @@ class CurtApi {
       })
       return token
     },
+    async register(registerInfo) {
+      const { data } = await axios.post(
+        `${API_URL}/users/register`,
+        registerInfo,
+      )
+      return data.success
+    },
   }
 
   cart = {
@@ -39,7 +46,7 @@ class CurtApi {
     async clearCart() {
       const { data: cart } = await axios.post(`${API_URL}/cart/clearAll`)
       return cart
-    }
+    },
   }
 
   products = {
@@ -50,16 +57,6 @@ class CurtApi {
     async fetchProduct(slug) {
       const { data: product } = await axios.get(`${API_URL}/products/${slug}`)
       return product
-    },
-  }
-
-  register = {
-    async register(registerInfo) {
-      const { data } = await axios.post(
-        `${API_URL}/users/register`,
-        registerInfo,
-      )
-      return data.success
     },
   }
 }

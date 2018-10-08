@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Slider from 'react-slick'
+import _ from 'lodash'
 
 import StyledLink from './StyledLink'
 import Product from './Product'
@@ -66,7 +67,7 @@ class ProductSlider extends React.PureComponent {
               <Link to="/catalog">View more.</Link>
             </div>
             <Slider {...settings}>
-              {productList.map(product => (
+              {_.uniqBy(productList, 'name').map(product => (
                 <PaddedProduct
                   to={'/product/' + product.slug}
                   title={product.name}

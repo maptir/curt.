@@ -56,7 +56,7 @@ class Summary extends React.Component {
             <Container>
               <Header>SUMMARY</Header>
               {cartProductDetail.map((product, index) => (
-                <CartItem key={index} {...product} removable={false} />
+                <CartItem key={index} {...product} />
               ))}
               <hr />
               <FlexBox>
