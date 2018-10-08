@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import CartProvider from '../../providers/CartProvider'
 
 const Remove = styled.div`
   display: flex;
@@ -21,25 +22,27 @@ const Button = styled.button`
 `
 
 class RemoveRodal extends React.Component {
-  state = {
-    visible: false,
-  }
-
-  toggleShow = () => {
-    this.setState({ visible: !this.state.visible })
-  }
-
-  removeShoeFromUserCart = cartIndex => {
-    // Remove product
-  }
-
   render() {
     return (
-      <Remove clicked={this.props.clicked}>
-        Are you sure you want to remove ?
-        <Button className="btn mr-2">Remove</Button>
-        <button className="btn btn-secondary mr-2">Cancel</button>
-      </Remove>
+      <CartProvider>
+        {({ removeCartItem }) => (
+          <Remove clicked={this.props.clicked}>
+            Are you sure you want to remove ?
+            <Button
+              className="btn mr-2"
+              onClick={() => removeCartItem(this.props.productId)}
+            >
+              Remove
+            </Button>
+            <button
+              className="btn btn-secondary mr-2"
+              onClick={this.props.toggleShow}
+            >
+              Cancel
+            </button>
+          </Remove>
+        )}
+      </CartProvider>
     )
   }
 }

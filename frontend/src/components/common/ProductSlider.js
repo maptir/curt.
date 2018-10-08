@@ -25,7 +25,7 @@ const Container = styled.div`
   margin-bottom: 2em;
 `
 
-class ProductSlider extends React.Component {
+class ProductSlider extends React.PureComponent {
   componentDidMount = () => {} // fetch data here
 
   render() {
@@ -68,6 +68,7 @@ class ProductSlider extends React.Component {
             <Slider {...settings}>
               {productList.map(product => (
                 <PaddedProduct
+                  to={'/product/' + product.slug}
                   title={product.name}
                   desc={product.price.toLocaleString() + ' Baht.'}
                   imageUrl={product.imageUrl}

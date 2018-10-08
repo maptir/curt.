@@ -137,27 +137,27 @@ class ShoesDetail extends React.Component {
           </SizeGrid>
           <div className="d-flex" style={{ marginTop: '20px' }}>
             <div className="mr-2" style={{ flex: '1' }}>
-                <CartProvider>
-                  {({ editCartItem, openCart, closeCart }) => (
-                    <Protected>
-                      <AddButton
-                        onClick={() => {
-                          editCartItem(
-                            this.props.products.find(
-                              item => item.size === this.state.size,
-                            )._id,
-                            1,
-                          )
-                          openCart()
-                          setTimeout(closeCart, 1000)
-                        }}
-                        className="btn btn-dark"
-                      >
-                        ADD TO CART
-                      </AddButton>
-                    </Protected>
-                  )}
-                </CartProvider>
+              <CartProvider>
+                {({ editCartItem, openCart, closeCart }) => (
+                  <Protected>
+                    <AddButton
+                      onClick={() => {
+                        editCartItem(
+                          this.props.products.find(
+                            item => item.size === this.state.size,
+                          )._id,
+                          1,
+                        )
+                        openCart()
+                        setTimeout(closeCart, 1000)
+                      }}
+                      className="btn btn-dark"
+                    >
+                      ADD TO CART
+                    </AddButton>
+                  </Protected>
+                )}
+              </CartProvider>
             </div>
             <div>
               <LoveButton className="btn-dark">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import RemoveItem from './RemoveItem'
 
@@ -52,8 +52,10 @@ class CartItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.removable)
+
     return (
-      <div>
+      <Fragment>
         <Container>
           <Image imageUrl={this.props.imageUrl} />
           <Detail>
@@ -62,14 +64,19 @@ class CartItem extends React.Component {
           </Detail>
           <Price>
             <BoldText>{this.props.price} Baht</BoldText>
-            <RemoveButton onClick={this.toggleShow}>REMOVE</RemoveButton>
+            {this.props.removable && (
+              <RemoveButton onClick={this.toggleShow}>REMOVE</RemoveButton>
+            )}
           </Price>
         </Container>
-        <RemoveItem
-          productId={this.props.id}
-          clicked={this.state.removeClicked}
-        />
-      </div>
+        {this.props.removable && (
+          <RemoveItem
+            productId={this.props._id}
+            clicked={this.state.removeClicked}
+            toggleShow={this.toggleShow}
+          />
+        )}
+      </Fragment>
     )
   }
 }

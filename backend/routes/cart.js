@@ -9,8 +9,6 @@ router.get('/', isAuthenticated, (req, res) => {
 })
 
 router.put('/edit', isAuthenticated, (req, res) => {
-  console.log('User cart', req.user.cart)
-
   const findProductInCart = _.find(req.user.cart, {
     productId: req.body.productId,
   })
@@ -33,23 +31,21 @@ router.put('/edit', isAuthenticated, (req, res) => {
   }
   req.user.save(err => {
     if (err) {
-      console.log(err)
       return res.sendStatus(404)
     }
   })
   res.send(req.user.cart)
-  res.sendStatus(200)
 })
 
-router.delete('/delete', isAuthenticated, (req, res) => {
+router.post('/remove', isAuthenticated, (req, res) => {
   req.user.cart = req.user.cart.filter(
     cartItem => cartItem.productId !== req.body.productId,
   )
+
   req.user.save(err => {
     if (err) return res.sendStatus(404)
   })
   res.send(req.user.cart)
-  res.sendStatus(200)
 })
 
 router.post('/clearAll', isAuthenticated, (req, res) => {

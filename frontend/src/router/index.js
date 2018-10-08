@@ -6,6 +6,7 @@ import ProductDetail from '../pages/ProductDetail'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Catalog from '../pages/Catalog'
+import Checkout from '../pages/Checkout'
 
 const routes = [
   {
@@ -32,7 +33,12 @@ const routes = [
     path: '/catalog',
     exact: true,
     component: Catalog,
-  }
+  },
+  {
+    path: '/checkout',
+    exact: true,
+    component: Checkout,
+  },
 ]
 
 export default () => (

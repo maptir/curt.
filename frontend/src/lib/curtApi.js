@@ -26,11 +26,10 @@ class CurtApi {
       })
       return cart
     },
-    async removeCartItem(itemId) {
-      const { data: cart } = await axios.delete(
-        `${API_URL}/cart/remove`,
-        itemId,
-      )
+    async removeCartItem(productId) {
+      const { data: cart } = await axios.post(`${API_URL}/cart/remove`, {
+        productId,
+      })
       return cart
     },
     async fetchCart() {

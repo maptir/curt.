@@ -131,11 +131,7 @@ class Cart extends React.Component {
                       <ScrollItem>
                         <ScrollItemContent>
                           {cartProductDetail.map((product, index) => (
-                            <CartItem
-                              key={index}
-                              {...product}
-                              cartIndex={index}
-                            />
+                            <CartItem key={index} {...product} />
                           ))}
                         </ScrollItemContent>
                       </ScrollItem>
@@ -153,7 +149,10 @@ class Cart extends React.Component {
                           &nbsp;Baht
                         </SumPrice>
                       </Price>
-                      <button className="btn btn-light btn-block rounded-0">
+                      <button
+                        className="btn btn-light btn-block rounded-0"
+                        onClick={() => (window.location = '/checkout')}
+                      >
                         CHECK OUT
                       </button>
                     </Checkout>

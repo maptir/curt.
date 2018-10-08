@@ -89,7 +89,6 @@ class PersonInfo extends React.Component {
     if (success) {
       window.location = '/register'
     } else {
-      console.log('lese')
       window.location = '/'
     }
   }
