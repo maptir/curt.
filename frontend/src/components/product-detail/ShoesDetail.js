@@ -74,25 +74,6 @@ const Description = styled.div`
   letter-spacing: 1.4px;
 `
 
-const sizeList = [
-  6,
-  6.5,
-  7,
-  7.5,
-  8,
-  8.5,
-  9,
-  9.5,
-  10,
-  10.5,
-  11,
-  11.5,
-  12,
-  13,
-  14,
-  15,
-]
-
 class ShoesDetail extends React.Component {
   state = {
     size: this.props.products[0].size,
@@ -103,7 +84,7 @@ class ShoesDetail extends React.Component {
       <div>
         <SneakerHeaderDetail>
           <div>
-            <SneakerType>Men's Sneaker</SneakerType>
+            <SneakerType>Men&apos;s Sneaker</SneakerType>
           </div>
           <div className="d-flex flex-wrap align-items-center justify-content-between">
             <div className="">
@@ -127,7 +108,7 @@ class ShoesDetail extends React.Component {
               <SizeButton
                 onClick={() => this.setState({ size })}
                 className={`btn ${
-                  this.props.products[0].size === size ? 'btn-dark' : 'btn-outline-dark'
+                  this.state.size === size ? 'btn-dark' : 'btn-outline-dark'
                 }`}
                 key={size}
               >

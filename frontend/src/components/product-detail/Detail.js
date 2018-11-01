@@ -46,8 +46,8 @@ class Detail extends React.Component {
     this.fetchProduct()
   }
 
-  componentDidUpdate = prevState => {
-    if (prevState.products !== this.state.products) {
+  componentDidUpdate = prevProps => {
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
       this.fetchProduct()
     }
   }
