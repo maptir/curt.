@@ -8,6 +8,7 @@ import Register from '../pages/Register'
 import Catalog from '../pages/Catalog'
 import Checkout from '../pages/Checkout'
 import Thankyou from '../components/checkout/Thankyou'
+import Custom from '../pages/Custom'
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: '/checkout/complete',
     exact: true,
     component: Thankyou,
+  },
+  {
+    path: '/custom',
+    exact: true,
+    component: Custom,
   },
 ]
 

@@ -5,7 +5,9 @@
     "node": true,
     "browser": true
   },
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
