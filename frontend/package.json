@@ -11,6 +11,7 @@
     "eslint-plugin-jest": "^21.24.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.11.1",
+    "fabric": "^2.4.2-b",
     "firebase": "^4.11.0",
     "font-awesome": "^4.7.0",
     "gh-pages": "^1.1.0",
