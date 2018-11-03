@@ -35,6 +35,10 @@ injectGlobal`
   button:focus {
     outline: 0 !important;
   }
+
+  input[type=range]::-moz-range-track {
+    background-color: black;
+  }
 `
 
 const store = configureStore()

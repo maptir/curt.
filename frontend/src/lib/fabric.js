@@ -8,7 +8,10 @@ export default {
 
     var canvas = (this.__canvas = new fabric.Canvas('custom', {
       isDrawingMode: true,
+      backgroundColor: 'white',
     }))
+
+    $('custom').fabric = canvas
 
     fabric.Object.prototype.transparentCorners = false
 
@@ -18,12 +21,11 @@ export default {
       drawingShadowColorEl = $('drawing-shadow-color'),
       drawingLineWidthEl = $('drawing-line-width'),
       drawingShadowWidth = $('drawing-shadow-width'),
-      drawingShadowOffset = $('drawing-shadow-offset'),
-      clearEl = $('clear-canvas')
+      drawingShadowOffset = $('drawing-shadow-offset')
 
-    clearEl.onclick = function() {
-      canvas.clear()
-    }
+    drawingLineWidthEl.value = 0
+    drawingShadowWidth.value = 0
+    drawingShadowOffset.value = 0
 
     drawingModeEl.onclick = function() {
       canvas.isDrawingMode = !canvas.isDrawingMode
