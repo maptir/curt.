@@ -1,17 +1,15 @@
 /* global fabric */
 
 import React from 'react'
-import styled from 'styled-components'
-
 class CustomPane extends React.Component {
   state = {
     dataURL: '',
-    _clipboard: '',
   }
-
-  componentDidMount = () => {}
-
-  componentWillUnmount = () => {}
+  delete = () => {
+    const canvas = document.getElementById('custom').fabric
+    canvas.remove(...canvas.getActiveObjects().concat())
+    canvas.discardActiveObject()
+  }
 
   clear = () => {
     const canvas = document.getElementById('custom').fabric
@@ -25,7 +23,6 @@ class CustomPane extends React.Component {
     reader.onload = function(event) {
       var imgObj = new Image(100, 100)
       imgObj.src = event.target.result
-      console.log(imgObj)
       imgObj.onload = function() {
         var image = new fabric.Image(imgObj)
         image.set({
@@ -41,6 +38,25 @@ class CustomPane extends React.Component {
     reader.readAsDataURL(event.target.files[0])
   }
 
+  save = () => {
+    const canvas = document.getElementById('custom')
+    const dataURL = canvas.toDataURL('image/jpg')
+    this.setState({
+      dataURL,
+    })
+  }
+
+  load = () => {
+    const canvas = document.getElementById('custom').fabric
+    var img = new Image()
+    img.onload = function() {
+      const fimg = new fabric.Image(img)
+      canvas.setBackgroundImage(fimg) // Or at whatever offset you like
+      canvas.renderAll()
+    }
+    img.src = this.state.dataURL
+  }
+
   render() {
     return (
       <div>
@@ -48,8 +64,17 @@ class CustomPane extends React.Component {
           Cancel drawing mode
         </button>
         <br />
+        <button className="btn btn-info" onClick={this.delete}>
+          Delete
+        </button>
         <button className="btn btn-info" onClick={this.clear}>
           Clear
+        </button>
+        <button className="btn btn-info" onClick={this.save}>
+          Save
+        </button>
+        <button className="btn btn-info" onClick={this.load}>
+          Load
         </button>
         <input
           type="file"

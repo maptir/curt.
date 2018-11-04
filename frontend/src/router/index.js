@@ -47,7 +47,7 @@ const routes = [
     component: Thankyou,
   },
   {
-    path: '/custom',
+    path: '/custom/:slug',
     exact: true,
     component: Custom,
   },

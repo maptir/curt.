@@ -29,8 +29,17 @@ router.post('/add', (req, res) => {
 
   if (errors) return res.send(errors)
 
-  let { name, slug, base, imageUrl, price, brand, size } = req.body
-  const addedProduct = { name, slug, base, imageUrl, price, brand, size }
+  let { name, slug, base, imageUrl, price, brand, size, thumbnails } = req.body
+  const addedProduct = {
+    name,
+    slug,
+    base,
+    imageUrl,
+    price,
+    brand,
+    size,
+    thumbnails,
+  }
   Product.findOne(addedProduct, (err, product) => {
     if (err) {
       return res.sendStatus(404)

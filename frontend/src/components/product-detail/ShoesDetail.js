@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import LoveIcon from '../../assets/icon/favourite.png'
 import CartProvider from '../../providers/CartProvider'
 import Protected from '../common/Protected'
 
-const SneakerType = styled.text`
+const SneakerType = styled.div`
   font-size: 18px;
   font-weight: 300;
 `
-const SneakerName = styled.text`
+const SneakerName = styled.div`
   font-size: 30px;
   font-weight: 700;
 `
-const SneakerPrice = styled.text`
+const SneakerPrice = styled.div`
   font-size: 24px;
   font-weight: 300;
 `
@@ -21,9 +21,10 @@ const SneakerHeaderDetail = styled.div`
   margin-bottom: 10px;
 `
 
-const Size = styled.text`
+const Size = styled.div`
   font-size: 18px;
   font-weight: 300;
+  margin-bottom: 0.5em;
 `
 
 const SizeSelection = styled.div`
@@ -47,21 +48,18 @@ const SizeGrid = styled.div`
     max-width: 100%;
   }
 `
-const AddButton = styled.button`
+const Button = styled.button`
   flex: 1;
   height: 47px !important;
   border-radius: 0px !important;
-  ${'' /* padding-top: 10px !important;
-  padding-bottom: 10px !important; */} font-size: 18px !important;
+  font-size: 18px !important;
   font-weight: 700 !important;
   width: 100% !important;
 `
 
 const LoveButton = styled.button`
-  height: 100%;
   padding: 0 2em;
   border-radius: 0px !important;
-  width: 100% !important;
 
   display: flex;
   justify-content: center;
@@ -79,30 +77,31 @@ class ShoesDetail extends React.Component {
     size: this.props.products[0].size,
   }
 
+  addToCart = (editCartItem, openCart, closeCart) => {
+    editCartItem(
+      this.props.products.find(
+        item => item.size === this.props.products[0].size,
+      )._id,
+      1,
+    )
+    openCart()
+    setTimeout(closeCart, 1000)
+  }
+
   render() {
     return (
-      <div>
+      <Fragment>
         <SneakerHeaderDetail>
-          <div>
-            <SneakerType>Men&apos;s Sneaker</SneakerType>
-          </div>
+          <SneakerType>Men&apos;s Sneaker</SneakerType>
           <div className="d-flex flex-wrap align-items-center justify-content-between">
-            <div className="">
-              <SneakerName>{this.props.products[0].name}</SneakerName>
-            </div>
-            <div className="">
-              <SneakerPrice>
-                {this.props.products[0].price.toLocaleString()} Baht
-              </SneakerPrice>
-            </div>
+            <SneakerName>{this.props.products[0].name}</SneakerName>
+            <SneakerPrice>
+              {this.props.products[0].price.toLocaleString()} Baht
+            </SneakerPrice>
           </div>
         </SneakerHeaderDetail>
         <SizeSelection>
-          <div className="row" style={{ marginBottom: '10px' }}>
-            <div className="col-12">
-              <Size>Select Size</Size>
-            </div>
-          </div>
+          <Size>Select Size</Size>
           <SizeGrid>
             {this.props.products.map(product => product.size).map(size => (
               <SizeButton
@@ -121,38 +120,38 @@ class ShoesDetail extends React.Component {
               <CartProvider>
                 {({ editCartItem, openCart, closeCart }) => (
                   <Protected>
-                    <AddButton
-                      onClick={() => {
-                        editCartItem(
-                          this.props.products.find(
-                            item => item.size === this.props.products[0].size,
-                          )._id,
-                          1,
-                        )
-                        openCart()
-                        setTimeout(closeCart, 1000)
-                      }}
+                    <Button
+                      onClick={() =>
+                        this.addToCart(editCartItem, openCart, closeCart)
+                      }
                       className="btn btn-dark"
                     >
                       ADD TO CART
-                    </AddButton>
+                    </Button>
                   </Protected>
                 )}
               </CartProvider>
             </div>
-            <div>
-              <LoveButton className="btn-dark">
-                <img src={LoveIcon} className="img-fluid" width="20px" alt="" />
-              </LoveButton>
-            </div>
+            <LoveButton className="btn-dark">
+              <img src={LoveIcon} className="img-fluid" width="20px" alt="" />
+            </LoveButton>
           </div>
+          {this.props.products[0].thumbnails.length > 0 && (
+            <Button
+              className="btn btn-dark btn-block rounded-0 mt-2"
+              onClick={() =>
+                (window.location = '/custom/' + this.props.products[0].slug)
+              }
+            >
+              CUSTOM THIS SHOES
+            </Button>
+          )}
         </SizeSelection>
-
         <Description>
           The Converse Jack Purcell Low Profile reinvents an icon with an
           ultra-low profile and a versatile, laces-optional design.
         </Description>
-      </div>
+      </Fragment>
     )
   }
 }

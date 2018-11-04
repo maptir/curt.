@@ -5,17 +5,9 @@ import styled from 'styled-components'
 
 import CustomPane from './CustomPane'
 import Limit from '../common/Limit'
+import curtApi from '../../lib/curtApi'
 import fabricLib from '../../lib/fabric'
-import mock1 from '../../assets/shoe-info/mock1.jpg'
-import mock2 from '../../assets/shoe-info/mock2.jpg'
-import mock3 from '../../assets/shoe-info/mock3.jpg'
-import mock4 from '../../assets/shoe-info/mock4.jpg'
-import mock5 from '../../assets/shoe-info/mock5.jpg'
-import mock6 from '../../assets/shoe-info/mock6.jpg'
-import mock7 from '../../assets/shoe-info/mock7.jpg'
-import mock8 from '../../assets/shoe-info/mock8.jpg'
-
-const imageList = [mock1, mock2, mock3, mock4, mock5, mock6, mock7, mock8]
+import mock from '../../assets/shoe-info/mock1.jpg'
 
 const Header = styled(Limit)`
   display: flex;
@@ -33,7 +25,7 @@ const Background = styled.div`
 
 const Container = styled(Limit)`
   display: grid;
-  grid-template-columns: 2fr 7fr 1fr;
+  grid-template-columns: 1fr 7fr 1fr;
   grid-gap: 1em;
   padding: 1em;
 `
@@ -61,9 +53,18 @@ const Grid = styled.div`
 class CustomBoard extends React.Component {
   state = {
     currentSide: 0,
+    products: [],
   }
 
-  componentDidMount = () => {
+  fetchProduct = async () => {
+    const products = await curtApi.products.fetchProduct(
+      this.props.match.params.slug,
+    )
+    this.setState({ products })
+  }
+
+  componentDidMount = async () => {
+    await this.fetchProduct()
     fabricLib.drawing()
     this.setBackgroundImage(0)
   }
@@ -71,7 +72,7 @@ class CustomBoard extends React.Component {
   setBackgroundImage = index => {
     const canvas = document.getElementById('custom').fabric
     canvas.setBackgroundImage(
-      imageList[index],
+      this.state.products[0].thumbnails[index],
       () => {
         canvas.backgroundImage.scaleToWidth(400)
         canvas.backgroundImage.scaleToHeight(500)
@@ -135,32 +136,40 @@ class CustomBoard extends React.Component {
   }
 
   render() {
+    const product = this.state.products[0]
+
     return (
       <Fragment>
-        <Header>
-          <div style={{ flex: '1' }}>
-            <div>Customized Shoes</div>
-            <Text>{'Converse Basic'.toUpperCase()}</Text>
-          </div>
-          <button className="btn btn-dark rounded-0">
-            FINALIZE YOUR DESIGN
-          </button>
-        </Header>
-        <Background>
-          <Container>
-            <CustomPane />
-            <Canvas id="custom" width="600" height="500" />
-            <Grid>
-              {imageList.map((image, index) => (
-                <Thumbnail
-                  key={index}
-                  imageUrl={image}
-                  onClick={() => this.changeSide(index)}
-                />
-              ))}
-            </Grid>
-          </Container>
-        </Background>
+        {product && (
+          <Fragment>
+            <Header>
+              <div style={{ flex: '1' }}>
+                <div>Customized Shoes</div>
+                <Text>
+                  {(product.brand + ' ' + product.name).toUpperCase()}
+                </Text>
+              </div>
+              <button className="btn btn-dark rounded-0">
+                FINALIZE YOUR DESIGN
+              </button>
+            </Header>
+            <Background>
+              <Container>
+                <CustomPane />
+                <Canvas id="custom" width="500" height="500" />
+                <Grid>
+                  {product.thumbnails.map((thumbnail, index) => (
+                    <Thumbnail
+                      key={index}
+                      imageUrl={thumbnail}
+                      onClick={() => this.changeSide(index)}
+                    />
+                  ))}
+                </Grid>
+              </Container>
+            </Background>
+          </Fragment>
+        )}
       </Fragment>
     )
   }
