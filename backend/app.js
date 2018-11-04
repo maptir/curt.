@@ -53,7 +53,7 @@ app.use('/images', imagesRouter)
 // })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   console.log('a fucking error occurs')
   console.log(err.status)

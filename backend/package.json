@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "dev": "nodemon ./bin/www",
+    "dev": "NODE_ENV=development nodemon ./bin/www",
     "start:test": "NODE_ENV=test nodemon ./bin/www",
     "dev:test": "NODE_ENV=test nodemon ./bin/www",
-    "mock": "node script/register.js && node script/product.js",
+    "mock": "NODE_ENV=development node script/register.js && node script/product.js",
     "test": "jest **/*.test.js"
   },
   "dependencies": {

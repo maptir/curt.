@@ -60,7 +60,7 @@ class CustomBoard extends React.Component {
     const products = await curtApi.products.fetchProduct(
       this.props.match.params.slug,
     )
-    this.setState({ products })
+    this.setState({ products }, () => console.log(this.state.products))
   }
 
   componentDidMount = async () => {

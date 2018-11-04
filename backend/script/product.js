@@ -1,6 +1,5 @@
 const axios = require('axios')
-// const config = require('../config')
-// `${config.API_URL}/images/abc.jpg`
+const config = require('../config')
 
 const mocks = [
   {
@@ -12,13 +11,13 @@ const mocks = [
     brand: 'Vans',
     size: 6.5,
     thumbnails: [
-      'https://images.vans.com/is/image/Vans/D3HY28-HERO',
-      'https://images.vans.com/is/image/Vans/D3HY28_E-ALT1',
-      'https://images.vans.com/is/image/Vans/D3HY28-ALT7',
-      'https://images.vans.com/is/image/Vans/D3HY28-ALT1',
-      'https://images.vans.com/is/image/Vans/D3HY28-ALT2',
-      'https://images.vans.com/is/image/Vans/D3HY28-ALT3',
-      'https://images.vans.com/is/image/Vans/D3HY28-ALT4',
+      `${config.API_URL}/images/old-skool-thumbnails-1.jpeg`,
+      `${config.API_URL}/images/old-skool-thumbnails-2.jpeg`,
+      `${config.API_URL}/images/old-skool-thumbnails-3.jpeg`,
+      `${config.API_URL}/images/old-skool-thumbnails-4.jpeg`,
+      `${config.API_URL}/images/old-skool-thumbnails-5.jpeg`,
+      `${config.API_URL}/images/old-skool-thumbnails-6.jpeg`,
+      `${config.API_URL}/images/old-skool-thumbnails-7.jpeg`,
     ],
   },
   {
@@ -346,7 +345,7 @@ const mocks = [
     slug: 'reebok-royal-bb4500-hi2-men',
     base: null,
     imageUrl:
-      'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw7d900817/zoom/CN4107_01_standard.jpg?sh=840&strip=false&sw=840',
+      'https://www.reebok.com/dihihiis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw7d900817/zoom/CN4107_01_standard.jpg?sh=840&strip=false&sw=840',
     price: 2130,
     brand: 'Reebok',
     size: 10,
