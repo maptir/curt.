@@ -29,12 +29,12 @@ router.post('/add', (req, res) => {
 
   if (errors) return res.send(errors)
 
-  let { name, slug, base, imageUrl, price, brand, gender, size } = req.body
+  let { name, slug, base, thumbnails, price, brand, gender, size } = req.body
   const addedProduct = {
     name,
     slug,
     base,
-    imageUrl,
+    thumbnails,
     price,
     brand,
     gender,
@@ -69,7 +69,7 @@ router.post('/update/:id', (req, res) => {
     name,
     slug,
     base,
-    imageUrl,
+    thumbnails,
     price,
     brand,
     gender,
@@ -80,7 +80,7 @@ router.post('/update/:id', (req, res) => {
     name,
     slug,
     base,
-    imageUrl,
+    thumbnails,
     price,
     brand,
     gender,
