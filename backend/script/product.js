@@ -9,6 +9,7 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 6.5,
+    gender: 'men',
   },
   {
     name: 'REDBULL RBR EVO CAT II',
@@ -19,6 +20,7 @@ const mocks = [
     price: 4499,
     brand: 'Puma',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'Air Max 97',
@@ -29,6 +31,7 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 7,
+    gender: 'men',
   },
   {
     name: 'Air Max 97',
@@ -39,26 +42,29 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 7.5,
+    gender: 'men',
   },
   {
     name: 'Air Max 97',
-    slug: 'air-max-97-men',
+    slug: 'air-max-97-women',
     base: null,
     imageUrl:
       'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
     price: 4800,
     brand: 'Nike',
     size: 8.5,
+    gender: 'women',
   },
   {
     name: 'Air Max 97',
-    slug: 'air-max-97-men',
+    slug: 'air-max-97-women',
     base: null,
     imageUrl:
       'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/tjcpz9pilxbhupaerwwf/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-air-max-97-M2vYej.jpg',
     price: 4800,
     brand: 'Nike',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'Air Max 97',
@@ -69,16 +75,18 @@ const mocks = [
     price: 4800,
     brand: 'Nike',
     size: 12,
+    gender: 'men',
   },
   {
     name: 'Cortez Basic SL',
-    slug: 'cortez-basic-sl-men',
+    slug: 'cortez-basic-sl-women',
     base: null,
     imageUrl:
       'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/mksnzvsllmy8pej7qm2b/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-cortez-basic-sl-8kwrrB.jpg',
     price: 2000,
     brand: 'Nike',
     size: 9,
+    gender: 'women',
   },
   {
     name: 'Huarache Extreme X',
@@ -89,6 +97,7 @@ const mocks = [
     price: 2900,
     brand: 'Nike',
     size: 7,
+    gender: 'men',
   },
   {
     name: 'Air Jordan 1 Mid Alt',
@@ -99,16 +108,18 @@ const mocks = [
     price: 2200,
     brand: 'Nike',
     size: 7,
+    gender: 'men',
   },
   {
     name: 'Huarache Extreme',
-    slug: 'huarache-extreme-men',
+    slug: 'huarache-extreme-women',
     base: null,
     imageUrl:
       'https://c.static-nike.com/a/images/t_PDP_1728_v1/f_auto/hrqddqgfm9og2k4hddrh/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2-huarache-extreme-4LNhnF.jpg',
     price: 2900,
     brand: 'Nike',
     size: 7,
+    gender: 'women',
   },
   {
     name: 'EQT SUPPORT SOCK PRIMEKNIT',
@@ -119,6 +130,7 @@ const mocks = [
     price: 5200,
     brand: 'Adidas',
     size: 7,
+    gender: 'men',
   },
   {
     name: 'NMD CS2 PRIMEKNIT',
@@ -129,16 +141,18 @@ const mocks = [
     price: 7000,
     brand: 'Adidas',
     size: 7,
+    gender: 'men',
   },
   {
     name: 'X TANGO 18.1',
-    slug: 'x-tango-18-1-men',
+    slug: 'x-tango-18-1-women',
     base: null,
     imageUrl:
       'https://www.adidas.co.th/dis/dw/image/v2/bcbs_prd/on/demandware.static/-/Sites-adidas-products/default/dwc0f47a27/zoom/DB2281_01_standard.jpg?sh=840&strip=false&sw=840',
     price: 4700,
     brand: 'Adidas',
     size: 7,
+    gender: 'women',
   },
   {
     name: 'ULTRABOOST X ALL TERRAIN',
@@ -149,36 +163,40 @@ const mocks = [
     price: 8000,
     brand: 'Adidas',
     size: 7,
+    gender: 'men',
   },
   {
     name: 'NMD TS1 PRIMEKNIT GTX',
-    slug: 'nmd-ts1-primeknit-gtx',
+    slug: 'nmd-ts1-primeknit-gtx-women',
     base: null,
     imageUrl:
       'https://www.adidas.co.th/dis/dw/image/v2/bcbs_prd/on/demandware.static/-/Sites-adidas-products/default/dwd1fea9c6/zoom/AQ0927_01_standard.jpg?sh=840&strip=false&sw=840',
     price: 9000,
     brand: 'Adidas',
     size: 7,
+    gender: 'women',
   },
   {
     name: 'NOVAS CT LEATHER',
-    slug: 'novas-ct-leather-men',
+    slug: 'novas-ct-leather-women',
     base: null,
     imageUrl:
       ' https://www.lacoste.co.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/3/5/35spm0038_231_01.jpg',
     price: 3790,
     brand: 'Lacoste',
     size: 10,
+    ggender: 'women',
   },
   {
     name: 'LEROND TENNIS INSPIRED',
-    slug: 'lerond-tennis-inspired-men',
+    slug: 'lerond-tennis-inspired-women',
     base: null,
     imageUrl:
       'https://www.lacoste.co.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/3/5/35cam0148_092_02.jpg',
     price: 2590,
     brand: 'Lacoste',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'EYYLA LEATHER',
@@ -189,6 +207,7 @@ const mocks = [
     price: 4790,
     brand: 'Lacoste',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'CARNABY EVO',
@@ -199,6 +218,7 @@ const mocks = [
     price: 2790,
     brand: 'Lacoste',
     size: 7,
+    gender: 'women',
   },
   {
     name: 'IGNITE LIMITLESS 2',
@@ -209,6 +229,7 @@ const mocks = [
     price: 4999,
     brand: 'Puma',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'SUEDE CLASSIC X THE WEEKND',
@@ -219,6 +240,7 @@ const mocks = [
     price: 6999,
     brand: 'Puma',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'ABYSS DIAMOND',
@@ -229,6 +251,7 @@ const mocks = [
     price: 5499,
     brand: 'Puma',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'PUMA XO PARALLEL',
@@ -239,6 +262,7 @@ const mocks = [
     price: 7999,
     brand: 'Puma',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'Evan Smith Hi Zero',
@@ -249,16 +273,18 @@ const mocks = [
     price: 2460,
     brand: 'DC',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'Pure SE',
-    slug: 'pure-se-men',
+    slug: 'pure-se-women',
     base: null,
     imageUrl:
       'https://ssl.quiksilver.com/www/store.quiksilver.eu/html/images/catalogs/global/dcshoes-products/all/default/xlarge/adys400043_purehightopwc,p_xkwb_frt2.jpg',
     price: 2790,
     brand: 'DC',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'Kalis Lite',
@@ -269,6 +295,7 @@ const mocks = [
     price: 2460,
     brand: 'DC',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'Court Graffik SE',
@@ -279,66 +306,73 @@ const mocks = [
     price: 2300,
     brand: 'DC',
     size: 10,
+    gender: 'men',
   },
   {
     name: 'Pensford',
-    slug: 'pensford-men',
+    slug: 'pensford-women',
     base: null,
     imageUrl:
       'https://ssl.quiksilver.com/www/store.quiksilver.eu/html/images/catalogs/global/dcshoes-products/all/default/xlarge/adys400038_pensford,p_wht_frt2.jpg',
     price: 2950,
     brand: 'DC',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'ELITE FLEX WASICK',
-    slug: 'elite-flex-wasick-men',
+    slug: 'elite-flex-wasick-women',
     base: null,
     imageUrl:
       'https://image.skechers.com/img/productimages/xlarge/52649_BKW.jpg',
     price: 2300,
     brand: 'Skechers',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'BOUNDER WOLFSTON',
-    slug: 'bounder-wolfston-men',
+    slug: 'bounder-wolfston-women',
     base: null,
     imageUrl:
       'https://image.skechers.com/img/productimages/xlarge/52506_BBK.jpg',
     price: 2130,
     brand: 'Skechers',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'SKECHERS ONE CHAMP ULTRA',
-    slug: 'skeschers-one-champ-ultra-men',
+    slug: 'skeschers-one-champ-ultra-women',
     base: null,
     imageUrl:
       'https://image.skechers.com/img/productimages/xlarge/18566_WHT.jpg',
     price: 2300,
     brand: 'Skechers',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'REEBOK ROYAL BB4500 HI2',
-    slug: 'reebok-royal-bb4500-hi2-men',
+    slug: 'reebok-royal-bb4500-hi2-women',
     base: null,
     imageUrl:
       'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw7d900817/zoom/CN4107_01_standard.jpg?sh=840&strip=false&sw=840',
     price: 2130,
     brand: 'Reebok',
     size: 10,
+    gender: 'women',
   },
   {
     name: 'DMX SERIES 1600',
-    slug: 'dmk-series-1600-men',
+    slug: 'dmk-series-1600-women',
     base: null,
     imageUrl:
       'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dwa575d7e6/zoom/CN7738_01_standard.jpg?sh=840&strip=false&sw=840',
     price: 3960,
     brand: 'Reebok',
     size: 10,
+    gender: 'women',
   },
 ]
 
