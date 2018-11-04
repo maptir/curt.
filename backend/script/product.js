@@ -1,4 +1,7 @@
 const axios = require('axios')
+// const config = require('../config')
+// `${config.API_URL}/images/abc.jpg`
+
 const mocks = [
   {
     name: 'Old Skool',
