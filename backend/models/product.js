@@ -14,8 +14,8 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  imageUrl: {
-    type: String,
+  thumbnails: {
+    type: Array,
     required: true,
   },
   price: {
@@ -23,6 +23,10 @@ const ProductSchema = mongoose.Schema({
     required: true,
   },
   brand: {
+    type: String,
+    required: true,
+  },
+  gender: {
     type: String,
     required: true,
   },

@@ -16,21 +16,30 @@ router.get('/', (req, res) => {
 })
 
 // POST new products to the database
-// Does it need to contain user for editting purpose
 router.post('/add', (req, res) => {
   req.checkBody('name', 'Name is required').notEmpty()
   req.checkBody('slug', 'slug is required').notEmpty()
-  req.checkBody('imageUrl', 'Image URL is required').notEmpty()
+  req.checkBody('thumbnails', 'Thumbnails is required').notEmpty()
   req.checkBody('price', 'Price is required').notEmpty()
   req.checkBody('brand', 'Brand is required').notEmpty()
+  req.checkBody('gender', 'Gender is required').notEmpty()
   req.checkBody('size', 'Size is required').notEmpty()
 
   let errors = req.validationErrors()
 
   if (errors) return res.send(errors)
 
-  let { name, slug, base, imageUrl, price, brand, size } = req.body
-  const addedProduct = { name, slug, base, imageUrl, price, brand, size }
+  let { name, slug, base, thumbnails, price, brand, gender, size } = req.body
+  const addedProduct = {
+    name,
+    slug,
+    base,
+    thumbnails,
+    price,
+    brand,
+    gender,
+    size,
+  }
   Product.findOne(addedProduct, (err, product) => {
     if (err) {
       return res.sendStatus(404)
@@ -51,6 +60,39 @@ router.post('/add', (req, res) => {
         }
       })
     }
+  })
+})
+
+// EDIT products with given name
+router.post('/update/:id', (req, res) => {
+  let {
+    name,
+    slug,
+    base,
+    thumbnails,
+    price,
+    brand,
+    gender,
+    size,
+    quantity,
+  } = req.body
+  const edittedProduct = {
+    name,
+    slug,
+    base,
+    thumbnails,
+    price,
+    brand,
+    gender,
+    size,
+    quantity,
+  }
+
+  let query = { _id: req.params.id }
+
+  Product.update(query, edittedProduct, err => {
+    if (err) res.send(err)
+    else res.send(201)
   })
 })
 
