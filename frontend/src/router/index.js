@@ -9,6 +9,7 @@ import Catalog from '../pages/Catalog'
 import Checkout from '../pages/Checkout'
 import Thankyou from '../components/checkout/Thankyou'
 import Custom from '../pages/Custom'
+import Admin from '../pages/Admin'
 
 const routes = [
   {
@@ -51,6 +52,12 @@ const routes = [
     exact: true,
     component: Custom,
   },
+  {
+    path: '/admin',
+    exact: true,
+    component: Admin,
+  },
+  
 ]
 
 export default () => (

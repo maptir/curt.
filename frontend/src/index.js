@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 import 'pretty-checkbox/dist/pretty-checkbox.css'
+import 'react-table/react-table.css'
 
 import 'rodal/lib/rodal.css'
 
