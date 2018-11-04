@@ -1,23 +1,10 @@
 /* Stateful Component */
 import React from 'react'
 import styled from 'styled-components'
+import curtApi from '../../lib/curtApi'
 
 import ReactTable from 'react-table'
-
-const newPerson = [
-  {
-    name: 'Jack Percel',
-    slug: 'Mock',
-    base: 'Mock',
-    thumbnails: 'curt@curt.com',
-    price: '4000',
-    brand: 'mock',
-    gender: 'male',
-    size: '6',
-    quantity: '6',
-  },
- 
-]
+import ProductProvider from '../../providers/ProductProvider'
 
 const InsideButton = styled.button`
   height: 40px !important;
@@ -37,13 +24,16 @@ class Table extends React.Component {
     this.renderEditable = this.renderEditable.bind(this)
   }
 
-  state = {
-    data: newPerson,
+  state = {}
+
+  fetchProduct = async () => {
+    const products = await curtApi.products.fetchAllProduct()
+    this.setState({ data: products })
   }
 
-  componentDidMount = () => {} // fetch data here
-
-  componentWillUnmount = () => {}
+  componentDidMount = () => {
+    this.fetchProduct()
+  }
 
   renderEditable(cellInfo) {
     return (
@@ -66,80 +56,83 @@ class Table extends React.Component {
   render() {
     return (
       <div>
-        <ReactTable
-          data={newPerson}
-          noDataText="NO DATA"
-          columns={[
-            {
-              Header: 'PRODUCT INFORMATION',
-              columns: [
-                {
-                  Header: 'Name',
-                  accessor: 'name',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Slug',
-                  accessor: 'slug',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Base',
-                  accessor: 'base',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Thumbnails',
-                  accessor: 'thumbnail',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Slug',
-                  accessor: 'slug',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Price',
-                  accessor: 'price',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Brand',
-                  accessor: 'brand',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Gender',
-                  accessor: 'gender',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Size',
-                  accessor: 'size',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Quantity',
-                  accessor: 'quantity',
-                  Cell: this.renderEditable,
-                },
-              ],
-            },
-          ]}
-          defaultPageSize={10}
-          className="-striped -highlight"
-          filterable="true"
-          SubComponent={row => {
-            return (
-              <div style={{ padding: '10px', textAlign: 'center' }}>
-                * Press the button to continue your action *<br />
-                <InsideButton className="btn-dark">SAVE</InsideButton>
-                <InsideButton className="btn-dark">REMOVE</InsideButton>
-              </div>
-            )
-          }}
-          className="-striped -highlight"
-        />
+        {this.state.data && (
+          <ProductProvider>
+            {({ productList }) => {
+              return (
+                <ReactTable
+                  data={productList}
+                  noDataText="NO DATA"
+                  columns={[
+                    {
+                      Header: 'PRODUCT INFORMATION',
+                      columns: [
+                        {
+                          Header: 'Name',
+                          accessor: 'name',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Slug',
+                          accessor: 'slug',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Base',
+                          accessor: 'base',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Slug',
+                          accessor: 'slug',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Price',
+                          accessor: 'price',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Brand',
+                          accessor: 'brand',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Gender',
+                          accessor: 'gender',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Size',
+                          accessor: 'size',
+                          Cell: this.renderEditable,
+                        },
+                        {
+                          Header: 'Quantity',
+                          accessor: 'quantity',
+                          Cell: this.renderEditable,
+                        },
+                      ],
+                    },
+                  ]}
+                  defaultPageSize={10}
+                  className="-striped -highlight"
+                  filterable="true"
+                  SubComponent={row => {
+                    return (
+                      <div style={{ padding: '10px', textAlign: 'center' }}>
+                        * Press the button to continue your action *<br />
+                        <InsideButton className="btn-dark">SAVE</InsideButton>
+                        <InsideButton className="btn-dark">REMOVE</InsideButton>
+                      </div>
+                    )
+                  }}
+                  className="-striped -highlight"
+                />
+              )
+            }}
+          </ProductProvider>
+        )}
       </div>
     )
   }
