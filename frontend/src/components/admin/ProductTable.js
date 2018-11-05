@@ -127,7 +127,6 @@ class Table extends React.Component {
                       </div>
                     )
                   }}
-                  className="-striped -highlight"
                 />
               )
             }}

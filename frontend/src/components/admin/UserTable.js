@@ -1,6 +1,7 @@
 /* Stateful Component */
 import React from 'react'
 import styled from 'styled-components'
+import curtApi from '../../lib/curtApi'
 
 import ReactTable from 'react-table'
 
@@ -53,11 +54,17 @@ class UserTable extends React.Component {
     this.renderEditable = this.renderEditable.bind(this)
   }
 
-  state = {
-    data: newPerson,
+  state = {}
+
+  fetchUser = async () => {
+    const users = await curtApi.auth.fetchAllUsers()
+    this.setState({ data: users })
+    console.log(this.state.users)
   }
 
-  componentDidMount = () => {} // fetch data here
+  componentDidMount = () => {
+    this.fetchUser()
+  }
 
   componentWillUnmount = () => {}
 
@@ -82,69 +89,70 @@ class UserTable extends React.Component {
   render() {
     return (
       <div>
-        <ReactTable
-          data={newPerson}
-          noDataText="NO DATA"
-          columns={[
-            {
-              Header: 'IDENTICAL',
-              columns: [
-                {
-                  Header: 'ID',
-                  accessor: 'id',
-                },
-              ],
-            },
-            {
-              Header: 'GENERAL INFORMATION',
-              columns: [
-                {
-                  Header: 'First Name',
-                  accessor: 'firstName',
-                  Cell: this.renderEditable,
-                },
-                {
-                  Header: 'Last Name',
-                  accessor: 'lastName',
-                  Cell: this.renderEditable,
-                },
-              ],
-            },
-            {
-              Header: 'CONTACT INFORMATION',
-              columns: [
-                {
-                  Header: 'Email',
-                  accessor: 'email',
-                  Cell: this.renderEditable,
-                },
-              ],
-            },
-            {
-              Header: 'USER DATA',
-              columns: [
-                {
-                  Header: 'Password',
-                  accessor: 'password',
-                  Cell: this.renderEditable,
-                },
-              ],
-            },
-          ]}
-          defaultPageSize={10}
-          className="-striped -highlight"
-          filterable="true"
-          SubComponent={row => {
-            return (
-              <div style={{ padding: '10px', textAlign: 'center' }}>
-                * Press the button to continue your action *<br />
-                <InsideButton className="btn-dark">SAVE</InsideButton>
-                <InsideButton className="btn-dark">REMOVE</InsideButton>
-              </div>
-            )
-          }}
-          className="-striped -highlight"
-        />
+        {this.state.data && (
+          <ReactTable
+            data={newPerson}
+            noDataText="NO DATA"
+            columns={[
+              {
+                Header: 'IDENTICAL',
+                columns: [
+                  {
+                    Header: 'ID',
+                    accessor: 'id',
+                  },
+                ],
+              },
+              {
+                Header: 'GENERAL INFORMATION',
+                columns: [
+                  {
+                    Header: 'First Name',
+                    accessor: 'firstName',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Last Name',
+                    accessor: 'lastName',
+                    Cell: this.renderEditable,
+                  },
+                ],
+              },
+              {
+                Header: 'CONTACT INFORMATION',
+                columns: [
+                  {
+                    Header: 'Email',
+                    accessor: 'email',
+                    Cell: this.renderEditable,
+                  },
+                ],
+              },
+              {
+                Header: 'USER DATA',
+                columns: [
+                  {
+                    Header: 'Password',
+                    accessor: 'password',
+                    Cell: this.renderEditable,
+                  },
+                ],
+              },
+            ]}
+            defaultPageSize={10}
+            className="-striped -highlight"
+            filterable="true"
+            SubComponent={row => {
+              return (
+                <div style={{ padding: '10px', textAlign: 'center' }}>
+                  * Press the button to continue your action *<br />
+                  <InsideButton className="btn-dark">SAVE</InsideButton>
+                  <InsideButton className="btn-dark">REMOVE</InsideButton>
+                </div>
+              )
+            }}
+          />
+        )}
       </div>
     )
   }
