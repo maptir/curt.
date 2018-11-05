@@ -56,7 +56,7 @@ router.post('/add', (req, res) => {
         if (err) {
           res.sendStatus(400)
         } else {
-          res.sendStatus(201)
+          res.send(newProduct)
         }
       })
     }
@@ -92,15 +92,15 @@ router.post('/update/:id', (req, res) => {
 
   Product.update(query, edittedProduct, err => {
     if (err) res.send(err)
-    else res.send(201)
+    else res.send(edittedProduct)
   })
 })
 
 // Remove given product
 router.post('/remove/:id', (req, res) => {
-  Product.findByIdAndRemove(req.params.id, err => {
+  Product.findByIdAndRemove(req.params.id, (product, err) => {
     if (err) res.send(err)
-    else res.send(200)
+    else res.send(req.product)
   })
 })
 
@@ -112,13 +112,6 @@ router.get('/:slug', (req, res) => {
     } else {
       res.send(product)
     }
-  })
-})
-
-router.post('/clearAll', (req, res) => {
-  Product.remove({}, err => {
-    if (err) res.send(err)
-    else res.send(200)
   })
 })
 

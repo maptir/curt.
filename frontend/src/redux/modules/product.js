@@ -34,3 +34,13 @@ export const addProduct = product => async dispatch => {
   await curtApi.products.addProduct(product)
   dispatch(fetchAllProduct())
 }
+
+export const editProduct = product => async dispatch => {
+  await curtApi.products.editProduct(product)
+  dispatch(fetchAllProduct())
+}
+
+export const removeProduct = id => async dispatch => {
+  await curtApi.products.removeProduct(id)
+  dispatch(fetchAllProduct())
+}
