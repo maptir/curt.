@@ -7,7 +7,8 @@ import CustomPane from './CustomPane'
 import Limit from '../common/Limit'
 import curtApi from '../../lib/curtApi'
 import fabricLib from '../../lib/fabric'
-import mock from '../../assets/shoe-info/mock1.jpg'
+
+import _ from 'lodash'
 
 const Header = styled(Limit)`
   display: flex;
@@ -60,16 +61,25 @@ class CustomBoard extends React.Component {
     const products = await curtApi.products.fetchProduct(
       this.props.match.params.slug,
     )
-    this.setState({ products }, () => console.log(this.state.products))
+    this.setState({ products })
   }
 
   componentDidMount = async () => {
     await this.fetchProduct()
     fabricLib.drawing()
     this.setBackgroundImage(0)
+    // const { thumbnails } = this.state.products[0]
+    // const canvas = document.getElementById('custom').fabric
+    // thumbnails.map(async (thumbnail, index) => {
+    //   await this.setBackgroundImage(index)
+    //   await this.setState({
+    //     dataURLs: [...this.state.dataURLs, canvas.toDataURL('png')],
+    //   })
+    //   console.log('dataurl', this.state.dataURLs)
+    // })
   }
 
-  setBackgroundImage = index => {
+  setBackgroundImage = (index, onFinish = () => {}) => {
     const canvas = document.getElementById('custom').fabric
     canvas.setBackgroundImage(
       this.state.products[0].thumbnails[index],
@@ -77,6 +87,7 @@ class CustomBoard extends React.Component {
         canvas.backgroundImage.scaleToWidth(400)
         canvas.backgroundImage.scaleToHeight(500)
         canvas.renderAll()
+        onFinish()
       },
       {
         top: canvas.getCenter().top,
@@ -87,11 +98,13 @@ class CustomBoard extends React.Component {
     )
   }
 
-  changeSide = index => {
-    this.setBackgroundImage(index)
-    this.save(this.state.currentSide)
-    this.setState({ currentSide: index })
-    this.load(index)
+  changeSide = (index, callback) => {
+    this.setBackgroundImage(index, () => {
+      this.save(this.state.currentSide)
+      this.load(index)
+      this.setState({ currentSide: index })
+      callback()
+    })
   }
 
   save = index => {
@@ -135,6 +148,18 @@ class CustomBoard extends React.Component {
       })
   }
 
+  upload = () => {
+    const { thumbnails } = this.state.products[0]
+    const canvas = document.getElementById('custom').fabric
+    let dataUrls = []
+    for (let index in thumbnails) {
+      this.changeSide(index, () => {
+        const dataUrl = canvas.toDataURL('image/png')
+        dataUrls.push(dataUrl)
+      })
+    }
+  }
+
   render() {
     const product = this.state.products[0]
 
@@ -149,7 +174,7 @@ class CustomBoard extends React.Component {
                   {(product.brand + ' ' + product.name).toUpperCase()}
                 </Text>
               </div>
-              <button className="btn btn-dark rounded-0">
+              <button className="btn btn-dark rounded-0" onClick={this.upload}>
                 FINALIZE YOUR DESIGN
               </button>
             </Header>
