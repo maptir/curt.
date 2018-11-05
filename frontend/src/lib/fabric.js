@@ -26,6 +26,10 @@ export default {
       drawingShadowWidth = $('drawing-shadow-width'),
       drawingShadowOffset = $('drawing-shadow-offset')
 
+    drawingModeEl.onclick = function() {
+      canvas.isDrawingMode = !canvas.isDrawingMode
+    }
+
     drawingLineWidthEl.value = 0
     drawingShadowWidth.value = 0
     drawingShadowOffset.value = 0

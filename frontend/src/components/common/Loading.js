@@ -29,19 +29,19 @@ const Text = styled.h3`
   margin: 0;
 `
 
-// const Loader = styled.img.attrs({
-//   src: spinner,
-// })`
-//   padding: 0 1em;
-//   width: 80%;
-// `
+const Loader = styled.img.attrs({
+  src: spinner,
+})`
+  padding: 0 1em;
+  width: 80%;
+`
 
-export default props => <h1>hi</h1>
-// props.isOpen ? (
-//   <Full isOpen={props.isOpen}>
-//     <Container>
-//       <img src={spinner} alt="spinner" />
-//       <Text>{props.text}</Text>
-//     </Container>
-//   </Full>
-// ) : null
+export default props =>
+  props.isOpen ? (
+    <Full isOpen={props.isOpen}>
+      <Container>
+        <img src={spinner} alt="spinner" />
+        <Text>{props.text}</Text>
+      </Container>
+    </Full>
+  ) : null

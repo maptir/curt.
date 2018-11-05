@@ -23,13 +23,14 @@ const Option = styled.div`
   width: fit-content;
   background-color: #313131;
   color: white;
-  padding: ${props => props.toggle ? '15px' : '0px'};
-  display: ${props => props.toggle ? '' : 'none'}
+  padding: ${props => (props.toggle ? '15px' : '0px')};
+  display: ${props => (props.toggle ? '' : 'none')};
 `
 
 class CustomPane extends React.Component {
   state = {
-    dataURL: '', toggle : false
+    dataURL: '',
+    toggle: true,
   }
   delete = () => {
     const canvas = document.getElementById('custom').fabric
@@ -85,8 +86,6 @@ class CustomPane extends React.Component {
   }
 
   toggleDrawingMode = () => {
-    const canvas = document.getElementById('custom').fabric
-    canvas.isDrawingMode = !canvas.isDrawingMode
     this.setState({ toggle: !this.state.toggle })
   }
 
@@ -94,7 +93,11 @@ class CustomPane extends React.Component {
     return (
       <div>
         <Toolbar>
-          <button id="drawing-mode" style={{ padding: '0px', margin: '0px' }} onClick={this.toggleDrawingMode}>
+          <button
+            id="drawing-mode"
+            style={{ padding: '0px', margin: '0px' }}
+            onClick={this.toggleDrawingMode}
+          >
             <img
               src={this.state.toggle ? BrushIconPressed : BrushIcon}
               style={{ maxHeight: '45px', width: 'auto' }}
@@ -128,7 +131,11 @@ class CustomPane extends React.Component {
 
         <Option toggle={this.state.toggle}>
           <div id="drawing-mode-options">
-            <img src={BrushLogo} alt="" style={{ maxHeight: '21px',width:'auto' , marginRight: '10px'}}/>
+            <img
+              src={BrushLogo}
+              alt=""
+              style={{ maxHeight: '21px', width: 'auto', marginRight: '10px' }}
+            />
             <select id="drawing-mode-selector">
               <option>Pencil</option>
               <option>Circle</option>
