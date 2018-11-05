@@ -29,3 +29,7 @@ export const fetchAllProduct = () => async dispatch => {
     payload: productList,
   })
 }
+
+export const addProduct = () => async dispatch => {
+  // const addedProduct = await curtApi.products.addProduct()
+}

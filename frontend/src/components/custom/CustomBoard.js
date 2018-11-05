@@ -3,12 +3,11 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
-import CustomPane from './CustomPane'
-import Limit from '../common/Limit'
 import curtApi from '../../lib/curtApi'
+import CustomPane from './CustomPane'
 import fabricLib from '../../lib/fabric'
-
 import firebase from '../../lib/firebase'
+import Limit from '../common/Limit'
 
 const Header = styled(Limit)`
   display: flex;
@@ -68,15 +67,6 @@ class CustomBoard extends React.Component {
     await this.fetchProduct()
     fabricLib.drawing()
     this.setBackgroundImage(0)
-    // const { thumbnails } = this.state.products[0]
-    // const canvas = document.getElementById('custom').fabric
-    // thumbnails.map(async (thumbnail, index) => {
-    //   await this.setBackgroundImage(index)
-    //   await this.setState({
-    //     dataURLs: [...this.state.dataURLs, canvas.toDataURL('png')],
-    //   })
-    //   console.log('dataurl', this.state.dataURLs)
-    // })
   }
 
   setBackgroundImage = (index, onFinish = () => {}) => {
@@ -99,15 +89,19 @@ class CustomBoard extends React.Component {
   }
 
   changeSide = (index, callback = () => {}) => {
+    console.log(index)
+
     this.setBackgroundImage(index, () => {
-      this.save(this.state.currentSide)
-      this.load(index)
-      this.setState({ currentSide: index })
-      callback()
+      console.log('setBG callback' + index)
+
+      this.save(this.state.currentSide, () => {
+        this.setState({ currentSide: index })
+        this.load(index, callback)
+      })
     })
   }
 
-  save = index => {
+  save = (index, callback) => {
     const canvas = document.getElementById('custom').fabric
     // Group all objects
     canvas.discardActiveObject()
@@ -123,62 +117,73 @@ class CustomBoard extends React.Component {
       this.setState({
         ['side' + index]: cloned,
       })
+      canvas.remove(...canvas.getObjects().concat())
+      canvas.discardActiveObject()
+      callback()
     })
-    canvas.remove(...canvas.getObjects().concat())
-    canvas.discardActiveObject()
   }
 
-  load = index => {
+  load = (index, callback = () => {}) => {
     const canvas = document.getElementById('custom').fabric
-    this.state['side' + index] &&
-      this.state['side' + index].clone(clonedObj => {
-        canvas.discardActiveObject()
-        if (clonedObj.type === 'activeSelection') {
-          clonedObj.canvas = canvas
-          clonedObj.forEachObject(function(obj) {
-            canvas.add(obj)
-          })
-          clonedObj.setCoords()
-        } else {
-          canvas.add(clonedObj)
-        }
-        canvas.setActiveObject(clonedObj)
-        canvas.discardActiveObject()
-        canvas.requestRenderAll()
-      })
+    this.state['side' + index]
+      ? this.state['side' + index].clone(clonedObj => {
+          canvas.discardActiveObject()
+          if (clonedObj.type === 'activeSelection') {
+            clonedObj.canvas = canvas
+            clonedObj.forEachObject(function(obj) {
+              canvas.add(obj)
+            })
+            clonedObj.setCoords()
+          } else {
+            canvas.add(clonedObj)
+          }
+          canvas.setActiveObject(clonedObj)
+          canvas.discardActiveObject()
+          canvas.requestRenderAll()
+          console.log('load' + index)
+          callback()
+        })
+      : callback()
   }
 
   upload = () => {
     const { thumbnails } = this.state.products[0]
     const canvas = document.getElementById('custom').fabric
-    // let dataUrls = []
     const randomKey = firebase
       .database()
       .ref()
       .push().key
-
-    for (let index in thumbnails) {
-      this.changeSide(index, async () => {
+    let i = 0
+    let dataURLs = []
+    const timer = setInterval(() => {
+      this.changeSide(i++, async () => {
+        console.log('Start callback changeside')
+        const index = i
         const dataUrl = canvas.toDataURL('image/png')
         const filename = `${randomKey}-${index}.png`
+        console.log(dataUrl)
         await firebase
           .storage()
           .ref(filename)
           .putString(dataUrl, 'data_url')
-
+        console.log('upload')
         const url = await firebase
           .storage()
           .ref(filename)
           .getDownloadURL()
 
         console.log(url)
-        // .putString(dataUrl, {
-        //   contentType: 'image/png',
-        // })
-
-        // dataUrls.push(dataUrl)
+        dataURLs[index] = url
+        console.log('Finish' + index + ' ' + dataURLs[index])
       })
-    }
+      if (i >= thumbnails.length) {
+        clearInterval(timer)
+        console.log(dataURLs)
+      }
+    }, 500)
+    setTimeout(() => {
+      console.log(dataURLs)
+    }, 30000)
   }
 
   render() {
