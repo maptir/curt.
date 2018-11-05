@@ -8,6 +8,8 @@ import AddProduct from './AddProductForm'
 import ReactTable from 'react-table'
 import * as productActions from '../../redux/modules/product'
 
+import Modal from '../common/Modal'
+
 const InsideButton = styled.button`
   height: 40px !important;
   border-radius: 10px !important;

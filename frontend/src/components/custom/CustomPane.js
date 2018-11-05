@@ -1,9 +1,35 @@
 /* global fabric */
 
 import React from 'react'
+import styled from 'styled-components'
+
+import BrushIconPressed from '../../assets/icon/brush-pressed.png'
+import BrushIcon from '../../assets/icon/brush.png'
+import StampIcon from '../../assets/icon/stamp.png'
+import ClearIcon from '../../assets/icon/clear.png'
+import DeleteIcon from '../../assets/icon/delete.png'
+
+import BrushLogo from '../../assets/icon/brush-icon.png'
+
+import { SketchPicker } from 'react-color'
+
+const Toolbar = styled.div`
+  max-height: 45px;
+  width: fit-content;
+  background-color: #313131;
+`
+const Option = styled.div`
+  height: auto;
+  width: fit-content;
+  background-color: #313131;
+  color: white;
+  padding: ${props => props.toggle ? '15px' : '0px'};
+  display: ${props => props.toggle ? '' : 'none'}
+`
+
 class CustomPane extends React.Component {
   state = {
-    dataURL: '',
+    dataURL: '', toggle : false
   }
   delete = () => {
     const canvas = document.getElementById('custom').fabric
@@ -58,70 +84,82 @@ class CustomPane extends React.Component {
     img.src = this.state.dataURL
   }
 
+  toggleDrawingMode = () => {
+    const canvas = document.getElementById('custom').fabric
+    canvas.isDrawingMode = !canvas.isDrawingMode
+    this.setState({ toggle: !this.state.toggle })
+  }
+
   render() {
     return (
       <div>
-        <button id="drawing-mode" className="btn btn-info">
-          Cancel drawing mode
-        </button>
-        <br />
-        <button className="btn btn-info" onClick={this.delete}>
-          Delete
-        </button>
-        <button className="btn btn-info" onClick={this.clear}>
-          Clear
-        </button>
-        <button className="btn btn-info" onClick={this.save}>
-          Save
-        </button>
-        <button className="btn btn-info" onClick={this.load}>
-          Load
-        </button>
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={this.upload}
-        />
-        <br />
+        <Toolbar>
+          <button id="drawing-mode" style={{ padding: '0px', margin: '0px' }} onClick={this.toggleDrawingMode}>
+            <img
+              src={this.state.toggle ? BrushIconPressed : BrushIcon}
+              style={{ maxHeight: '45px', width: 'auto' }}
+            />
+          </button>
+          <label>
+            <img src={StampIcon} style={{ maxHeight: '45px', width: 'auto' }} />
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={this.upload}
+              style={{ display: 'none' }}
+            />
+          </label>
+          <button
+            style={{ padding: '0px', margin: '0px' }}
+            onClick={this.delete}
+          >
+            <img
+              src={DeleteIcon}
+              style={{ maxHeight: '45px', width: 'auto' }}
+            />
+          </button>
+          <button
+            style={{ padding: '0px', margin: '0px' }}
+            onClick={this.clear}
+          >
+            <img src={ClearIcon} style={{ maxHeight: '45px', width: 'auto' }} />
+          </button>
+        </Toolbar>
 
-        <div id="drawing-mode-options">
-          <label>Mode:</label>
-          <select id="drawing-mode-selector">
-            <option>Pencil</option>
-            <option>Circle</option>
-            <option>Spray</option>
-            <option>Pattern</option>
-            <option>hline</option>
-            <option>vline</option>
-            <option>square</option>
-            <option>diamond</option>
-            <option>texture</option>
-          </select>
-          <br />
+        <Option toggle={this.state.toggle}>
+          <div id="drawing-mode-options">
+            <img src={BrushLogo} alt="" style={{ maxHeight: '21px',width:'auto' , marginRight: '10px'}}/>
+            <select id="drawing-mode-selector">
+              <option>Pencil</option>
+              <option>Circle</option>
+              <option>Spray</option>
+            </select>
+            <br />
 
-          <label>Line width:</label>
-          <span className="info">0</span>
-          <input type="range" min="0" max="150" id="drawing-line-width" />
-          <br />
+            <label>Line width : </label>
+            <span className="info"> 0 </span>
+            <input type="range" min="0" max="150" id="drawing-line-width" />
+            <br />
 
-          <label>Line color:</label>
-          <input type="color" id="drawing-color" />
-          <br />
+            <label>Line color:</label>
+            <input type="color" id="drawing-color" />
+            <br />
 
-          <label>Shadow color:</label>
-          <input type="color" id="drawing-shadow-color" />
-          <br />
+            <label>Shadow color:</label>
+            <input type="color" id="drawing-shadow-color" />
+            <br />
 
-          <label>Shadow width:</label>
-          <span className="info">0</span>
-          <input type="range" min="0" max="50" id="drawing-shadow-width" />
-          <br />
+            <label>Shadow width:</label>
+            <span className="info">0</span>
+            <input type="range" min="0" max="50" id="drawing-shadow-width" />
+            <br />
 
-          <label>Shadow offset:</label>
-          <span className="info">0</span>
-          <input type="range" min="0" max="50" id="drawing-shadow-offset" />
-          <br />
-        </div>
+            <label>Shadow offset:</label>
+            <span className="info">0</span>
+            <input type="range" min="0" max="50" id="drawing-shadow-offset" />
+            <br />
+          </div>
+        </Option>
       </div>
     )
   }

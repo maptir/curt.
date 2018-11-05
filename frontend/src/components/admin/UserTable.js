@@ -152,6 +152,8 @@ class UserTable extends React.Component {
                 ],
               },
             ]}
+            noDataText="NO DATA"
+            filterable="true"
             defaultSorted={[{ id: 'id', desc: false }]}
             defaultPageSize={10}
             className="-striped -highlight"
