@@ -41,7 +41,7 @@
     "eject": "react-scripts eject",
     "dev": "npm start",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.5"

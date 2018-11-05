@@ -76,10 +76,13 @@ class CurtApi {
       return product
     },
     async addProduct(newProduct) {
+      console.log('New product', newProduct)
       const { data: product } = await axios.post(
         `${API_URL}/products/add/`,
         newProduct,
       )
+      console.log(product)
+
       return product
     },
   }
