@@ -23,6 +23,13 @@ const Bottom = styled.div`
   padding: 1em;
 `
 
+const TableButton = styled.button`
+  margin: 0px 5px;
+  background-color: #415461;
+  color: white;
+  border-radius: 5px;
+`
+
 const BottomButton = styled.button`
   height: 40px !important;
   padding-left: 15px !important;
@@ -72,6 +79,11 @@ class Table extends React.Component {
   fetchProduct = async () => {
     const products = await curtApi.products.fetchAllProduct()
     this.setState({ data: products })
+  }
+
+  checkRow = async row => {
+    console.log(row)
+    // const product = await curtApi.products.editProduct(row.original)
   }
 
   componentDidMount = () => {
@@ -196,8 +208,12 @@ class Table extends React.Component {
                       Header: 'EDIT',
                       Cell: row => (
                         <div style={{ textAlign: 'center' }}>
-                          <button>Save</button>
-                          <button>Delete</button>
+                          <TableButton
+                            onClick={() => this.checkRow(row.original)}
+                          >
+                            Save
+                          </TableButton>
+                          <TableButton>Delete</TableButton>
                         </div>
                       ),
                     },
