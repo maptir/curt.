@@ -35,11 +35,7 @@ class UserTable extends React.Component {
 
     if (this.state.selectAll === 0) {
       this.state.data.forEach(x => {
-<<<<<<< HEAD
         newSelected[x.id] = true
-=======
-        newSelected[x._id] = true
->>>>>>> 85927f77ea1f3792b49fb9fa85ebe7297bbb6f94
       })
     }
 
@@ -91,13 +87,8 @@ class UserTable extends React.Component {
                         <input
                           type="checkbox"
                           className="checkbox"
-<<<<<<< HEAD
                           checked={this.state.selected[original.id] === true}
                           onChange={() => this.toggleRow(original.id)}
-=======
-                          checked={this.state.selected[original._id] === true}
-                          onChange={() => this.toggleRow(original._id)}
->>>>>>> 85927f77ea1f3792b49fb9fa85ebe7297bbb6f94
                         />
                       )
                     },
@@ -121,11 +112,7 @@ class UserTable extends React.Component {
                   },
                   {
                     Header: 'ID',
-<<<<<<< HEAD
                     accessor: 'id',
-=======
-                    accessor: '_id',
->>>>>>> 85927f77ea1f3792b49fb9fa85ebe7297bbb6f94
                   },
                 ],
               },
