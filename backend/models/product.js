@@ -14,15 +14,20 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
+  thumbnails: [
+    {
+      type: String,
+    },
+  ],
   price: {
     type: Number,
     required: true,
   },
   brand: {
+    type: String,
+    required: true,
+  },
+  gender: {
     type: String,
     required: true,
   },

@@ -153,11 +153,12 @@ class CustomBoard extends React.Component {
       .database()
       .ref()
       .push().key
-    let index = 0
+    let i = 0
+    let dataURLs = []
     const timer = setInterval(() => {
-      this.changeSide(index++, async () => {
+      this.changeSide(i++, async () => {
         console.log('Start callback changeside')
-
+        const index = i
         const dataUrl = canvas.toDataURL('image/png')
         const filename = `${randomKey}-${index}.png`
         console.log(dataUrl)
@@ -172,11 +173,17 @@ class CustomBoard extends React.Component {
           .getDownloadURL()
 
         console.log(url)
+        dataURLs[index] = url
+        console.log('Finish' + index + ' ' + dataURLs[index])
       })
-      if (index >= thumbnails.length) {
+      if (i >= thumbnails.length) {
         clearInterval(timer)
+        console.log(dataURLs)
       }
     }, 500)
+    setTimeout(() => {
+      console.log(dataURLs)
+    }, 30000)
   }
 
   render() {

@@ -87,4 +87,12 @@ router.post('/clearAll', (req, res) => {
   })
 })
 
+// Get all users
+router.get('/', (req, res) => {
+  User.find({}, (err, users) => {
+    if (err) res.send(err)
+    else res.send(users)
+  })
+})
+
 module.exports = router
