@@ -48,6 +48,17 @@ class AddProduct extends React.Component {
   }
 
   addProduct = () => {
+    this.setState({
+      name: '',
+      slug: '',
+      base: '',
+      price: '',
+      brand: '',
+      imageUrl: '',
+      gender: '',
+      size: '',
+      quantity: '',
+    })
     this.props.addProduct(this.state)
     this.props.closeModal()
   }
