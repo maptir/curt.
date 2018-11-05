@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.post('/add', (req, res) => {
   req.checkBody('name', 'Name is required').notEmpty()
   req.checkBody('slug', 'slug is required').notEmpty()
-  req.checkBody('thumbnails', 'Thumbnails is required').notEmpty()
+  req.checkBody('thumbnails', 'Thumbnails is required')
   req.checkBody('price', 'Price is required').notEmpty()
   req.checkBody('brand', 'Brand is required').notEmpty()
   req.checkBody('gender', 'Gender is required').notEmpty()
@@ -93,6 +93,14 @@ router.post('/update/:id', (req, res) => {
   Product.update(query, edittedProduct, err => {
     if (err) res.send(err)
     else res.send(201)
+  })
+})
+
+// Remove given product
+router.post('/remove/:id', (req, res) => {
+  Product.findByIdAndRemove(req.params.id, err => {
+    if (err) res.send(err)
+    else res.send(200)
   })
 })
 

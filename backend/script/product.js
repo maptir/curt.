@@ -1,6 +1,25 @@
 const axios = require('axios')
 const mocks = [
   {
+    name: 'Old Skool',
+    slug: 'old-skool-men',
+    base: null,
+    imageUrl: 'https://images.vans.com/is/image/Vans/D3HY28-HERO',
+    price: 2300,
+    brand: 'Vans',
+    size: 6.5,
+    gender: 'men',
+    thumbnails: [
+      `http://localhost:3000/mocks/old-skool-thumbnails-1.jpeg`,
+      `http://localhost:3000/mocks/old-skool-thumbnails-2.jpeg`,
+      `http://localhost:3000/mocks/old-skool-thumbnails-3.jpeg`,
+      `http://localhost:3000/mocks/old-skool-thumbnails-4.jpeg`,
+      `http://localhost:3000/mocks/old-skool-thumbnails-5.jpeg`,
+      `http://localhost:3000/mocks/old-skool-thumbnails-6.jpeg`,
+      `http://localhost:3000/mocks/old-skool-thumbnails-7.jpeg`,
+    ],
+  },
+  {
     name: 'Air Max 97',
     slug: 'air-max-97-men',
     base: null,

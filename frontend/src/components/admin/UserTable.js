@@ -5,53 +5,22 @@ import curtApi from '../../lib/curtApi'
 
 import ReactTable from 'react-table'
 
-const newPerson = [
-  {
-    id: Math.floor(Math.random() * 100),
-    firstName: 'Mock',
-    lastName: 'Mock',
-    email: 'curt@curt.com',
-    password: '123456',
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    firstName: 'Mock',
-    lastName: 'Mock',
-    email: 'curt@curt.com',
-    password: '123456',
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    firstName: 'Mock',
-    lastName: 'Mock',
-    email: 'curt@curt.com',
-    password: '123456',
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    firstName: 'Mock',
-    lastName: 'Mock',
-    email: 'curt@curt.com',
-    password: '123456',
-  },
-]
-
-const InsideButton = styled.button`
-  height: 40px !important;
-  border-radius: 10px !important;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
-  font-size: 14px !important;
-  font-weight: 300 !important;
-  margin: 10px;
-  margin-top: 0px;
-  margin-button: 0px;
-`
-
 class UserTable extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state = { selected: {}, selectAll: 0, data: [] }
+
+    this.toggleRow = this.toggleRow.bind(this)
     this.renderEditable = this.renderEditable.bind(this)
+  }
+
+  toggleRow(id) {
+    const newSelected = Object.assign({}, this.state.selected)
+    newSelected[id] = !this.state.selected[id]
+    this.setState({
+      selected: newSelected,
+      selectAll: 2,
+    })
   }
 
   state = {}
@@ -59,7 +28,21 @@ class UserTable extends React.Component {
   fetchUser = async () => {
     const users = await curtApi.auth.fetchAllUsers()
     this.setState({ data: users })
-    console.log(this.state.users)
+  }
+
+  toggleSelectAll() {
+    let newSelected = {}
+
+    if (this.state.selectAll === 0) {
+      this.state.data.forEach(x => {
+        newSelected[x.id] = true
+      })
+    }
+
+    this.setState({
+      selected: newSelected,
+      selectAll: this.state.selectAll === 0 ? 1 : 0,
+    })
   }
 
   componentDidMount = () => {
@@ -91,12 +74,42 @@ class UserTable extends React.Component {
       <div>
         {this.state.data && (
           <ReactTable
-            data={newPerson}
-            noDataText="NO DATA"
+            data={this.state.data}
             columns={[
               {
                 Header: 'IDENTICAL',
                 columns: [
+                  {
+                    id: 'checkbox',
+                    accessor: '',
+                    Cell: ({ original }) => {
+                      return (
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          checked={this.state.selected[original.id] === true}
+                          onChange={() => this.toggleRow(original.id)}
+                        />
+                      )
+                    },
+                    Header: x => {
+                      return (
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          checked={this.state.selectAll === 1}
+                          ref={input => {
+                            if (input) {
+                              input.indeterminate = this.state.selectAll === 2
+                            }
+                          }}
+                          onChange={() => this.toggleSelectAll()}
+                        />
+                      )
+                    },
+                    sortable: false,
+                    width: 45,
+                  },
                   {
                     Header: 'ID',
                     accessor: 'id',
@@ -139,18 +152,9 @@ class UserTable extends React.Component {
                 ],
               },
             ]}
+            defaultSorted={[{ id: 'id', desc: false }]}
             defaultPageSize={10}
             className="-striped -highlight"
-            filterable="true"
-            SubComponent={row => {
-              return (
-                <div style={{ padding: '10px', textAlign: 'center' }}>
-                  * Press the button to continue your action *<br />
-                  <InsideButton className="btn-dark">SAVE</InsideButton>
-                  <InsideButton className="btn-dark">REMOVE</InsideButton>
-                </div>
-              )
-            }}
           />
         )}
       </div>
