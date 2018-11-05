@@ -225,10 +225,10 @@ class CustomBoard extends React.Component {
               </button>
             </Header>
             <Background>
-              <Spinner
+              {/* <Spinner
                 isOpen={this.state.uploading}
                 text={<div>ควยๆๆๆๆ</div>}
-              />
+              /> */}
               <Container>
                 <CustomPane />
                 <Canvas id="custom" width="500" height="500" />
