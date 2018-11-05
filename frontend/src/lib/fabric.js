@@ -1,5 +1,8 @@
 /* global fabric */
 
+import BrushIcon from '../assets/icon/brush.png'
+import BrushIconPressed from '../assets/icon/brush-pressed.png'
+
 export default {
   drawing() {
     var $ = function(id) {
@@ -26,17 +29,6 @@ export default {
     drawingLineWidthEl.value = 0
     drawingShadowWidth.value = 0
     drawingShadowOffset.value = 0
-
-    drawingModeEl.onclick = function() {
-      canvas.isDrawingMode = !canvas.isDrawingMode
-      if (canvas.isDrawingMode) {
-        drawingModeEl.innerHTML = 'Cancel drawing mode'
-        drawingOptionsEl.style.display = ''
-      } else {
-        drawingModeEl.innerHTML = 'Enter drawing mode'
-        drawingOptionsEl.style.display = 'none'
-      }
-    }
 
     if (fabric.PatternBrush) {
       var vLinePatternBrush = new fabric.PatternBrush(canvas)
