@@ -209,7 +209,7 @@ class Table extends React.Component {
                       Cell: row => (
                         <div style={{ textAlign: 'center' }}>
                           <TableButton
-                            onClick={() => this.checkRow(row.original)}
+                            onClick={() => this.checkRow(this.state.data[row.index])}
                           >
                             Save
                           </TableButton>
