@@ -13,3 +13,18 @@ axios
     console.log(data)
   })
   .catch(err => console.log(err))
+
+
+axios
+  .post('http://localhost:8000/users/register', {
+    firstName: 'admin',
+    lastName: 'admin',
+    email: 'admin@curt.org',
+    facebookId: 'Curt.',
+    password: 'admin',
+    password2: 'admin',
+  })
+  .then(({ data }) => {
+    console.log(data)
+  })
+  .catch(err => console.log(err))

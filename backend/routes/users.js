@@ -68,7 +68,7 @@ router.post('/login', (req, res, next) => {
       res.send(jwt.sign('fail', 'shhhhh'))
     } else if (user) {
       let token = jwt.sign({ id: user.toJSON()._id }, 'shhhhh')
-      res.send(token)
+      res.send({ isAdmin: user.toJSON().firstName === 'admin', token })
     } else {
       res.send('Incorrect username or password')
     }

@@ -48,7 +48,7 @@ const routes = [
     component: Thankyou,
   },
   {
-    path: '/custom',
+    path: '/custom/:slug',
     exact: true,
     component: Custom,
   },
@@ -57,7 +57,6 @@ const routes = [
     exact: true,
     component: Admin,
   },
-  
 ]
 
 export default () => (

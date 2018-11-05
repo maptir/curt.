@@ -1,4 +1,6 @@
 const axios = require('axios')
+const config = require('../config')
+
 const mocks = [
   {
     name: 'Old Skool',
@@ -8,16 +10,16 @@ const mocks = [
     price: 2300,
     brand: 'Vans',
     size: 6.5,
-    gender: 'men',
     thumbnails: [
-      `http://localhost:3000/mocks/old-skool-thumbnails-1.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-2.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-3.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-4.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-5.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-6.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-7.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-1.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-2.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-3.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-4.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-5.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-6.jpeg`,
+      `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-7.jpeg`,
     ],
+    gender: 'men',
   },
   {
     name: 'Air Max 97',
@@ -376,7 +378,7 @@ const mocks = [
     slug: 'reebok-royal-bb4500-hi2-women',
     base: null,
     imageUrl:
-      'https://www.reebok.com/dis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw7d900817/zoom/CN4107_01_standard.jpg?sh=840&strip=false&sw=840',
+      'https://www.reebok.com/dihihiis/dw/image/v2/AAJP_PRD/on/demandware.static/-/Sites-reebok-products/default/dw7d900817/zoom/CN4107_01_standard.jpg?sh=840&strip=false&sw=840',
     price: 2130,
     brand: 'Reebok',
     size: 10,

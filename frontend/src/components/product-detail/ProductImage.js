@@ -1,7 +1,6 @@
 /* Stateful Component */
 import React from 'react'
 import styled from 'styled-components'
-import Slider from 'react-slick'
 
 const FullImage = styled.div`
   background: url(${props => props.imageUrl}) center center / cover no-repeat;

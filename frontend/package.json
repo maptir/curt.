@@ -12,7 +12,7 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.11.1",
     "fabric": "^2.4.2-b",
-    "firebase": "^4.11.0",
+    "firebase": "^5.5.7",
     "font-awesome": "^4.7.0",
     "gh-pages": "^1.1.0",
     "lodash": "^4.17.11",
@@ -40,7 +40,7 @@
     "eject": "react-scripts eject",
     "dev": "npm start",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.5"

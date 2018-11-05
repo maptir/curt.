@@ -27,7 +27,7 @@ db.on('error', console.error.bind(console, 'connection error:'))
 
 const app = express()
 
-app.use(cors())
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -53,7 +53,7 @@ app.use('/images', imagesRouter)
 // })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   console.log('a fucking error occurs')
   console.log(err.status)
