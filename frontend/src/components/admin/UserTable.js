@@ -79,40 +79,40 @@ class UserTable extends React.Component {
               {
                 Header: 'IDENTICAL',
                 columns: [
-                  {
-                    id: 'checkbox',
-                    accessor: '',
-                    Cell: ({ original }) => {
-                      return (
-                        <input
-                          type="checkbox"
-                          className="checkbox"
-                          checked={this.state.selected[original.id] === true}
-                          onChange={() => this.toggleRow(original.id)}
-                        />
-                      )
-                    },
-                    Header: x => {
-                      return (
-                        <input
-                          type="checkbox"
-                          className="checkbox"
-                          checked={this.state.selectAll === 1}
-                          ref={input => {
-                            if (input) {
-                              input.indeterminate = this.state.selectAll === 2
-                            }
-                          }}
-                          onChange={() => this.toggleSelectAll()}
-                        />
-                      )
-                    },
-                    sortable: false,
-                    width: 45,
-                  },
+                  // {
+                  //   id: 'checkbox',
+                  //   accessor: '',
+                  //   Cell: ({ original }) => {
+                  //     return (
+                  //       <input
+                  //         type="checkbox"
+                  //         className="checkbox"
+                  //         checked={this.state.selected[original._id] === true}
+                  //         onChange={() => this.toggleRow(original._id)}
+                  //       />
+                  //     )
+                  //   },
+                  //   Header: x => {
+                  //     return (
+                  //       <input
+                  //         type="checkbox"
+                  //         className="checkbox"
+                  //         checked={this.state.selectAll === 1}
+                  //         ref={input => {
+                  //           if (input) {
+                  //             input.indeterminate = this.state.selectAll === 2
+                  //           }
+                  //         }}
+                  //         onChange={() => this.toggleSelectAll()}
+                  //       />
+                  //     )
+                  //   },
+                  //   sortable: false,
+                  //   width: 45,
+                  // },
                   {
                     Header: 'ID',
-                    accessor: 'id',
+                    accessor: '_id',
                   },
                 ],
               },
@@ -155,6 +155,7 @@ class UserTable extends React.Component {
             defaultSorted={[{ id: 'id', desc: false }]}
             defaultPageSize={10}
             className="-striped -highlight"
+            filterable="true"
           />
         )}
       </div>

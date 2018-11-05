@@ -1,10 +1,12 @@
 /* Stateful Component */
 import React from 'react'
 import styled from 'styled-components'
-import curtApi from '../../lib/curtApi'
+import { connect } from 'react-redux'
+import Modal from '../common/Modal'
+import AddProduct from './AddProductForm'
 
 import ReactTable from 'react-table'
-import ProductProvider from '../../providers/ProductProvider'
+import * as productActions from '../../redux/modules/product'
 
 const InsideButton = styled.button`
   height: 40px !important;
@@ -27,7 +29,9 @@ const TableButton = styled.button`
   margin: 0px 5px;
   background-color: #415461;
   color: white;
-  border-radius: 5px;
+`
+const ModalButtonDiv = styled.div`
+  text-align: center;
 `
 
 const BottomButton = styled.button`
@@ -44,50 +48,53 @@ const BottomButton = styled.button`
 class Table extends React.Component {
   constructor(props) {
     super(props)
-    // this.state = { selected: {}, selectAll: 0, data: [] }
-
-    // this.toggleRow = this.toggleRow.bind(this)
     this.renderEditable = this.renderEditable.bind(this)
   }
 
-  state = {}
-
-  // toggleRow(id) {
-  //   const newSelected = Object.assign({}, this.state.selected)
-  //   newSelected[id] = !this.state.selected[id]
-  //   this.setState({
-  //     selected: newSelected,
-  //     selectAll: 2,
-  //   })
-  // }
-
-  // toggleSelectAll() {
-  //   let newSelected = {}
-
-  //   if (this.state.selectAll === 0) {
-  //     this.state.data.forEach(x => {
-  //       newSelected[x.id] = true
-  //     })
-  //   }
-
-  //   this.setState({
-  //     selected: newSelected,
-  //     selectAll: this.state.selectAll === 0 ? 1 : 0,
-  //   })
-  // }
-
-  fetchProduct = async () => {
-    const products = await curtApi.products.fetchAllProduct()
-    this.setState({ data: products })
+  state = {
+    data: undefined,
   }
 
-  checkRow = async row => {
-    console.log(row)
-    // const product = await curtApi.products.editProduct(row.original)
+  saveRow = row => {
+    this.setState({ saveModalIsOpen: true, row: row })
+  }
+
+  modalSaveOnClick = async () => {
+    this.setState({ saveModalIsOpen: false })
+    this.props.editProduct(this.state.row)
+  }
+
+  modalCancelOnClick = () => {
+    this.setState({ saveModalIsOpen: false, deleteModalIsOpen: false })
+  }
+
+  modalDeleteOnClick = async () => {
+    this.props.removeProduct(this.state.row._id)
+    this.setState({
+      deleteModalIsOpen: false,
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      addModalIsOpen: false,
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      saveModalIsOpen: false,
+      deleteModalIsOpen: false,
+      addModalIsOpen: false,
+    })
+  }
+
+  deleteRow = async row => {
+    this.setState({ deleteModalIsOpen: true, row: row })
   }
 
   componentDidMount = () => {
-    this.fetchProduct()
+    this.props.fetchAllProduct()
   }
 
   renderEditable(cellInfo) {
@@ -97,144 +104,135 @@ class Table extends React.Component {
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.state.data]
+          const data = [...this.props.productList]
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML
           this.setState({ data })
-          console.log(this.state.data)
         }}
         dangerouslySetInnerHTML={{
-          __html: this.state.data[cellInfo.index][cellInfo.column.id],
+          __html: this.props.productList[cellInfo.index][cellInfo.column.id],
         }}
       />
     )
   }
 
   render() {
+    console.log(this.props.productList)
     return (
       <div>
-        {this.state.data && (
-          <ProductProvider>
-            {({ productList }) => {
-              return (
-                <ReactTable
-                  data={productList}
-                  noDataText="NO DATA"
-                  columns={[
-                    {
-                      Header: 'PRODUCT INFORMATION',
-                      columns: [
-                        // {
-                        //   id: 'checkbox',
-                        //   accessor: '',
-                        //   Cell: ({ original }) => {
-                        //     return (
-                        //       <input
-                        //         type="checkbox"
-                        //         className="checkbox"
-                        //         checked={
-                        //           this.state.selected[original.id] === true
-                        //         }
-                        //         onChange={() => this.toggleRow(original.id)}
-                        //       />
-                        //     )
-                        //   },
-                        //   Header: x => {
-                        //     return (
-                        //       <input
-                        //         type="checkbox"
-                        //         className="checkbox"
-                        //         checked={this.state.selectAll === 1}
-                        //         ref={input => {
-                        //           if (input) {
-                        //             input.indeterminate =
-                        //               this.state.selectAll === 2
-                        //           }
-                        //         }}
-                        //         onChange={() => this.toggleSelectAll()}
-                        //       />
-                        //     )
-                        //   },
-                        //   sortable: false,
-                        //   width: 45,
-                        // },
-                        {
-                          Header: 'Name',
-                          accessor: 'name',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Slug',
-                          accessor: 'slug',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Base',
-                          accessor: 'base',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Slug',
-                          accessor: 'slug',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Price',
-                          accessor: 'price',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Brand',
-                          accessor: 'brand',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Gender',
-                          accessor: 'gender',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Size',
-                          accessor: 'size',
-                          Cell: this.renderEditable,
-                        },
-                        {
-                          Header: 'Quantity',
-                          accessor: 'quantity',
-                          Cell: this.renderEditable,
-                        },
-                      ],
-                    },
-                    {
-                      Header: 'EDIT',
-                      Cell: row => (
-                        <div style={{ textAlign: 'center' }}>
-                          <TableButton
-                            onClick={() => this.checkRow(row.original)}
-                          >
-                            Save
-                          </TableButton>
-                          <TableButton>Delete</TableButton>
-                        </div>
-                      ),
-                    },
-                  ]}
-                  defaultPageSize={10}
-                  className="-striped -highlight"
-                  filterable="true"
-                />
-              )
-            }}
-          </ProductProvider>
+        {this.props.productList && (
+          <ReactTable
+            data={this.props.productList}
+            noDataText="NO DATA"
+            columns={[
+              {
+                Header: 'PRODUCT INFORMATION',
+                columns: [
+                  {
+                    Header: 'Name',
+                    accessor: 'name',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Slug',
+                    accessor: 'slug',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Base',
+                    accessor: 'base',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Price',
+                    accessor: 'price',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Brand',
+                    accessor: 'brand',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Gender',
+                    accessor: 'gender',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Size',
+                    accessor: 'size',
+                    Cell: this.renderEditable,
+                  },
+                  {
+                    Header: 'Quantity',
+                    accessor: 'quantity',
+                    Cell: this.renderEditable,
+                  },
+                ],
+              },
+              {
+                Header: 'EDIT',
+                Cell: row => (
+                  <div style={{ textAlign: 'center' }}>
+                    <TableButton
+                      onClick={() =>
+                        this.saveRow(this.props.productList[row.index])
+                      }
+                    >
+                      Save
+                    </TableButton>
+                    <TableButton
+                      onClick={() =>
+                        this.deleteRow(this.props.productList[row.index])
+                      }
+                    >
+                      Delete
+                    </TableButton>
+                  </div>
+                ),
+              },
+            ]}
+            defaultPageSize={10}
+            className="-striped -highlight"
+            filterable="true"
+          />
         )}
-        {/* <div className="row no-gutters">
+        <div className="row no-gutters">
           <Bottom className="col-12">
-            <BottomButton className="btn-dark">ADD PRODUCT</BottomButton>
-            <BottomButton className="btn-dark">REMOVE PRODUCT</BottomButton>
+            <BottomButton
+              className="btn-dark"
+              onClick={() => this.setState({ addModalIsOpen: true })}
+            >
+              ADD PRODUCT
+            </BottomButton>
           </Bottom>
-        </div> */}
+        </div>
+        <Modal isOpen={this.state.saveModalIsOpen} onClose={this.closeModal}>
+          <Bottom>Please confirm to save changes.</Bottom>
+          <ModalButtonDiv>
+            <TableButton onClick={this.modalSaveOnClick}>Save</TableButton>
+            <TableButton onClick={this.modalCancelOnClick}>Cancel</TableButton>
+          </ModalButtonDiv>
+        </Modal>
+        <Modal isOpen={this.state.deleteModalIsOpen} onClose={this.closeModal}>
+          <Bottom>Are you sure to delete the current row?</Bottom>
+          <ModalButtonDiv>
+            <TableButton onClick={this.modalDeleteOnClick}>Delete</TableButton>
+            <TableButton onClick={this.modalCancelOnClick}>Cancel</TableButton>
+          </ModalButtonDiv>
+        </Modal>
+        <Modal isOpen={this.state.addModalIsOpen} onClose={this.closeModal}>
+          <AddProduct closeModal={this.closeModal} />
+        </Modal>
       </div>
     )
   }
 }
 
-export default Table
+const mapStateToProps = state => ({ ...state.product })
+
+const mapDispatchToProps = { ...productActions }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Table)
