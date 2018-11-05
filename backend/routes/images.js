@@ -17,13 +17,7 @@ router.get('/', (req, res) => {
 
 // GET image by name
 router.get('/:name', (req, res) => {
-  Image.find({ name: req.params.name }, (err, image) => {
-    if (err) {
-      res.sendStatus(404)
-    } else {
-      res.send(image)
-    }
-  })
+  res.sendFile(`/images/${req.params.name}`, { root: __dirname })
 })
 
 // POST images to database

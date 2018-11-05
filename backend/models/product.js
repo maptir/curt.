@@ -39,6 +39,7 @@ const ProductSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  thumbnails: [{ type: String }],
 })
 
 module.exports = mongoose.model('Product', ProductSchema)
