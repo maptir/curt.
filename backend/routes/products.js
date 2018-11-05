@@ -21,6 +21,7 @@ router.post('/add', (req, res) => {
   req.checkBody('slug', 'slug is required').notEmpty()
   req.checkBody('thumbnails', 'Thumbnails is required')
   req.checkBody('price', 'Price is required').notEmpty()
+  req.checkBody('imageUrl', 'ImageUrl is required').notEmpty()
   req.checkBody('brand', 'Brand is required').notEmpty()
   req.checkBody('gender', 'Gender is required').notEmpty()
   req.checkBody('size', 'Size is required').notEmpty()
@@ -29,7 +30,17 @@ router.post('/add', (req, res) => {
 
   if (errors) return res.send(errors)
 
-  let { name, slug, base, thumbnails, price, brand, gender, size } = req.body
+  let {
+    name,
+    slug,
+    base,
+    thumbnails,
+    price,
+    brand,
+    gender,
+    size,
+    imageUrl,
+  } = req.body
   const addedProduct = {
     name,
     slug,
@@ -39,6 +50,7 @@ router.post('/add', (req, res) => {
     brand,
     gender,
     size,
+    imageUrl,
   }
   Product.findOne(addedProduct, (err, product) => {
     if (err) {
@@ -75,6 +87,7 @@ router.post('/update/:id', (req, res) => {
     gender,
     size,
     quantity,
+    imageUrl,
   } = req.body
   const edittedProduct = {
     name,
@@ -86,6 +99,7 @@ router.post('/update/:id', (req, res) => {
     gender,
     size,
     quantity,
+    imageUrl,
   }
 
   let query = { _id: req.params.id }
