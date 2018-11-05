@@ -153,6 +153,11 @@ class Table extends React.Component {
                     Cell: this.renderEditable,
                   },
                   {
+                    Header: 'Image URL',
+                    accessor: 'imageUrl',
+                    Cell: this.renderEditable,
+                  },
+                  {
                     Header: 'Gender',
                     accessor: 'gender',
                     Cell: this.renderEditable,

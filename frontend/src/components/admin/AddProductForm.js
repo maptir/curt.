@@ -35,6 +35,7 @@ class AddProduct extends React.Component {
     base: '',
     price: '',
     brand: '',
+    imageUrl: '',
     gender: '',
     size: '',
     quantity: '',
@@ -47,6 +48,17 @@ class AddProduct extends React.Component {
   }
 
   addProduct = () => {
+    this.setState({
+      name: '',
+      slug: '',
+      base: '',
+      price: '',
+      brand: '',
+      imageUrl: '',
+      gender: '',
+      size: '',
+      quantity: '',
+    })
     this.props.addProduct(this.state)
     this.props.closeModal()
   }
@@ -90,6 +102,13 @@ class AddProduct extends React.Component {
           onChange={this.onChange}
           type="text"
         />
+        <InputDescription>Image URL</InputDescription>
+        <Input
+          name="imageUrl"
+          value={this.state.imageUrl}
+          onChange={this.onChange}
+          type="text"
+        />
         <InputDescription>Gender</InputDescription>
         <Input
           name="gender"
@@ -112,9 +131,7 @@ class AddProduct extends React.Component {
           type="number"
         />
         <ModalButtonDiv>
-          <TableButton onClick={this.addProduct}>
-            Add
-          </TableButton>
+          <TableButton onClick={this.addProduct}>Add</TableButton>
           <TableButton onClick={this.cancelOnClick}>Cancel</TableButton>
         </ModalButtonDiv>
       </div>
