@@ -10,7 +10,6 @@ const mocks = [
     price: 2300,
     brand: 'Vans',
     size: 6.5,
-<<<<<<< HEAD
     thumbnails: [
       `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-1.jpeg`,
       `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-2.jpeg`,
@@ -21,18 +20,6 @@ const mocks = [
       `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-7.jpeg`,
     ],
     gender: 'men',
-=======
-    gender: 'men',
-    thumbnails: [
-      `http://localhost:3000/mocks/old-skool-thumbnails-1.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-2.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-3.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-4.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-5.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-6.jpeg`,
-      `http://localhost:3000/mocks/old-skool-thumbnails-7.jpeg`,
-    ],
->>>>>>> 85927f77ea1f3792b49fb9fa85ebe7297bbb6f94
   },
   {
     name: 'Air Max 97',
