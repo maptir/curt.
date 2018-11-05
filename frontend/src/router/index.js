@@ -57,7 +57,6 @@ const routes = [
     exact: true,
     component: Admin,
   },
-  
 ]
 
 export default () => (

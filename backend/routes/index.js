@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/reset', (req, res, next) => {
   mongoose.connection.db.dropDatabase()
+  res.send({ success: true })
 })
 
 module.exports = router

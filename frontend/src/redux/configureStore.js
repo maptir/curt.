@@ -34,9 +34,11 @@ const configureStore = () => {
   )
 
   const token = localStorage.getItem('token')
+  const isAdmin = localStorage.getItem('isAdmin')
 
   if (token) {
     store.dispatch(authActions.setToken(token))
+    store.dispatch(authActions.setAdmin(isAdmin))
     curtApi.auth.verifyToken().then(() => {
       store.dispatch(cartActions.fetchCart())
     })
