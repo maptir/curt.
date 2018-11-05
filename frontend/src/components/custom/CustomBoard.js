@@ -8,7 +8,7 @@ import Limit from '../common/Limit'
 import curtApi from '../../lib/curtApi'
 import fabricLib from '../../lib/fabric'
 
-import _ from 'lodash'
+import firebase from '../../lib/firebase'
 
 const Header = styled(Limit)`
   display: flex;
@@ -98,7 +98,7 @@ class CustomBoard extends React.Component {
     )
   }
 
-  changeSide = (index, callback) => {
+  changeSide = (index, callback = () => {}) => {
     this.setBackgroundImage(index, () => {
       this.save(this.state.currentSide)
       this.load(index)
@@ -151,11 +151,34 @@ class CustomBoard extends React.Component {
   upload = () => {
     const { thumbnails } = this.state.products[0]
     const canvas = document.getElementById('custom').fabric
-    let dataUrls = []
+    // let dataUrls = []
+    const randomKey = firebase
+      .database()
+      .ref()
+      .push().key
+
     for (let index in thumbnails) {
       this.changeSide(index, () => {
         const dataUrl = canvas.toDataURL('image/png')
-        dataUrls.push(dataUrl)
+
+        firebase
+          .storage()
+          .ref(randomKey + '.png')
+          .putString(dataUrl, 'data_url')
+          .then(() => {
+            firebase
+              .storage()
+              .ref(randomKey + `-${index}.png`)
+              .getDownloadURL()
+              .then(url => {
+                console.log(url)
+              })
+          })
+        // .putString(dataUrl, {
+        //   contentType: 'image/png',
+        // })
+
+        // dataUrls.push(dataUrl)
       })
     }
   }
