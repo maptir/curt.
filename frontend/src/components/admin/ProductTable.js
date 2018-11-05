@@ -6,6 +6,8 @@ import curtApi from '../../lib/curtApi'
 import ReactTable from 'react-table'
 import ProductProvider from '../../providers/ProductProvider'
 
+import Modal from '../common/Modal'
+
 const InsideButton = styled.button`
   height: 40px !important;
   border-radius: 10px !important;
@@ -45,29 +47,29 @@ class Table extends React.Component {
 
   state = {}
 
-  // toggleRow(id) {
-  //   const newSelected = Object.assign({}, this.state.selected)
-  //   newSelected[id] = !this.state.selected[id]
-  //   this.setState({
-  //     selected: newSelected,
-  //     selectAll: 2,
-  //   })
-  // }
+  toggleRow(id) {
+    const newSelected = Object.assign({}, this.state.selected)
+    newSelected[id] = !this.state.selected[id]
+    this.setState({
+      selected: newSelected,
+      selectAll: 2,
+    })
+  }
 
-  // toggleSelectAll() {
-  //   let newSelected = {}
+  toggleSelectAll() {
+    let newSelected = {}
 
-  //   if (this.state.selectAll === 0) {
-  //     this.state.data.forEach(x => {
-  //       newSelected[x.id] = true
-  //     })
-  //   }
+    if (this.state.selectAll === 0) {
+      this.state.data.forEach(x => {
+        newSelected[x.id] = true
+      })
+    }
 
-  //   this.setState({
-  //     selected: newSelected,
-  //     selectAll: this.state.selectAll === 0 ? 1 : 0,
-  //   })
-  // }
+    this.setState({
+      selected: newSelected,
+      selectAll: this.state.selectAll === 0 ? 1 : 0,
+    })
+  }
 
   fetchProduct = async () => {
     const products = await curtApi.products.fetchAllProduct()
@@ -111,40 +113,40 @@ class Table extends React.Component {
                     {
                       Header: 'PRODUCT INFORMATION',
                       columns: [
-                        // {
-                        //   id: 'checkbox',
-                        //   accessor: '',
-                        //   Cell: ({ original }) => {
-                        //     return (
-                        //       <input
-                        //         type="checkbox"
-                        //         className="checkbox"
-                        //         checked={
-                        //           this.state.selected[original.id] === true
-                        //         }
-                        //         onChange={() => this.toggleRow(original.id)}
-                        //       />
-                        //     )
-                        //   },
-                        //   Header: x => {
-                        //     return (
-                        //       <input
-                        //         type="checkbox"
-                        //         className="checkbox"
-                        //         checked={this.state.selectAll === 1}
-                        //         ref={input => {
-                        //           if (input) {
-                        //             input.indeterminate =
-                        //               this.state.selectAll === 2
-                        //           }
-                        //         }}
-                        //         onChange={() => this.toggleSelectAll()}
-                        //       />
-                        //     )
-                        //   },
-                        //   sortable: false,
-                        //   width: 45,
-                        // },
+                        {
+                          id: 'checkbox',
+                          accessor: '',
+                          Cell: ({ original }) => {
+                            return (
+                              <input
+                                type="checkbox"
+                                className="checkbox"
+                                checked={
+                                  this.state.selected[original.id] === true
+                                }
+                                onChange={() => this.toggleRow(original.id)}
+                              />
+                            )
+                          },
+                          Header: x => {
+                            return (
+                              <input
+                                type="checkbox"
+                                className="checkbox"
+                                checked={this.state.selectAll === 1}
+                                ref={input => {
+                                  if (input) {
+                                    input.indeterminate =
+                                      this.state.selectAll === 2
+                                  }
+                                }}
+                                onChange={() => this.toggleSelectAll()}
+                              />
+                            )
+                          },
+                          sortable: false,
+                          width: 45,
+                        },
                         {
                           Header: 'Name',
                           accessor: 'name',
@@ -210,12 +212,12 @@ class Table extends React.Component {
             }}
           </ProductProvider>
         )}
-        {/* <div className="row no-gutters">
+        <div className="row no-gutters">
           <Bottom className="col-12">
             <BottomButton className="btn-dark">ADD PRODUCT</BottomButton>
             <BottomButton className="btn-dark">REMOVE PRODUCT</BottomButton>
           </Bottom>
-        </div> */}
+        </div>
       </div>
     )
   }
