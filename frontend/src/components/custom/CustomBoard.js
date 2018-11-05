@@ -1,13 +1,16 @@
 /*global fabric */
 
+import { connect } from 'react-redux'
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
+import * as productActions from '../../redux/modules/product'
 import curtApi from '../../lib/curtApi'
 import CustomPane from './CustomPane'
 import fabricLib from '../../lib/fabric'
 import firebase from '../../lib/firebase'
 import Limit from '../common/Limit'
+import Spinner from '../common/Loading'
 
 const Header = styled(Limit)`
   display: flex;
@@ -54,13 +57,15 @@ class CustomBoard extends React.Component {
   state = {
     currentSide: 0,
     products: [],
+    newName: '',
+    uploading: false,
   }
 
   fetchProduct = async () => {
     const products = await curtApi.products.fetchProduct(
       this.props.match.params.slug,
     )
-    this.setState({ products })
+    this.setState({ products, newName: products[0].name })
   }
 
   componentDidMount = async () => {
@@ -153,10 +158,12 @@ class CustomBoard extends React.Component {
       .database()
       .ref()
       .push().key
-    let i = 0
+    let i = 0,
+      j = 0
     let dataURLs = []
     const timer = setInterval(() => {
       this.changeSide(i++, async () => {
+        this.setState({ uploading: true })
         console.log('Start callback changeside')
         const index = i
         const dataUrl = canvas.toDataURL('image/png')
@@ -166,24 +173,33 @@ class CustomBoard extends React.Component {
           .storage()
           .ref(filename)
           .putString(dataUrl, 'data_url')
-        console.log('upload')
+        console.log('uploaded')
         const url = await firebase
           .storage()
           .ref(filename)
           .getDownloadURL()
 
         console.log(url)
-        dataURLs[index] = url
-        console.log('Finish' + index + ' ' + dataURLs[index])
+        dataURLs[index - 1] = url
+        j++
+        if (j >= thumbnails.length) {
+          this.setState({ uploading: false })
+          this.props.addProduct({
+            ...this.state.products[0],
+            name: this.state.newName,
+            slug:
+              this.state.newName.toLowerCase() +
+              '-' +
+              this.state.products[0].gender,
+            thumbnails: dataURLs,
+          })
+        }
       })
       if (i >= thumbnails.length) {
         clearInterval(timer)
         console.log(dataURLs)
       }
     }, 500)
-    setTimeout(() => {
-      console.log(dataURLs)
-    }, 30000)
   }
 
   render() {
@@ -197,7 +213,11 @@ class CustomBoard extends React.Component {
               <div style={{ flex: '1' }}>
                 <div>Customized Shoes</div>
                 <Text>
-                  {(product.brand + ' ' + product.name).toUpperCase()}
+                  <input
+                    type="text"
+                    onChange={e => this.setState({ newName: e.target.value })}
+                    value={this.state.newName}
+                  />
                 </Text>
               </div>
               <button className="btn btn-dark rounded-0" onClick={this.upload}>
@@ -205,6 +225,10 @@ class CustomBoard extends React.Component {
               </button>
             </Header>
             <Background>
+              <Spinner
+                isOpen={this.state.uploading}
+                text={<div>ควยๆๆๆๆ</div>}
+              />
               <Container>
                 <CustomPane />
                 <Canvas id="custom" width="500" height="500" />
@@ -226,4 +250,11 @@ class CustomBoard extends React.Component {
   }
 }
 
-export default CustomBoard
+const mapStateToProps = state => ({ ...state.product })
+
+const mapDispatchToProps = { ...productActions }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CustomBoard)

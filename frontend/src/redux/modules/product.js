@@ -30,6 +30,7 @@ export const fetchAllProduct = () => async dispatch => {
   })
 }
 
-export const addProduct = () => async dispatch => {
-  // const addedProduct = await curtApi.products.addProduct()
+export const addProduct = product => async dispatch => {
+  await curtApi.products.addProduct(product)
+  dispatch(fetchAllProduct())
 }
