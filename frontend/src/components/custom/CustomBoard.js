@@ -9,9 +9,10 @@ import fabricLib from '../../lib/fabric'
 import firebase from '../../lib/firebase'
 import Limit from '../common/Limit'
 
-const Header = styled(Limit)`
+const Header = styled.div`
+  ${'' /* max-width: 1400px; */}
   display: flex;
-  padding: 1em;
+  padding: 1em 2em 1em 2em;
 `
 
 const Text = styled.div`
@@ -23,11 +24,12 @@ const Background = styled.div`
   background-color: #ccc;
 `
 
-const Container = styled(Limit)`
+const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 7fr 1fr;
+  grid-template-columns: 5fr 10fr 2fr;
   grid-gap: 1em;
-  padding: 1em;
+  padding: 0em 2em 1em 0em;
+  ${'' /* max-width: 1400px; */}
 `
 
 const Thumbnail = styled.div`
@@ -40,10 +42,12 @@ const Thumbnail = styled.div`
 `
 
 const Canvas = styled.canvas`
-  border: 1px solid black;
+  padding-top: 1em
+  ${'' /* border: 1px solid black; */}
 `
 
 const Grid = styled.div`
+  padding-top: 1em
   display: grid;
   grid-gap: 0.5em;
   grid-auto-flow: row;

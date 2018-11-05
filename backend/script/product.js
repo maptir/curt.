@@ -19,6 +19,7 @@ const mocks = [
       `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-6.jpeg`,
       `${config.FRONTEND_URL}/mocks/old-skool-thumbnails-7.jpeg`,
     ],
+    gender: 'men',
   },
   {
     name: 'Air Max 97',

@@ -19,6 +19,7 @@
     "prettier": "^1.14.2",
     "pretty-checkbox": "^3.0.3",
     "react": "^16.2.0",
+    "react-color": "^2.14.1",
     "react-composer": "^5.0.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
