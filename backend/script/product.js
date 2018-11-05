@@ -3,6 +3,26 @@ const config = require('../config')
 
 const mocks = [
   {
+    name: 'Slip On White',
+    slug: 'slip-on-white-men',
+    base: null,
+    imageUrl: 'https://images.vans.com/is/image/Vans/D3HY28-HERO',
+    price: 2300,
+    brand: 'Vans',
+    size: 6.5,
+    thumbnails: [
+      `${config.FRONTEND_URL}/mocks/slip-on-white-1.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-2.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-3.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-4.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-5.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-6.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-7.jpeg`,
+      `${config.FRONTEND_URL}/mocks/slip-on-white-8.jpeg`,
+    ],
+    gender: 'men',
+  },
+  {
     name: 'Old Skool',
     slug: 'old-skool-men',
     base: null,
@@ -397,6 +417,7 @@ const mocks = [
   },
 ]
 
+console.log(mocks.length)
 for (let i = 0; i < mocks.length; i++) {
   axios
     .post('http://localhost:8000/products/add', mocks[i])
