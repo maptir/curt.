@@ -193,6 +193,7 @@ class CustomBoard extends React.Component {
               this.state.products[0].gender,
             thumbnails: dataURLs,
           })
+          window.location = '/catalog'
         }
       })
       if (i >= thumbnails.length) {
@@ -225,10 +226,10 @@ class CustomBoard extends React.Component {
               </button>
             </Header>
             <Background>
-              {/* <Spinner
+              <Spinner
                 isOpen={this.state.uploading}
-                text={<div>ควยๆๆๆๆ</div>}
-              /> */}
+                text={<div>Loading...</div>}
+              />
               <Container>
                 <CustomPane />
                 <Canvas id="custom" width="500" height="500" />

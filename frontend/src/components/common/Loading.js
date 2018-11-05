@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import spinner from '../../assets/spinner.svg'
+import spinner from '../../assets/spinner.svg'
 
 const Full = styled.div`
   display: flex;
