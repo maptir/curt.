@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import ReactTable from 'react-table'
 
 import UserTable from '../components/admin/UserTable'
 import ProductTable from '../components/admin/ProductTable'
+
+import withAdmin from '../hocs/withAdmin'
 
 const SideBar = styled.div`
   max-width: 100%;
@@ -43,6 +44,7 @@ class Admin extends React.Component {
         <div className="col-2">
           {sideBarOption.map(option => (
             <SideBar
+              key={option}
               clicked={this.state.current === option}
               onClick={() => this.setPane(option)}
             >
@@ -56,4 +58,4 @@ class Admin extends React.Component {
   }
 }
 
-export default Admin
+export default withAdmin(Admin)

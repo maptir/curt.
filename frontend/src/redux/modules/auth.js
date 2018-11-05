@@ -2,6 +2,7 @@ import axios from 'axios'
 import curtApi from '../../lib/curtApi'
 
 // Actions
+const SET_ADMIN = 'auth/SET_ADMIN'
 const SET_TOKEN = 'auth/SET_TOKEN'
 const REMOVE_TOKEN = 'auth/REMOVE_TOKEN'
 const OPEN_MODAL = 'auth/OPEN_MODAL'
@@ -9,6 +10,7 @@ const CLOSE_MODAL = 'auth/CLOSE_MODAL'
 
 // Initial State
 const initialState = {
+  isAdmin: false,
   token: undefined,
   isModalOpen: false,
 }
@@ -16,6 +18,9 @@ const initialState = {
 // Reducer
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case SET_ADMIN:
+      localStorage.setItem('isAdmin', action.payload)
+      return { ...state, isAdmin: action.payload }
     case SET_TOKEN:
       localStorage.setItem('token', action.payload)
       axios.defaults.headers.common['Authorization'] = `Bearer ${
@@ -41,14 +46,22 @@ export const setToken = token => ({
   payload: token,
 })
 
+export const setAdmin = isAdmin => ({
+  type: SET_ADMIN,
+  payload: isAdmin,
+})
+
 export const login = ({ username, password }) => async dispatch => {
-  const token = await curtApi.auth.login({ username, password })
+  const { isAdmin, token } = await curtApi.auth.login({ username, password })
   dispatch(setToken(token))
+  dispatch(setAdmin(isAdmin))
   window.location.reload()
 }
 
 export const logout = () => dispatch => {
   dispatch({ type: REMOVE_TOKEN })
+  dispatch(setAdmin(false))
+  localStorage.setItem('isAdmin', false)
   window.location.reload()
 }
 

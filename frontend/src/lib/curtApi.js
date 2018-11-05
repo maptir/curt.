@@ -10,11 +10,12 @@ class CurtApi {
       return !!data.success
     },
     async login({ username, password }) {
-      const { data: token } = await axios.post(`${API_URL}/users/login`, {
+      const { data } = await axios.post(`${API_URL}/users/login`, {
         username,
         password,
       })
-      return token
+      console.log(data)
+      return data
     },
     async register(registerInfo) {
       const { data } = await axios.post(
