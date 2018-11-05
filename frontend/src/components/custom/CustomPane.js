@@ -34,6 +34,7 @@ class CustomPane extends React.Component {
         canvas.add(image)
         canvas.renderAll()
       }
+      setTimeout(() => console.log(canvas.toDataURL('image/png')), 1000)
     }
     reader.readAsDataURL(event.target.files[0])
   }
