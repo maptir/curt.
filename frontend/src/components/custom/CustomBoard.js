@@ -158,22 +158,20 @@ class CustomBoard extends React.Component {
       .push().key
 
     for (let index in thumbnails) {
-      this.changeSide(index, () => {
+      this.changeSide(index, async () => {
         const dataUrl = canvas.toDataURL('image/png')
 
-        firebase
+        await firebase
           .storage()
           .ref(randomKey + '.png')
           .putString(dataUrl, 'data_url')
-          .then(() => {
-            firebase
-              .storage()
-              .ref(randomKey + `-${index}.png`)
-              .getDownloadURL()
-              .then(url => {
-                console.log(url)
-              })
-          })
+
+        const url = await firebase
+          .storage()
+          .ref(randomKey + `-${index}.png`)
+          .getDownloadURL()
+
+        console.log(url)
         // .putString(dataUrl, {
         //   contentType: 'image/png',
         // })
