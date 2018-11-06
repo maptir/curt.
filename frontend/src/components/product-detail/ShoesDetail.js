@@ -137,14 +137,16 @@ class ShoesDetail extends React.Component {
             </LoveButton>
           </div>
           {this.props.products[0].thumbnails.length > 0 && (
-            <Button
-              className="btn btn-dark btn-block rounded-0 mt-2"
-              onClick={() =>
-                (window.location = '/custom/' + this.props.products[0].slug)
-              }
-            >
-              CUSTOM THIS SHOES
-            </Button>
+            <Protected>
+              <Button
+                className="btn btn-dark btn-block rounded-0 mt-2"
+                onClick={() =>
+                  (window.location = '/custom/' + this.props.products[0].slug)
+                }
+              >
+                CUSTOM THIS SHOES
+              </Button>
+            </Protected>
           )}
         </SizeSelection>
         <Description>
