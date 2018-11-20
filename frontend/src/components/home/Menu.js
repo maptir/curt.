@@ -31,19 +31,19 @@ const menus = [
   {
     title: { text: 'MEN', to: '/catalog' },
     list: [
-      { text: 'NIKE', to: '/catalog?brand=nike' },
-      { text: 'ADIDAS', to: '/catalog?brand=adidas' },
-      { text: 'CONVERSE', to: '/catalog?brand=converse' },
-      { text: 'PUMA', to: '/catalog?brand=puma' },
+      { text: 'NIKE', to: '/catalog?brand=Nike' },
+      { text: 'ADIDAS', to: '/catalog?brand=Adidas' },
+      { text: 'CONVERSE', to: '/catalog?brand=Converse' },
+      { text: 'PUMA', to: '/catalog?brand=Puma' },
     ],
   },
   {
     title: { text: 'WOMEN', to: '/catalog' },
     list: [
-      { text: 'SKEECHER', to: '/catalog?brand=skeecher' },
-      { text: 'CONVERSE', to: '/catalog?brand=converse' },
-      { text: 'NIKE', to: '/catalog?brand=nike' },
-      { text: 'VANS', to: '/catalog?brand=vans' },
+      { text: 'SKEECHER', to: '/catalog?brand=Skeecher' },
+      { text: 'CONVERSE', to: '/catalog?brand=Converse' },
+      { text: 'NIKE', to: '/catalog?brand=Nike' },
+      { text: 'VANS', to: '/catalog?brand=Vans' },
     ],
   },
 ]
