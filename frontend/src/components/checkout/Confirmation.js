@@ -10,7 +10,7 @@ class Confirmation extends React.Component {
   componentWillUnmount = () => {}
 
   completeCheckout = async () => {
-    await curtApi.cart.clearCart()    
+    await curtApi.cart.clearCart()
     window.location = '/checkout/complete'
   }
 

@@ -4,7 +4,7 @@ import ShoesDetail from '../product-detail/ShoesDetail'
 import ProductImage from '../product-detail/ProductImage'
 import ProductSlider from '../common/ProductSlider'
 import { withRouter } from 'react-router-dom'
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 
 import mock1 from '../../assets/shoe-info/mock1.jpg'
 import mock2 from '../../assets/shoe-info/mock2.jpg'
@@ -52,6 +52,8 @@ class Detail extends React.Component {
   }
 
   render() {
+    const firstProduct = this.state.products[0]
+
     return (
       this.state.products.length > 0 && (
         <DetailContainer className="container-fluid">
@@ -59,9 +61,9 @@ class Detail extends React.Component {
             <div className="col-12 col-md-6">
               <ProductImage
                 images={
-                  this.state.products[0].thumbnails.length > 0
-                    ? this.state.products[0].thumbnails
-                    : [this.state.products[0].imageUrl, ...imageList]
+                  firstProduct.thumbnails.length > 0
+                    ? firstProduct.thumbnails
+                    : [firstProduct.imageUrl, ...imageList]
                 }
               />
             </div>

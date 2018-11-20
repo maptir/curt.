@@ -71,8 +71,6 @@ class CurtApi {
       return product
     },
     async removeProduct(productId) {
-      console.log(productId);
-      
       const { data: product } = await axios.post(
         `${API_URL}/products/remove/${productId}`,
       )

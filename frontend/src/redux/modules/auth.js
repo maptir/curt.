@@ -1,5 +1,5 @@
 import axios from 'axios'
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 
 // Actions
 const SET_ADMIN = 'auth/SET_ADMIN'

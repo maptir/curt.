@@ -1,4 +1,4 @@
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 
 // Actions
 const GET_PRODUCTS = 'product/GET_PRODUCTS'

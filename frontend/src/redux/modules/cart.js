@@ -1,4 +1,4 @@
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 
 // Actions
 const UPDATE_CART = 'cart/UPDATE_CART'

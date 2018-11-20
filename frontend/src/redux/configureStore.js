@@ -9,7 +9,7 @@ import * as cartActions from './modules/cart'
 import * as productActions from './modules/product'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import axios from 'axios'
-import curtApi from '../lib/curtApi'
+import curtApi from '../api'
 
 const reducer = combineReducers({
   counter,
