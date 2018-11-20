@@ -25,10 +25,12 @@ const ProductList = ({ location }) => (
       <CatalogContainer>
         <CatalogGrid>
           {_.uniqBy(productList, 'name')
-            .filter(
-              product =>
-                product.brand === location.search.substring(1).split('=')[1],
-            )
+            .filter(product => {
+              if (location.search === '') return true
+              return (
+                product.brand === location.search.substring(1).split('=')[1]
+              )
+            })
             .map(product => (
               <Product
                 key={product._id}
