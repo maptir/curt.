@@ -4,14 +4,26 @@ var router = express.Router()
 
 const isAuthenticated = require('../middlewares/isAuthenticated')
 
-router.get('/', isAuthenticated, (req, res) => {
-  res.send(req.user.cart)
+let Product = require('../models/product')
+
+const cartWithProductDetail = async cart => {
+  return await Promise.all(
+    cart.map(async cartItem => {
+      let product = await Product.findOne({ _id: cartItem.productId }).exec()
+      product.quantity = cartItem.quantity
+      return product
+    }),
+  )
+}
+
+router.get('/', isAuthenticated, async (req, res) => {
+  res.send(await cartWithProductDetail(req.user.cart))
 })
 
-router.put('/edit', isAuthenticated, (req, res) => {
-  const findProductInCart = _.find(req.user.cart, {
-    productId: req.body.productId,
-  })
+router.put('/edit', isAuthenticated, async (req, res) => {
+  const findProductInCart = req.user.cart.find(
+    cartItem => cartItem.productId === req.body.productId,
+  )
 
   if (findProductInCart) {
     req.user.updateOne(
@@ -34,10 +46,10 @@ router.put('/edit', isAuthenticated, (req, res) => {
       return res.sendStatus(404)
     }
   })
-  res.send(req.user.cart)
+  res.send(await cartWithProductDetail(req.user.cart))
 })
 
-router.post('/remove', isAuthenticated, (req, res) => {
+router.post('/remove', isAuthenticated, async (req, res) => {
   req.user.cart = req.user.cart.filter(
     cartItem => cartItem.productId !== req.body.productId,
   )
@@ -45,7 +57,7 @@ router.post('/remove', isAuthenticated, (req, res) => {
   req.user.save(err => {
     if (err) return res.sendStatus(404)
   })
-  res.send(req.user.cart)
+  res.send(await cartWithProductDetail(req.user.cart))
 })
 
 router.post('/clearAll', isAuthenticated, (req, res) => {

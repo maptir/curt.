@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import _ from 'lodash'
 import CartItem from './CartItem'
 import CartProvider from '../../providers/CartProvider'
-import ProductProvider from '../../providers/ProductProvider'
 
 const Overlay = styled.div`
   display: ${props => (props.isOpen ? 'block' : 'none')};
@@ -108,61 +106,46 @@ class Cart extends React.Component {
     return (
       <CartProvider>
         {({ cart }) => (
-          <ProductProvider>
-            {({ productList }) => {
-              const cartProductDetail = _.intersectionWith(
-                productList,
-                cart,
-                (product, cartItem) => product._id === cartItem.productId,
-              )
-              return (
-                <Fragment>
-                  <Overlay
-                    isOpen={this.props.isOpen}
-                    onClick={this.props.onClose}
-                  />
-                  <Container isOpen={this.props.isOpen}>
-                    <Padding>
-                      <Head>
-                        <div style={{ flex: 1 }}>CART</div>
-                        <Close onClick={this.props.onClose}>CLOSE</Close>
-                      </Head>
-                      <Promotion>
-                        FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
-                      </Promotion>
-                      <ScrollItem>
-                        <ScrollItemContent>
-                          {cartProductDetail.map((product, index) => (
-                            <CartItem key={index} {...product} removable />
-                          ))}
-                        </ScrollItemContent>
-                      </ScrollItem>
-                    </Padding>
-                    <Checkout>
-                      <Price>
-                        <SubTotal>
-                          SUB TOTAL ({cartProductDetail.length.toLocaleString()}{' '}
-                          ITEMS)
-                        </SubTotal>
-                        <SumPrice>
-                          {cartProductDetail
-                            .reduce((acc, cur) => acc + cur.price, 0)
-                            .toLocaleString()}
-                          &nbsp;Baht
-                        </SumPrice>
-                      </Price>
-                      <button
-                        className="btn btn-light btn-block rounded-0"
-                        onClick={() => (window.location = '/checkout')}
-                      >
-                        CHECK OUT
-                      </button>
-                    </Checkout>
-                  </Container>
-                </Fragment>
-              )
-            }}
-          </ProductProvider>
+          <Fragment>
+            <Overlay isOpen={this.props.isOpen} onClick={this.props.onClose} />
+            <Container isOpen={this.props.isOpen}>
+              <Padding>
+                <Head>
+                  <div style={{ flex: 1 }}>CART</div>
+                  <Close onClick={this.props.onClose}>CLOSE</Close>
+                </Head>
+                <Promotion>
+                  FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
+                </Promotion>
+                <ScrollItem>
+                  <ScrollItemContent>
+                    {cart.map((product, index) => (
+                      <CartItem key={index} {...product} removable />
+                    ))}
+                  </ScrollItemContent>
+                </ScrollItem>
+              </Padding>
+              <Checkout>
+                <Price>
+                  <SubTotal>
+                    SUB TOTAL ({cart.length.toLocaleString()} ITEMS)
+                  </SubTotal>
+                  <SumPrice>
+                    {cart
+                      .reduce((acc, cur) => acc + cur.price, 0)
+                      .toLocaleString()}
+                    &nbsp;Baht
+                  </SumPrice>
+                </Price>
+                <button
+                  className="btn btn-light btn-block rounded-0"
+                  onClick={() => (window.location = '/checkout')}
+                >
+                  CHECK OUT
+                </button>
+              </Checkout>
+            </Container>
+          </Fragment>
         )}
       </CartProvider>
     )
