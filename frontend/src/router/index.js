@@ -10,6 +10,7 @@ import Checkout from '../pages/Checkout'
 import Thankyou from '../components/checkout/Thankyou'
 import Custom from '../pages/Custom'
 import Admin from '../pages/Admin'
+import Credit from '../pages/Credit'
 
 const routes = [
   {
@@ -56,6 +57,11 @@ const routes = [
     path: '/admin',
     exact: true,
     component: Admin,
+  },
+  {
+    path: '/credit',
+    exact: true,
+    component: Credit,
   },
 ]
 
