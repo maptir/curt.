@@ -24,9 +24,13 @@ export default {
         if (statusCode == 200) {
           // Success: send back the TOKEN_ID to your server to create a charge.
           // The TOKEN_ID can be found in `response.id`.
+          console.log('sosossossososo')
+
           const { data } = await axios.post(`${API_URL}/orders/payment`, {
             token_id: response.id,
           })
+          console.log('resolve')
+
           resolve(data)
         } else {
           // Error: display an error message. Note that `response.message` contains

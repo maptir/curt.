@@ -4,6 +4,7 @@ import Limit from '../common/Limit'
 import Cleave from 'cleave.js/react'
 import axios from 'axios'
 import curtApi from '../../api'
+import Spinner from '../common/Loading'
 
 const StyledLimit = styled(Limit)`
   max-width: 400px;
@@ -25,6 +26,10 @@ const AccentButton = styled.button`
 `
 
 class Credit extends React.PureComponent {
+  state = {
+    uploading: false,
+  }
+
   onCreditCardSubmit = async e => {
     e.preventDefault()
 
@@ -39,8 +44,10 @@ class Credit extends React.PureComponent {
     }
 
     try {
+      this.setState({ uploading: true })
       const result = await curtApi.orders.checkoutWithCreditCard(card)
       this.props.onPaymentSuccess()
+      this.setState({ uploading: false })
     } catch (error) {
       alert(error.code + ': ' + error.message)
     }
@@ -48,6 +55,7 @@ class Credit extends React.PureComponent {
   render() {
     return (
       <StyledLimit>
+        <Spinner isOpen={this.state.uploading} text={<div>Loading...</div>} />
         <Form onSubmit={this.onCreditCardSubmit} id="card">
           <input
             placeholder="Card holder Name"
