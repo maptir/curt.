@@ -73,7 +73,7 @@ class Credit extends React.PureComponent {
             options={{ numericOnly: true }}
             maxLength="3"
           />
-          <AccentButton type="submit">Submit</AccentButton>
+          <AccentButton type="submit">CONFIRM ORDER</AccentButton>
         </Form>
       </StyledLimit>
     )

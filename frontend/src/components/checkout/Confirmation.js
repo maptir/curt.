@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Step, Bold, FlexBox } from './Styled'
 import * as orderActions from '../../redux/modules/order'
-
+import Credit from './Credit'
 class Confirmation extends React.Component {
   state = {}
 
@@ -31,8 +31,8 @@ class Confirmation extends React.Component {
         <div>{userInfo.address + ' ' + userInfo.district}</div>
         <div>{userInfo.country + ' ' + userInfo.postalCode}</div>
         <div>{userInfo.contact}</div>
-        <Bold>PAYMENT METHOD : </Bold>
-        Credit Cart
+        <Bold>Omise:</Bold>
+        <Credit onPaymentSuccess={this.completeCheckout} />
         <FlexBox>
           <div
             onClick={() => this.props.continueTo('PAYMENTMETHOD')}
@@ -40,12 +40,6 @@ class Confirmation extends React.Component {
           >
             &lt; RETURN TO PAYMENT
           </div>
-          <button
-            className="btn btn-dark rounded-0"
-            onClick={this.completeCheckout}
-          >
-            CONFIRM ORDER
-          </button>
         </FlexBox>
       </div>
     )

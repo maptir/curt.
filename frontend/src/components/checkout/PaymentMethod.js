@@ -8,7 +8,6 @@ import {
   Grid,
   FlexBox,
 } from './Styled'
-import Credit from './Credit'
 
 class PaymentMethod extends React.Component {
   state = {}
@@ -54,7 +53,6 @@ class PaymentMethod extends React.Component {
           <InputDescription>Customer Email *</InputDescription>
           <Input type="text" />
         </InputBox>
-        <Credit />
         <FlexBox>
           <div
             onClick={() => this.props.continueTo('SHIPPINGINFORMATION')}
