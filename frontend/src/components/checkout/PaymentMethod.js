@@ -7,7 +7,6 @@ import {
   InputDescription,
   Grid,
   FlexBox,
-  StyledLink,
 } from './Styled'
 
 class PaymentMethod extends React.Component {

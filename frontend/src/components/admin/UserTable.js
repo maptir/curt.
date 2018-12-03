@@ -1,7 +1,7 @@
 /* Stateful Component */
 import React from 'react'
 import styled from 'styled-components'
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 
 import ReactTable from 'react-table'
 

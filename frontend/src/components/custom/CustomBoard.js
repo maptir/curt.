@@ -5,15 +5,12 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 import * as productActions from '../../redux/modules/product'
-import curtApi from '../../lib/curtApi'
 import CustomPane from './CustomPane'
 import fabricLib from '../../lib/fabric'
 import firebase from '../../lib/firebase'
-import Limit from '../common/Limit'
 import Spinner from '../common/Loading'
 
 const Header = styled.div`
-  ${'' /* max-width: 1400px; */}
   display: flex;
   padding: 1em 2em 1em 2em;
 `
@@ -32,7 +29,6 @@ const Container = styled.div`
   grid-template-columns: 5fr 10fr 2fr;
   grid-gap: 1em;
   padding: 0em 2em 1em 0em;
-  ${'' /* max-width: 1400px; */}
 `
 
 const Thumbnail = styled.div`
@@ -45,12 +41,11 @@ const Thumbnail = styled.div`
 `
 
 const Canvas = styled.canvas`
-  padding-top: 1em
-  ${'' /* border: 1px solid black; */}
+  padding-top: 1em;
 `
 
 const Grid = styled.div`
-  padding-top: 1em
+  padding-top: 1em;
   display: grid;
   grid-gap: 0.5em;
   grid-auto-flow: row;
@@ -66,9 +61,7 @@ class CustomBoard extends React.Component {
   }
 
   fetchProduct = async () => {
-    const products = await curtApi.products.fetchProduct(
-      this.props.match.params.slug,
-    )
+    const products = await this.props.fetchProduct(this.props.match.params.slug)
     this.setState({ products, newName: products[0].name })
   }
 
@@ -98,11 +91,7 @@ class CustomBoard extends React.Component {
   }
 
   changeSide = (index, callback = () => {}) => {
-    console.log(index)
-
     this.setBackgroundImage(index, () => {
-      console.log('setBG callback' + index)
-
       this.save(this.state.currentSide, () => {
         this.setState({ currentSide: index })
         this.load(index, callback)
@@ -115,9 +104,7 @@ class CustomBoard extends React.Component {
     // Group all objects
     canvas.discardActiveObject()
     canvas.setActiveObject(
-      new fabric.ActiveSelection(canvas.getObjects(), {
-        canvas: canvas,
-      }),
+      new fabric.ActiveSelection(canvas.getObjects(), { canvas }),
     )
     canvas.requestRenderAll()
 
@@ -149,7 +136,6 @@ class CustomBoard extends React.Component {
           canvas.setActiveObject(clonedObj)
           canvas.discardActiveObject()
           canvas.requestRenderAll()
-          console.log('load' + index)
           callback()
         })
       : callback()
@@ -168,22 +154,18 @@ class CustomBoard extends React.Component {
     const timer = setInterval(() => {
       this.changeSide(i++, async () => {
         this.setState({ uploading: true })
-        console.log('Start callback changeside')
         const index = i
         const dataUrl = canvas.toDataURL('image/png')
         const filename = `${randomKey}-${index}.png`
-        console.log(dataUrl)
         await firebase
           .storage()
           .ref(filename)
           .putString(dataUrl, 'data_url')
-        console.log('uploaded')
         const url = await firebase
           .storage()
           .ref(filename)
           .getDownloadURL()
 
-        console.log(url)
         dataURLs[index - 1] = url
         j++
         if (j >= thumbnails.length) {
@@ -202,7 +184,6 @@ class CustomBoard extends React.Component {
       })
       if (i >= thumbnails.length) {
         clearInterval(timer)
-        console.log(dataURLs)
       }
     }, 500)
   }

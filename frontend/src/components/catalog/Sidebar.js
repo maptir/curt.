@@ -1,6 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import RadioButton from '../common/RadioButton'
+import StyledLink from '../common/StyledLink'
+import * as productActions from '../../redux/modules/product'
+import _ from 'lodash'
 
 const CatalogType = styled.div`
   font-size: 34px;
@@ -23,15 +27,15 @@ const SubItem = styled.div`
   font-weight: 100;
 `
 
-const brandList = ['NIKE', 'ADIDAS', 'Converse', 'Puma']
+// const brandList = ['Nike', 'Adidas', 'Converse', 'Puma']
 
 const typeList = ['Sneaker', 'Formals', 'Sandals', 'Leathers']
 
 const priceList = [
   '< 1,000',
   '1,000 - 3,000',
-  '3,000-5,000',
-  '5,000-8,000',
+  '3,000 - 5,000',
+  '5,000 - 8,000',
   '> 8,000',
 ]
 
@@ -107,10 +111,7 @@ const ColorGrid = styled.div`
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 0;
   grid-row-gap: 0.5em;
-  margin-top: 0.5em
-    ${'' /* @media (max-width: 600px) {
-    max-width: 100%;
-  } */};
+  margin-top: 0.5em;
 `
 
 const Fixed = styled.div`
@@ -136,12 +137,21 @@ class Sidebar extends React.Component {
         <CatalogType>MEN</CatalogType>
         <SeperateLine />
         <Header>Brand</Header>
-        {brandList.map((item, index) => (
-          <SubItem key={index}>{item}</SubItem>
+        <SubItem>
+          <StyledLink to="/catalog">ALL</StyledLink>
+        </SubItem>
+        {_.uniqBy(this.props.productList, 'brand').map((product, index) => (
+          <SubItem key={index}>
+            <StyledLink to={`?brand=${product.brand}`}>
+              {product.brand.toUpperCase()}
+            </StyledLink>
+          </SubItem>
         ))}
         <Header>Type</Header>
         {typeList.map((item, index) => (
-          <SubItem key={index}>{item}</SubItem>
+          <SubItem key={index}>
+            <StyledLink to={`?brand=${item}`}>{item.toUpperCase()}</StyledLink>
+          </SubItem>
         ))}
         <Header>Price</Header>
         {priceList.map((item, index) => (
@@ -172,4 +182,11 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar
+const mapStateToProps = state => ({ ...state.product })
+
+const mapDispatchToProps = { ...productActions }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Sidebar)

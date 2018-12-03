@@ -1,9 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Composer from 'react-composer'
-import _ from 'lodash'
 import CartItem from '../cart/CartItem'
-import ProductProvider from '../../providers/ProductProvider'
 import CartProvider from '../../providers/CartProvider'
 
 const Container = styled.div`
@@ -42,20 +39,15 @@ class Summary extends React.Component {
 
   render() {
     return (
-      <Composer components={[<ProductProvider />, <CartProvider />]}>
-        {([{ productList }, { cart }]) => {
-          const cartProductDetail = _.intersectionWith(
-            productList,
-            cart,
-            (product, cartItem) => product._id === cartItem.productId,
-          )
-          const totalPrice = cartProductDetail
+      <CartProvider>
+        {({ cart }) => {
+          const totalPrice = cart
             .reduce((acc, cur) => acc + cur.price, 0)
             .toLocaleString()
           return (
             <Container>
               <Header>SUMMARY</Header>
-              {cartProductDetail.map((product, index) => (
+              {cart.map((product, index) => (
                 <CartItem key={index} {...product} />
               ))}
               <hr />
@@ -74,7 +66,7 @@ class Summary extends React.Component {
             </Container>
           )
         }}
-      </Composer>
+      </CartProvider>
     )
   }
 }

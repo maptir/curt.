@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 import RegisterImage from '../../assets/register/register-pic.jpg'
 import * as authActions from '../../redux/modules/auth'
 
@@ -93,6 +93,7 @@ class PersonInfo extends React.Component {
         username: this.state.email,
         password: this.state.password,
       })
+      window.location = '/'
     } else {
       window.location = '/register'
     }

@@ -10,7 +10,7 @@ class Confirmation extends React.Component {
   componentWillUnmount = () => {}
 
   completeCheckout = async () => {
-    await curtApi.cart.clearCart()    
+    await curtApi.cart.clearCart()
     window.location = '/checkout/complete'
   }
 
@@ -24,9 +24,10 @@ class Confirmation extends React.Component {
         <Bold>Order Number : </Bold>
         3194719794 <br />
         <Bold>SHIPPING INFORMATION</Bold>
-        <div>Kongpon Charanwattanakit</div>
-        <div>28/56, Premio Vetro, Ngamwongwan 54, Bangkhen, Ladyao</div>
-        <div>Bangkok, Thailand</div>
+        <div>{this.props.name}</div>
+        <div>{this.props.address + ' ' + this.props.district}</div>
+        <div>{this.props.country + ' ' + this.props.postalCode}</div>
+        <div>{this.props.contact}</div>
         <Bold>PAYMENT METHOD : </Bold>
         Credit Cart
         <FlexBox>

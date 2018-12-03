@@ -39,6 +39,7 @@ export const Input = styled.input`
   width: 100%;
   height: 2.2em;
   text-align: left;
+  padding: 0.5em;
 `
 
 export const Textarea = styled.textarea`

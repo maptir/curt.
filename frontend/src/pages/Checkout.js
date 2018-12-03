@@ -20,20 +20,42 @@ const Flex = styled.div`
 class Checkout extends React.Component {
   state = {
     checkoutState: 'SHIPPINGINFORMATION',
+    userInfo: {
+      name: '',
+      address: '',
+      district: '',
+      country: '',
+      postalCode: '',
+      contact: '',
+    },
   }
 
   changeCheckoutState = checkoutState => {
     this.setState({ checkoutState })
   }
 
+  setUserInfo = userInfo => {
+    this.setState({ userInfo })
+  }
+
   checkoutState = () => {
     switch (this.state.checkoutState) {
       case 'SHIPPINGINFORMATION':
-        return <ShippingInformation continueTo={this.changeCheckoutState} />
+        return (
+          <ShippingInformation
+            continueTo={this.changeCheckoutState}
+            setUserInfo={userInfo => this.setUserInfo(userInfo)}
+          />
+        )
       case 'PAYMENTMETHOD':
         return <PaymentMethod continueTo={this.changeCheckoutState} />
       case 'CONFIRMATION':
-        return <Confirmation continueTo={this.changeCheckoutState} />
+        return (
+          <Confirmation
+            continueTo={this.changeCheckoutState}
+            {...this.state.userInfo}
+          />
+        )
       default:
         return <div>WRONG CHECKOUT STATE</div>
     }
