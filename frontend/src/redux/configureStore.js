@@ -44,11 +44,11 @@ const configureStore = () => {
     store.dispatch(authActions.setAdmin(isAdmin))
     curtApi.auth.verifyToken().then(() => {
       store.dispatch(cartActions.fetchCart())
+      store.dispatch(orderActions.fetchAllOrder())
     })
   }
 
   store.dispatch(productActions.fetchAllProduct())
-  store.dispatch(orderActions.fetchAllOrder())
 
   return store
 }

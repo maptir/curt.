@@ -38,13 +38,14 @@
     "testcafe": "^0.23.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_ENV=production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "dev": "npm start",
+    "dev": "NODE_ENV=development react-scripts start",
     "predeploy": "npm run build",
-    "deploy": "firebase deploy --only hosting"
+    "deploy": "firebase deploy --only hosting",
+    "testcafe": "testcafe chrome src/test"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.5"

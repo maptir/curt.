@@ -67,8 +67,8 @@ class OrderItem extends React.Component {
           <img src={this.state.isClicked ? Up : Down} />
         </Item>
         <OrderList onClick={this.toggleShow} clicked={this.state.isClicked}>
-          {order.purchasedList.map(history => {
-            return <CartItem key={history.product._id} {...history.product} />
+          {order.purchasedList.map((history, index) => {
+            return <CartItem key={index} {...history.product} />
           })}
         </OrderList>
       </Fragment>

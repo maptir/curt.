@@ -49,7 +49,7 @@ router.post('/payment', isAuthenticated, async (req, res) => {
     'https://api.omise.co/charges',
     {
       description: 'Test payment',
-      amount: 99900,
+      amount: req.body.price + '00' || 99900,
       currency: 'thb',
       card: req.body.token_id,
     },

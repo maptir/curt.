@@ -24,6 +24,10 @@ const AccentButton = styled.button`
 const CleaveInput = Input.withComponent(Cleave)
 
 class Credit extends React.PureComponent {
+  state = {
+    uploading: false,
+  }
+
   onCreditCardSubmit = async e => {
     e.preventDefault()
 
@@ -38,8 +42,10 @@ class Credit extends React.PureComponent {
     }
 
     try {
+      this.setState({ uploading: true })
       const result = await curtApi.orders.checkoutWithCreditCard(card)
       this.props.onPaymentSuccess()
+      this.setState({ uploading: false })
     } catch (error) {
       alert(error.code + ': ' + error.message)
     }

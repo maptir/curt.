@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import Logo from '../../assets/logo/logoblack.png'
 import OrderProvider from '../../providers/OrderProvider'
-import CartItem from '../common/CartItem'
 import OrderItem from './OrderItem'
 import Overlay from '../common/Overlay'
 import Sidebar from '../common/Sidebar'
@@ -41,6 +40,15 @@ const HeadPurchase = styled.div`
   padding: 1em;
 `
 
+const ScrollItem = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  :hover,
+  :focus {
+    visibility: visible;
+  }
+`
+
 class User extends React.Component {
   render() {
     console.log(this.props)
@@ -58,9 +66,11 @@ class User extends React.Component {
                 </Head>
               </Padding>
               <HeadPurchase>PURCHASED HISTORY</HeadPurchase>
-              {orderList.map(order => (
-                <OrderItem key={order.id} order={order} />
-              ))}
+              <ScrollItem>
+                {orderList.map(order => (
+                  <OrderItem key={order.id} order={order} />
+                ))}
+              </ScrollItem>
             </Sidebar>
           </Fragment>
         )}
