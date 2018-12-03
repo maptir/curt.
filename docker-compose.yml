@@ -6,7 +6,7 @@ services:
     environment:
       - MONGO_INITDB_DATABASE=curt
     ports:
-      - 27017:27017
+      - 80:27017
     volumes:
       - ./backend/db:/data/db
     restart: always
