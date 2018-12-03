@@ -4,18 +4,15 @@ import Limit from '../common/Limit'
 import Cleave from 'cleave.js/react'
 import axios from 'axios'
 import curtApi from '../../api'
-
-const StyledLimit = styled(Limit)`
-  max-width: 400px;
-`
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  > * {
-    margin: 0.25em 0;
-  }
-`
+import {
+  Step,
+  Bold,
+  InputBox,
+  Input,
+  InputDescription,
+  Grid,
+  FlexBox,
+} from './Styled'
 
 const AccentButton = styled.button`
   color:white;
@@ -23,6 +20,8 @@ const AccentButton = styled.button`
   background-color :#545454
   padding: 5px 23px;
 `
+
+const CleaveInput = Input.withComponent(Cleave)
 
 class Credit extends React.PureComponent {
   onCreditCardSubmit = async e => {
@@ -47,9 +46,43 @@ class Credit extends React.PureComponent {
   }
   render() {
     return (
-      <StyledLimit>
-        <Form onSubmit={this.onCreditCardSubmit} id="card">
-          <input
+      <Limit>
+        <form onSubmit={this.onCreditCardSubmit} id="card">
+          <InputBox>
+            <InputDescription>Credit Card Number *</InputDescription>
+            <CleaveInput
+              name="number"
+              placeholder="Credit card number"
+              options={{ creditCard: true }}
+            />
+          </InputBox>
+          <Grid>
+            <InputBox>
+              <InputDescription>Card Holder Name *</InputDescription>
+              <CleaveInput name="holder_name" placeholder="John Doe" />
+            </InputBox>
+            <InputBox>
+              <InputDescription>MM / YY *</InputDescription>
+              <CleaveInput
+                name="expiration"
+                placeholder="Expiration date (MM/YY)"
+                options={{
+                  date: true,
+                  datePattern: ['m', 'y'],
+                }}
+              />
+            </InputBox>
+            <InputBox>
+              <InputDescription>CVV *</InputDescription>
+              <CleaveInput
+                name="security_code"
+                placeholder="3 Digits Code"
+                options={{ numericOnly: true }}
+                maxLength="3"
+              />
+            </InputBox>
+          </Grid>
+          {/* <input
             placeholder="Card holder Name"
             name="holder_name"
             type="text"
@@ -72,10 +105,10 @@ class Credit extends React.PureComponent {
             placeholder="CVV"
             options={{ numericOnly: true }}
             maxLength="3"
-          />
+          /> */}
           <AccentButton type="submit">CONFIRM ORDER</AccentButton>
-        </Form>
-      </StyledLimit>
+        </form>
+      </Limit>
     )
   }
 }
