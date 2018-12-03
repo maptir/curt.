@@ -238,50 +238,6 @@ const mocks = [
     gender: 'women',
   },
   {
-    name: 'NOVAS CT LEATHER',
-    slug: 'novas-ct-leather-women',
-    base: null,
-    imageUrl:
-      ' https://www.lacoste.co.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/3/5/35spm0038_231_01.jpg',
-    price: 3790,
-    brand: 'Lacoste',
-    size: 10,
-    ggender: 'women',
-  },
-  {
-    name: 'LEROND TENNIS INSPIRED',
-    slug: 'lerond-tennis-inspired-women',
-    base: null,
-    imageUrl:
-      'https://www.lacoste.co.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/3/5/35cam0148_092_02.jpg',
-    price: 2590,
-    brand: 'Lacoste',
-    size: 10,
-    gender: 'women',
-  },
-  {
-    name: 'EYYLA LEATHER',
-    slug: 'eyyla-leather-women',
-    base: null,
-    imageUrl:
-      'https://www.lacoste.co.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/3/5/35caw0004_7e9_01.jpg',
-    price: 4790,
-    brand: 'Lacoste',
-    size: 10,
-    gender: 'women',
-  },
-  {
-    name: 'CARNABY EVO',
-    slug: 'carnaby-evo-women',
-    base: null,
-    imageUrl:
-      'https://www.lacoste.co.th/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/3/5/35spj0002_nv1_01.jpg',
-    price: 2790,
-    brand: 'Lacoste',
-    size: 7,
-    gender: 'women',
-  },
-  {
     name: 'IGNITE LIMITLESS 2',
     slug: 'ignite-limitless-2-men',
     base: null,

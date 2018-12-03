@@ -48,8 +48,6 @@ class Checkout extends React.Component {
             setUserInfo={userInfo => this.setUserInfo(userInfo)}
           />
         )
-      case 'PAYMENTMETHOD':
-        return <PaymentMethod continueTo={this.changeCheckoutState} />
       case 'CONFIRMATION':
         return (
           <Confirmation

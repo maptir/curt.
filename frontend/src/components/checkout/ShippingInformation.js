@@ -32,8 +32,7 @@ class ShippingInformation extends React.Component {
     return (
       <Fragment>
         <Step>
-          <Bold>Shipping Information</Bold> &gt; Payment Method &gt;
-          Confirmation
+          <Bold>Shipping Information</Bold> &gt; Confirmation
         </Step>
         <InputBox>
           <InputDescription>Customer Name *</InputDescription>
@@ -97,10 +96,10 @@ class ShippingInformation extends React.Component {
             className="btn btn-dark rounded-0"
             onClick={() => {
               this.props.setUserInfo(this.state)
-              this.props.continueTo('PAYMENTMETHOD')
+              this.props.continueTo('CONFIRMATION')
             }}
           >
-            CONTINUE TO PAYMENT METHOD
+            CONTINUE TO CONFIRMATION
           </button>
         </FlexBox>
       </Fragment>

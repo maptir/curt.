@@ -21,7 +21,7 @@ class Confirmation extends React.Component {
     return (
       <div style={{ marginBottom: '9em' }}>
         <Step>
-          Shipping Information &gt; Payment Method &gt;
+          Shipping Information &gt;
           <Bold> Confirmation</Bold>
         </Step>
         <Bold>Order Number : </Bold>
@@ -35,10 +35,10 @@ class Confirmation extends React.Component {
         <Credit onPaymentSuccess={this.completeCheckout} />
         <FlexBox>
           <div
-            onClick={() => this.props.continueTo('PAYMENTMETHOD')}
+            onClick={() => this.props.continueTo('SHIPPINGINFORMATION')}
             style={{ flex: 1, cursor: 'pointer' }}
           >
-            &lt; RETURN TO PAYMENT
+            &lt; RETURN TO SHIPPING
           </div>
         </FlexBox>
       </div>
