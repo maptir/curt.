@@ -31,6 +31,7 @@ class CustomPane extends React.Component {
   state = {
     dataURL: '',
     toggle: true,
+    fileUpload: []
   }
   delete = () => {
     const canvas = document.getElementById('custom').fabric
@@ -63,6 +64,7 @@ class CustomPane extends React.Component {
       }
     }
     reader.readAsDataURL(event.target.files[0])
+    this.setState({fileUpload: []})
   }
 
   save = () => {
@@ -108,6 +110,7 @@ class CustomPane extends React.Component {
               type="file"
               accept="image/png, image/jpeg"
               onChange={this.upload}
+              value={this.state.fileUpload}
               style={{ display: 'none' }}
             />
           </label>
