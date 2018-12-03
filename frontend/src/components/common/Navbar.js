@@ -173,7 +173,7 @@ class Navbar extends React.PureComponent {
               isLoggedIn ? (
                 <Fragment>
                   <NavItem onClick={openCart}>CART</NavItem>
-                  <NavItem onClick={openOrder}>USER</NavItem>
+                  <NavItem onClick={openOrder}>HISTORY</NavItem>
                   <NavItem onClick={logout}>LOGOUT</NavItem>
                 </Fragment>
               ) : (
