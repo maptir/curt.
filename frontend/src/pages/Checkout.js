@@ -20,7 +20,7 @@ const Flex = styled.div`
 
 class Checkout extends React.Component {
   state = {
-    checkoutState: 'CONFIRMATION',
+    checkoutState: 'SHIPPINGINFORMATION',
     userInfo: {
       name: '',
       address: '',

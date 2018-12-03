@@ -88,30 +88,6 @@ class Credit extends React.PureComponent {
               />
             </InputBox>
           </Grid>
-          {/* <input
-            placeholder="Card holder Name"
-            name="holder_name"
-            type="text"
-          />
-          <Cleave
-            name="number"
-            placeholder="Credit card number"
-            options={{ creditCard: true }}
-          />
-          <Cleave
-            name="expiration"
-            placeholder="Expiration date (MM/YY)"
-            options={{
-              date: true,
-              datePattern: ['m', 'y'],
-            }}
-          />
-          <Cleave
-            name="security_code"
-            placeholder="CVV"
-            options={{ numericOnly: true }}
-            maxLength="3"
-          /> */}
           <AccentButton type="submit">CONFIRM ORDER</AccentButton>
         </form>
       </Limit>
