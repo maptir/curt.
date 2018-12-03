@@ -13,6 +13,7 @@ import {
   Grid,
   FlexBox,
 } from './Styled'
+import { connect } from 'react-redux'
 
 const AccentButton = styled.button`
   color:white;
@@ -43,7 +44,8 @@ class Credit extends React.PureComponent {
 
     try {
       this.setState({ uploading: true })
-      const result = await curtApi.orders.checkoutWithCreditCard(card)
+      const price = this.props.cart.reduce((acc, cur) => acc + cur.price, 0)
+      const result = await curtApi.orders.checkoutWithCreditCard(card, price)
       this.props.onPaymentSuccess()
       this.setState({ uploading: false })
     } catch (error) {
@@ -65,7 +67,11 @@ class Credit extends React.PureComponent {
           <Grid>
             <InputBox>
               <InputDescription>Card Holder Name *</InputDescription>
-              <CleaveInput name="holder_name" placeholder="John Doe" />
+              <CleaveInput
+                name="holder_name"
+                placeholder="John Doe"
+                type="text"
+              />
             </InputBox>
             <InputBox>
               <InputDescription>MM / YY *</InputDescription>
@@ -95,4 +101,9 @@ class Credit extends React.PureComponent {
   }
 }
 
-export default Credit
+const mapStateToProps = state => ({ ...state.cart })
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Credit)

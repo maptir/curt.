@@ -14,7 +14,7 @@ export default {
     )
     return addedOrder
   },
-  async checkoutWithCreditCard(card) {
+  async checkoutWithCreditCard(card, price) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line
       Omise.createToken('card', card, async (statusCode, response) => {
@@ -28,6 +28,7 @@ export default {
             `${config.API_URL}/orders/payment`,
             {
               token_id: response.id,
+              price: price,
             },
           )
           console.log('resolve')
