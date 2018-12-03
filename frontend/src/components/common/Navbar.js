@@ -10,6 +10,7 @@ import LoginForm from '../login/LoginForm'
 import Cart from '../cart/Cart'
 import AuthProvider from '../../providers/AuthProvider'
 import CartProvider from '../../providers/CartProvider'
+import OrderProvider from '../../providers/OrderProvider'
 import Modal from './Modal'
 
 const Container = styled.div`
@@ -67,7 +68,7 @@ const NavItem = styled.div`
 const menus = [
   { name: 'HOME', path: '/' },
   { name: 'REGISTER', path: '/register' },
-  { name: 'CATALOG', path: '/catalog'},
+  { name: 'CATALOG', path: '/catalog' },
 ]
 
 class Navbar extends React.PureComponent {
@@ -161,11 +162,18 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
-          <Composer components={[<AuthProvider />, <CartProvider />]} >
-            {([{ isLoggedIn, logout, openModal }, { openCart }]) =>
+          <Composer
+            components={[<AuthProvider />, <CartProvider />, <OrderProvider />]}
+          >
+            {([
+              { isLoggedIn, logout, openModal },
+              { openCart },
+              { openOrder },
+            ]) =>
               isLoggedIn ? (
                 <Fragment>
                   <NavItem onClick={openCart}>CART</NavItem>
+                  <NavItem onClick={openOrder}>HISTORY</NavItem>
                   <NavItem onClick={logout}>LOGOUT</NavItem>
                 </Fragment>
               ) : (

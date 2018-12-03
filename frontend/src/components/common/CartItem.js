@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import RemoveItem from './RemoveItem'
+import RemoveItem from '../cart/RemoveItem'
 
 const Container = styled.div`
   display: flex;

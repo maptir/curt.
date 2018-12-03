@@ -1,7 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Step, Bold, FlexBox } from './Styled'
-import curtApi from '../../lib/curtApi'
-
+import * as orderActions from '../../redux/modules/order'
+import Credit from './Credit'
 class Confirmation extends React.Component {
   state = {}
 
@@ -10,11 +11,13 @@ class Confirmation extends React.Component {
   componentWillUnmount = () => {}
 
   completeCheckout = async () => {
-    await curtApi.cart.clearCart()    
+    await this.props.addOrder({ ...this.props.userInfo })
     window.location = '/checkout/complete'
   }
 
   render() {
+    const userInfo = this.props.userInfo
+
     return (
       <div style={{ marginBottom: '9em' }}>
         <Step>
@@ -24,11 +27,12 @@ class Confirmation extends React.Component {
         <Bold>Order Number : </Bold>
         3194719794 <br />
         <Bold>SHIPPING INFORMATION</Bold>
-        <div>Kongpon Charanwattanakit</div>
-        <div>28/56, Premio Vetro, Ngamwongwan 54, Bangkhen, Ladyao</div>
-        <div>Bangkok, Thailand</div>
-        <Bold>PAYMENT METHOD : </Bold>
-        Credit Cart
+        <div>{userInfo.name}</div>
+        <div>{userInfo.address + ' ' + userInfo.district}</div>
+        <div>{userInfo.country + ' ' + userInfo.postalCode}</div>
+        <div>{userInfo.contact}</div>
+        <Bold>Omise:</Bold>
+        <Credit onPaymentSuccess={this.completeCheckout} />
         <FlexBox>
           <div
             onClick={() => this.props.continueTo('PAYMENTMETHOD')}
@@ -36,16 +40,17 @@ class Confirmation extends React.Component {
           >
             &lt; RETURN TO PAYMENT
           </div>
-          <button
-            className="btn btn-dark rounded-0"
-            onClick={this.completeCheckout}
-          >
-            CONFIRM ORDER
-          </button>
         </FlexBox>
       </div>
     )
   }
 }
 
-export default Confirmation
+const mapStateToProps = state => ({ ...state.order })
+
+const mapDispatchToProps = { ...orderActions }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Confirmation)

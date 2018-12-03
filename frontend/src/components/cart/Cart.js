@@ -1,43 +1,9 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import _ from 'lodash'
-import CartItem from './CartItem'
+import CartItem from '../common/CartItem'
 import CartProvider from '../../providers/CartProvider'
-import ProductProvider from '../../providers/ProductProvider'
-
-const Overlay = styled.div`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  transition: all 300ms;
-`
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  width: 400px;
-  height: 100vh;
-  top: 0;
-  ${'' /* right: ${props => (props.isOpen ? '0' : '-400px')}; */} right: -400px;
-  background-color: white;
-  color: black;
-  z-index: 99999;
-  box-shadow: ${props =>
-    props.isOpen ? '0 -4px 5px rgba(0, 0, 0, 0.6);' : 'none'};
-
-  transition: all 300ms;
-  transform: ${props =>
-    !props.isOpen ? 'translate3d(0)' : 'translate3d(-400px, 0 ,0 )'};
-  @media (max-width: 480px) {
-    width: 90vw;
-  }
-`
+import Overlay from '../common/Overlay'
+import Sidebar from '../common/Sidebar'
 
 const Padding = styled.div`
   display: flex;
@@ -56,7 +22,7 @@ const Head = styled.div`
 `
 
 const Promotion = styled.div`
-  border: 1px solid black !important;
+  border: 1px solid #2f2f2f !important;
   text-align: center;
   padding: 20px 30px 20px 30px;
   font-size: 12px;
@@ -82,7 +48,7 @@ const Close = styled.div`
 `
 
 const Checkout = styled.div`
-  background-color: black;
+  background-color: #2f2f2f;
   color: white;
   width: 100%;
   padding: 2em 1em;
@@ -108,61 +74,46 @@ class Cart extends React.Component {
     return (
       <CartProvider>
         {({ cart }) => (
-          <ProductProvider>
-            {({ productList }) => {
-              const cartProductDetail = _.intersectionWith(
-                productList,
-                cart,
-                (product, cartItem) => product._id === cartItem.productId,
-              )
-              return (
-                <Fragment>
-                  <Overlay
-                    isOpen={this.props.isOpen}
-                    onClick={this.props.onClose}
-                  />
-                  <Container isOpen={this.props.isOpen}>
-                    <Padding>
-                      <Head>
-                        <div style={{ flex: 1 }}>CART</div>
-                        <Close onClick={this.props.onClose}>CLOSE</Close>
-                      </Head>
-                      <Promotion>
-                        FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
-                      </Promotion>
-                      <ScrollItem>
-                        <ScrollItemContent>
-                          {cartProductDetail.map((product, index) => (
-                            <CartItem key={index} {...product} removable />
-                          ))}
-                        </ScrollItemContent>
-                      </ScrollItem>
-                    </Padding>
-                    <Checkout>
-                      <Price>
-                        <SubTotal>
-                          SUB TOTAL ({cartProductDetail.length.toLocaleString()}{' '}
-                          ITEMS)
-                        </SubTotal>
-                        <SumPrice>
-                          {cartProductDetail
-                            .reduce((acc, cur) => acc + cur.price, 0)
-                            .toLocaleString()}
-                          &nbsp;Baht
-                        </SumPrice>
-                      </Price>
-                      <button
-                        className="btn btn-light btn-block rounded-0"
-                        onClick={() => (window.location = '/checkout')}
-                      >
-                        CHECK OUT
-                      </button>
-                    </Checkout>
-                  </Container>
-                </Fragment>
-              )
-            }}
-          </ProductProvider>
+          <Fragment>
+            <Overlay isOpen={this.props.isOpen} onClick={this.props.onClose} />
+            <Sidebar isOpen={this.props.isOpen}>
+              <Padding>
+                <Head>
+                  <div style={{ flex: 1 }}>CART</div>
+                  <Close onClick={this.props.onClose}>CLOSE</Close>
+                </Head>
+                <Promotion>
+                  FREE SHIPPING ON ALL ORDER WITH 1,500 BAHT OR MORE !
+                </Promotion>
+                <ScrollItem>
+                  <ScrollItemContent>
+                    {cart.map((product, index) => (
+                      <CartItem key={index} {...product} removable />
+                    ))}
+                  </ScrollItemContent>
+                </ScrollItem>
+              </Padding>
+              <Checkout>
+                <Price>
+                  <SubTotal>
+                    SUB TOTAL ({cart.length.toLocaleString()} ITEMS)
+                  </SubTotal>
+                  <SumPrice>
+                    {cart
+                      .reduce((acc, cur) => acc + cur.price, 0)
+                      .toLocaleString()}
+                    &nbsp;Baht
+                  </SumPrice>
+                </Price>
+                <button
+                  className="btn btn-light btn-block rounded-0"
+                  onClick={() => (window.location = '/checkout')}
+                >
+                  CHECK OUT
+                </button>
+              </Checkout>
+            </Sidebar>
+          </Fragment>
         )}
       </CartProvider>
     )

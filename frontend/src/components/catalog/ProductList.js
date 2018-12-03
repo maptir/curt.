@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Product from '../common/Product'
 import ProductProvider from '../../providers/ProductProvider'
+import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
 
 const CatalogContainer = styled.div`
@@ -18,24 +19,31 @@ const CatalogGrid = styled.div`
   margin-top: 0.5em;
 `
 
-const ProductList = () => (
+const ProductList = ({ location }) => (
   <ProductProvider>
     {({ productList }) => (
       <CatalogContainer>
         <CatalogGrid>
-          {_.uniqBy(productList, 'name').map(product => (
-            <Product
-              key={product._id}
-              to={'/product/' + product.slug}
-              imageUrl={product.imageUrl}
-              title={product.name}
-              desc={product.price.toLocaleString() + ' Baht'}
-            />
-          ))}
+          {_.uniqBy(productList, 'name')
+            .filter(product => {
+              if (location.search === '') return true
+              return (
+                product.brand === location.search.substring(1).split('=')[1]
+              )
+            })
+            .map(product => (
+              <Product
+                key={product._id}
+                to={'/product/' + product.slug}
+                imageUrl={product.imageUrl}
+                title={product.name}
+                desc={product.price.toLocaleString() + ' Baht'}
+              />
+            ))}
         </CatalogGrid>
       </CatalogContainer>
     )}
   </ProductProvider>
 )
 
-export default ProductList
+export default withRouter(ProductList)

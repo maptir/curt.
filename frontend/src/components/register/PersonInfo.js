@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import curtApi from '../../lib/curtApi'
+import curtApi from '../../api'
 import RegisterImage from '../../assets/register/register-pic.jpg'
 import * as authActions from '../../redux/modules/auth'
 

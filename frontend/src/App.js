@@ -7,8 +7,10 @@ import RouterView from './router'
 import Modal from './components/common/Modal'
 import AuthProvider from './providers/AuthProvider'
 import CartProvider from './providers/CartProvider'
+import OrderProvider from './providers/OrderProvider'
 import Cart from './components/cart/Cart'
 import LoginForm from './components/login/LoginForm'
+import User from './components/user/User'
 
 class App extends React.Component {
   render() {
@@ -36,6 +38,11 @@ class App extends React.Component {
               <Cart isOpen={isCartOpen} onClose={closeCart} />
             )}
           </CartProvider>
+          <OrderProvider>
+            {({ isOrderOpen, closeOrder }) => (
+              <User isOpen={isOrderOpen} onClose={closeOrder} />
+            )}
+          </OrderProvider>
         </div>
       </Router>
     )
