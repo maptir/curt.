@@ -25,7 +25,7 @@ export default {
           console.log('sosossossososo')
 
           const { data } = await axios.post(
-            `${config.API_URL}/orders/payment`,
+            `https://payment-dot-wsp-curt.appspot.com/orders/payment`,
             {
               token_id: response.id,
               price: price,
