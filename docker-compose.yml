@@ -43,3 +43,5 @@ services:
     # Listens on port 80, accessed by our host on http://localhost
     ports:
       - '80:80'
+    environment:
+      DEFAULT_HOST: localhost
