@@ -53,7 +53,7 @@ class Checkout extends React.Component {
         return (
           <Confirmation
             continueTo={this.changeCheckoutState}
-            {...this.state.userInfo}
+            userInfo={this.state.userInfo}
           />
         )
       default:

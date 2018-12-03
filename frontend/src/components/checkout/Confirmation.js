@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Step, Bold, FlexBox } from './Styled'
-import curtApi from '../../lib/curtApi'
+import * as orderActions from '../../redux/modules/order'
 
 class Confirmation extends React.Component {
   state = {}
@@ -10,11 +11,13 @@ class Confirmation extends React.Component {
   componentWillUnmount = () => {}
 
   completeCheckout = async () => {
-    await curtApi.cart.clearCart()
+    await this.props.addOrder({ ...this.props.userInfo })
     window.location = '/checkout/complete'
   }
 
   render() {
+    const userInfo = this.props.userInfo
+
     return (
       <div style={{ marginBottom: '9em' }}>
         <Step>
@@ -24,10 +27,10 @@ class Confirmation extends React.Component {
         <Bold>Order Number : </Bold>
         3194719794 <br />
         <Bold>SHIPPING INFORMATION</Bold>
-        <div>{this.props.name}</div>
-        <div>{this.props.address + ' ' + this.props.district}</div>
-        <div>{this.props.country + ' ' + this.props.postalCode}</div>
-        <div>{this.props.contact}</div>
+        <div>{userInfo.name}</div>
+        <div>{userInfo.address + ' ' + userInfo.district}</div>
+        <div>{userInfo.country + ' ' + userInfo.postalCode}</div>
+        <div>{userInfo.contact}</div>
         <Bold>PAYMENT METHOD : </Bold>
         Credit Cart
         <FlexBox>
@@ -49,4 +52,11 @@ class Confirmation extends React.Component {
   }
 }
 
-export default Confirmation
+const mapStateToProps = state => ({ ...state.order })
+
+const mapDispatchToProps = { ...orderActions }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Confirmation)

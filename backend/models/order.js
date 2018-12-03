@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const ordersSchema = mongoose.Schema({
   purchasedList: [
     {
-      productID: {
+      productId: {
         type: String,
         required: true,
       },
@@ -17,15 +17,23 @@ const ordersSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
-  totalPrice: {
-    type: Number,
-    required: true,
-  },
-  status: {
+  address: {
     type: String,
     required: true,
   },
-  shippingAddress: {
+  district: {
+    type: String,
+    required: true,
+  },
+  country: {
+    type: String,
+    required: true,
+  },
+  postalCode: {
+    type: String,
+    required: true,
+  },
+  contact: {
     type: String,
     required: true,
   },

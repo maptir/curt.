@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import CartItem from '../cart/CartItem'
+import CartItem from '../common/CartItem'
 import CartProvider from '../../providers/CartProvider'
 
 const Container = styled.div`

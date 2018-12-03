@@ -4,9 +4,11 @@ import counter from './modules/counter'
 import auth from './modules/auth'
 import cart from './modules/cart'
 import product from './modules/product'
+import order from './modules/order'
 import * as authActions from './modules/auth'
 import * as cartActions from './modules/cart'
 import * as productActions from './modules/product'
+import * as orderActions from './modules/order'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import axios from 'axios'
 import curtApi from '../api'
@@ -16,6 +18,7 @@ const reducer = combineReducers({
   auth,
   cart,
   product,
+  order,
 })
 
 const configureStore = () => {
@@ -45,6 +48,7 @@ const configureStore = () => {
   }
 
   store.dispatch(productActions.fetchAllProduct())
+  store.dispatch(orderActions.fetchAllOrder())
 
   return store
 }

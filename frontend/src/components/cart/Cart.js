@@ -1,41 +1,9 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import CartItem from './CartItem'
+import CartItem from '../common/CartItem'
 import CartProvider from '../../providers/CartProvider'
-
-const Overlay = styled.div`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  transition: all 300ms;
-`
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  width: 400px;
-  height: 100vh;
-  top: 0;
-  ${'' /* right: ${props => (props.isOpen ? '0' : '-400px')}; */} right: -400px;
-  background-color: white;
-  color: black;
-  z-index: 99999;
-  box-shadow: ${props =>
-    props.isOpen ? '0 -4px 5px rgba(0, 0, 0, 0.6);' : 'none'};
-
-  transition: all 300ms;
-  transform: ${props =>
-    !props.isOpen ? 'translate3d(0)' : 'translate3d(-400px, 0 ,0 )'};
-  @media (max-width: 480px) {
-    width: 90vw;
-  }
-`
+import Overlay from '../common/Overlay'
+import Sidebar from '../common/Sidebar'
 
 const Padding = styled.div`
   display: flex;
@@ -54,7 +22,7 @@ const Head = styled.div`
 `
 
 const Promotion = styled.div`
-  border: 1px solid black !important;
+  border: 1px solid #2f2f2f !important;
   text-align: center;
   padding: 20px 30px 20px 30px;
   font-size: 12px;
@@ -80,7 +48,7 @@ const Close = styled.div`
 `
 
 const Checkout = styled.div`
-  background-color: black;
+  background-color: #2f2f2f;
   color: white;
   width: 100%;
   padding: 2em 1em;
@@ -108,7 +76,7 @@ class Cart extends React.Component {
         {({ cart }) => (
           <Fragment>
             <Overlay isOpen={this.props.isOpen} onClick={this.props.onClose} />
-            <Container isOpen={this.props.isOpen}>
+            <Sidebar isOpen={this.props.isOpen}>
               <Padding>
                 <Head>
                   <div style={{ flex: 1 }}>CART</div>
@@ -144,7 +112,7 @@ class Cart extends React.Component {
                   CHECK OUT
                 </button>
               </Checkout>
-            </Container>
+            </Sidebar>
           </Fragment>
         )}
       </CartProvider>
