@@ -27,7 +27,18 @@ app.post('/orders/payment', async (req, res) => {
   return res.send(data)
 })
 
-app.use('/', proxy({ target: 'http://35.197.147.179', changeOrigin: true }))
+app.use(
+  '/',
+  (res, req, next) => {
+    console.log('proxying')
+    next()
+  },
+  proxy({ target: 'http://35.197.147.179', changeOrigin: true }),
+  (res, req, next) => {
+    console.log('proxyed')
+    next()
+  }
+)
 
 app.listen(process.env.PORT || 3000)
 

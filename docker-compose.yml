@@ -5,35 +5,35 @@ services:
     image: mongo
     environment:
       - MONGO_INITDB_DATABASE=curt
-    ports:
-      - 80:27017
+    # ports:
+    #   - 80:27017
     volumes:
       - ./backend/db:/data/db
     restart: always
 
-  # api:
-  #   build: ./backend
-  #   expose:
-  #     - '8000'
-  #   ports:
-  #     - '80:8000'
-  #   links:
-  #     - mongodb
-  #   depends_on:
-  #     - mongodb
-  #     # - nginx
-  #   environment:
-  #     # VIRTUAL_HOST: 'localhost'
-  #     # VIRTUAL_PORT: 8000
-  #     MONGODB_HOST: mongodb://mongodb
+  api:
+    build: ./backend
+    expose:
+      - '8000'
+    # ports:
+    #   - '80:8000'
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+      - nginx
+    environment:
+      VIRTUAL_HOST: 'localhost'
+      VIRTUAL_PORT: 8000
+      MONGODB_HOST: mongodb://mongodb
 
-  # nginx:
-  #   image: jwilder/nginx-proxy
-  #   volumes:
-  #     # It needs to access Docker's API, so we mount the Unix socket
-  #     - '/var/run/docker.sock:/tmp/docker.sock:ro'
-  #   # Listens on port 80, accessed by our host on http://localhost
-  #   ports:
-  #     - '80:80'
-  #   environment:
-  #     DEFAULT_HOST: 'localhost'
+  nginx:
+    image: jwilder/nginx-proxy
+    volumes:
+      # It needs to access Docker's API, so we mount the Unix socket
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+    # Listens on port 80, accessed by our host on http://localhost
+    ports:
+      - '80:80'
+    environment:
+      DEFAULT_HOST: 'localhost'

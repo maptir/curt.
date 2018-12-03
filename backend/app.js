@@ -15,14 +15,12 @@ const productsRouter = require('./routes/products')
 const imagesRouter = require('./routes/images')
 const ordersRouter = require('./routes/orders')
 
-const DB_URL =
-  process.env.MONGODB_HOST ||
-  'mongodb://35.197.147.179' ||
-  'mongodb://localhost:27017'
+const DB_PORT = process.env.NODE_ENV === 'test' ? 27018 : 27017
+const DB_URL = process.env.MONGODB_HOST || 'mongodb://localhost'
 
 // MongoDB
 mongoose.connect(
-  `${DB_URL}/curt`,
+  `${DB_URL}:${DB_PORT}/curt`,
   { useNewUrlParser: true },
 )
 const db = mongoose.connection
@@ -58,7 +56,7 @@ app.use('/orders', ordersRouter)
 // })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   console.log('a fucking error occurs')
   console.log(err)
