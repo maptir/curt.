@@ -5,7 +5,7 @@ const app = express()
 
 app.use(bodyParser.json())
 
-app.post('/payment', async (req, res) => {
+app.post('/orders/payment', async (req, res) => {
   console.log(req.body)
   const { data } = await axios.post(
     'https://api.omise.co/charges',
