@@ -22,6 +22,7 @@ services:
       - nginx
     environment:
       VIRTUAL_HOST: 'localhost'
+      VIRTUAL_PORT: 8000
       MONGODB_HOST: mongodb://mongodb
 
   # web:
