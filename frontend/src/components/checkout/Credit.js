@@ -14,11 +14,12 @@ import {
   FlexBox,
 } from './Styled'
 import { connect } from 'react-redux'
+import Spinner from '../common/Loading'
 
 const AccentButton = styled.button`
-  color:white;
-  font-size : 16px;
-  background-color :#545454
+  color: white;
+  font-size: 16px;
+  background-color: #545454;
   padding: 5px 23px;
 `
 
@@ -56,6 +57,7 @@ class Credit extends React.PureComponent {
     return (
       <Limit>
         <form onSubmit={this.onCreditCardSubmit} id="card">
+          <Spinner isOpen={this.state.uploading} text={<div>Loading...</div>} />
           <InputBox>
             <InputDescription>Credit Card Number *</InputDescription>
             <CleaveInput
