@@ -11,21 +11,21 @@ services:
       - ./backend/db:/data/db
     restart: always
 
-  api:
-    build: ./backend
-    expose:
-      - '8000'
-    ports:
-      - '80:8000'
-    links:
-      - mongodb
-    depends_on:
-      - mongodb
-      # - nginx
-    environment:
-      # VIRTUAL_HOST: 'localhost'
-      # VIRTUAL_PORT: 8000
-      MONGODB_HOST: mongodb://mongodb
+  # api:
+  #   build: ./backend
+  #   expose:
+  #     - '8000'
+  #   ports:
+  #     - '80:8000'
+  #   links:
+  #     - mongodb
+  #   depends_on:
+  #     - mongodb
+  #     # - nginx
+  #   environment:
+  #     # VIRTUAL_HOST: 'localhost'
+  #     # VIRTUAL_PORT: 8000
+  #     MONGODB_HOST: mongodb://mongodb
 
   # nginx:
   #   image: jwilder/nginx-proxy
