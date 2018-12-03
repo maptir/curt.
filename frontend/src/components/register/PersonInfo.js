@@ -93,6 +93,7 @@ class PersonInfo extends React.Component {
         username: this.state.email,
         password: this.state.password,
       })
+      window.location = '/'
     } else {
       window.location = '/register'
     }

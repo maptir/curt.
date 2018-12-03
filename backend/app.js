@@ -13,6 +13,7 @@ const usersRouter = require('./routes/users')
 const cartRouter = require('./routes/cart')
 const productsRouter = require('./routes/products')
 const imagesRouter = require('./routes/images')
+const ordersRouter = require('./routes/orders')
 
 const DB_PORT = process.env.NODE_ENV === 'test' ? 27018 : 27017
 
@@ -46,6 +47,7 @@ app.use('/users', usersRouter)
 app.use('/cart', cartRouter)
 app.use('/products', productsRouter)
 app.use('/images', imagesRouter)
+app.use('/orders', ordersRouter)
 
 // // catch 404 and forward to error handler
 // app.use(function (req, res, next) {

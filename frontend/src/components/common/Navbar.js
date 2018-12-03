@@ -67,7 +67,7 @@ const NavItem = styled.div`
 const menus = [
   { name: 'HOME', path: '/' },
   { name: 'REGISTER', path: '/register' },
-  { name: 'CATALOG', path: '/catalog'},
+  { name: 'CATALOG', path: '/catalog' },
 ]
 
 class Navbar extends React.PureComponent {
@@ -161,7 +161,7 @@ class Navbar extends React.PureComponent {
               {menu.name}
             </StyledLink>
           ))}
-          <Composer components={[<AuthProvider />, <CartProvider />]} >
+          <Composer components={[<AuthProvider />, <CartProvider />]}>
             {([{ isLoggedIn, logout, openModal }, { openCart }]) =>
               isLoggedIn ? (
                 <Fragment>
