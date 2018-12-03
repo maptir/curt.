@@ -1,7 +1,7 @@
 const config = {
   production: {
     FRONTEND_URL: '',
-    API_URL: 'http://35.197.147.179/',
+    API_URL: 'https://wsp-curt.appspot.com',
   },
   development: {
     FRONTEND_URL: 'http://localhost:3000',
