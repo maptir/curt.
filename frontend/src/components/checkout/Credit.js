@@ -69,7 +69,7 @@ class Credit extends React.PureComponent {
           <Grid>
             <InputBox>
               <InputDescription>Card Holder Name *</InputDescription>
-              <CleaveInput
+              <Input
                 name="holder_name"
                 placeholder="John Doe"
                 type="text"

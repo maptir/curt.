@@ -43,24 +43,24 @@ router.get('/', isAuthenticated, (req, res) => {
   })
 })
 
-router.post('/payment', isAuthenticated, async (req, res) => {
-  console.log(req.body)
-  const { data } = await axios.post(
-    'https://api.omise.co/charges',
-    {
-      description: 'Test payment',
-      amount: req.body.price + '00' || 99900,
-      currency: 'thb',
-      card: req.body.token_id,
-    },
-    {
-      auth: {
-        username: config.OMISE_KEY_SECRET,
-      },
-    },
-  )
-  return res.send(data)
-})
+// router.post('/payment', isAuthenticated, async (req, res) => {
+//   console.log(req.body)
+//   const { data } = await axios.post(
+//     'https://api.omise.co/charges',
+//     {
+//       description: 'Test payment',
+//       amount: req.body.price + '00' || 99900,
+//       currency: 'thb',
+//       card: req.body.token_id,
+//     },
+//     {
+//       auth: {
+//         username: config.OMISE_KEY_SECRET,
+//       },
+//     },
+//   )
+//   return res.send(data)
+// })
 
 router.post('/create', isAuthenticated, (req, res) => {
   let newOrder = new Order({
