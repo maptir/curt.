@@ -22,17 +22,8 @@ services:
       - nginx
     environment:
       VIRTUAL_HOST: 'localhost'
+      VIRTUAL_PORT: 8000
       MONGODB_HOST: mongodb://mongodb
-
-  # web:
-  #   build: ./frontend
-  #   expose:
-  #     - '3000'
-  #   depends_on:
-  #     - nginx
-  #   ports:
-  #     - 3000:3000
-  #   restart: always
 
   nginx:
     image: jwilder/nginx-proxy
@@ -42,3 +33,5 @@ services:
     # Listens on port 80, accessed by our host on http://localhost
     ports:
       - '80:80'
+    environment:
+      DEFAULT_HOST: 'localhost'

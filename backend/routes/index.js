@@ -8,7 +8,7 @@ let User = require('../models/user')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' })
+  res.send('Welcome to curt. API')
 })
 
 router.get('/reset', (req, res, next) => {

@@ -29,7 +29,7 @@ db.on('error', console.error.bind(console, 'connection error:'))
 
 const app = express()
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -59,7 +59,7 @@ app.use('/orders', ordersRouter)
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   console.log('a fucking error occurs')
-  console.log(err.status)
+  console.log(err)
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
