@@ -27,7 +27,7 @@ export default {
           const { data } = await axios.post(`${API_URL}/orders/payment`, {
             token_id: response.id,
           })
-          return data
+          resolve(data)
         } else {
           // Error: display an error message. Note that `response.message` contains
           // a preformatted error message. Also note that `response.code` will be
