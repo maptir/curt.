@@ -1,4 +1,6 @@
 const express = require('express')
+const axios = require('axios')
+const config = require('../config')
 const router = express.Router()
 
 const Order = require('../models/order')
@@ -6,6 +8,25 @@ const User = require('../models/user')
 const Product = require('../models/product')
 
 const isAuthenticated = require('../middlewares/isAuthenticated')
+
+router.post('/payment', isAuthenticated, async (req, res) => {
+  console.log(req.body)
+  const { data } = await axios.post(
+    'https://api.omise.co/charges',
+    {
+      description: 'Test payment',
+      amount: 99900,
+      currency: 'thb',
+      card: req.body.token_id,
+    },
+    {
+      auth: {
+        username: config.OMISE_KEY_SECRET,
+      },
+    },
+  )
+  return res.send(data)
+})
 
 router.post('/create', isAuthenticated, (req, res) => {
   let newOrder = new Order({

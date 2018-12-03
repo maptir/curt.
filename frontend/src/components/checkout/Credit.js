@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Limit from '../components/common/Limit'
+import Limit from '../common/Limit'
 import Cleave from 'cleave.js/react'
 import axios from 'axios'
-const API_URL =
-  process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000'
+import curtApi from '../../api'
 
 const StyledLimit = styled(Limit)`
   max-width: 400px;
@@ -26,7 +25,7 @@ const AccentButton = styled.button`
 `
 
 class Credit extends React.PureComponent {
-  onCreditCardSubmit = e => {
+  onCreditCardSubmit = async e => {
     e.preventDefault()
 
     var card_form = document.getElementById('card')
@@ -38,34 +37,20 @@ class Credit extends React.PureComponent {
       expiration_year: '20' + card_form.expiration.value.split('/')[1],
       security_code: card_form.security_code.value,
     }
-    console.log(card)
 
-    // eslint-disable-next-line
-    Omise.createToken('card', card, async (statusCode, response) => {
-      console.log(response)
-      if (statusCode == 200) {
-        // Success: send back the TOKEN_ID to your server to create a charge.
-        // The TOKEN_ID can be found in `response.id`.
-        const { data } = await axios.post(`${API_URL}/checkout_credit`, {
-          token: response.id,
-        })
-        console.log(data)
-      } else {
-        // Error: display an error message. Note that `response.message` contains
-        // a preformatted error message. Also note that `response.code` will be
-        // "invalid_card" in case of validation error on the card.
-
-        // Example Error displaying
-        alert(response.code + ': ' + response.message)
-      }
-    })
+    try {
+      const result = await curtApi.orders.checkoutWithCreditCard(card)
+      this.props.onPaymentSuccess()
+    } catch (error) {
+      alert(error.code + ': ' + error.message)
+    }
   }
   render() {
     return (
       <StyledLimit>
         <Form onSubmit={this.onCreditCardSubmit} id="card">
           <input
-            placeholder="Card Holder Name"
+            placeholder="Card holder Name"
             name="holder_name"
             type="text"
           />
