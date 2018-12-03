@@ -1,10 +1,12 @@
 const express = require('express')
 const proxy = require('http-proxy-middleware')
 const axios = require('axios')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.post('/orders/payment', async (req, res) => {
   console.log(req.body)
