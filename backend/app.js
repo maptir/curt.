@@ -16,10 +16,11 @@ const imagesRouter = require('./routes/images')
 const ordersRouter = require('./routes/orders')
 
 const DB_PORT = process.env.NODE_ENV === 'test' ? 27018 : 27017
+const DB_URL = process.env.MONGODB_HOST || 'mongodb://localhost'
 
 // MongoDB
 mongoose.connect(
-  `mongodb://localhost:${DB_PORT}/curt`,
+  `${DB_URL}:${DB_PORT}/curt`,
   { useNewUrlParser: true },
 )
 const db = mongoose.connection
