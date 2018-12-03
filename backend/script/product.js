@@ -3,24 +3,24 @@ const config = require('../config')
 
 const mocks = [
   {
-    thumbnails : [ 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-1.png?alt=media&token=c78460a2-6900-4411-94ed-f991377f4e83", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-2.png?alt=media&token=45bfa9ce-67c7-4772-845f-81561d02f11d", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-3.png?alt=media&token=db6a15a0-d798-40aa-b1d0-0650f8b8b17f", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-4.png?alt=media&token=42ee2a8f-e587-45e2-a54a-8446244224e2", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-5.png?alt=media&token=27d1beda-f085-4aca-bf3f-8c2eb19256d2", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-6.png?alt=media&token=56463740-1c1f-4445-83d3-eead7de79617", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-7.png?alt=media&token=94123e7e-84da-4025-b3bb-093c46825e46", 
-        "https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-8.png?alt=media&token=747e8caa-7961-47be-b526-01770e879679"
+    thumbnails: [
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-1.png?alt=media&token=c78460a2-6900-4411-94ed-f991377f4e83',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-2.png?alt=media&token=45bfa9ce-67c7-4772-845f-81561d02f11d',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-3.png?alt=media&token=db6a15a0-d798-40aa-b1d0-0650f8b8b17f',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-4.png?alt=media&token=42ee2a8f-e587-45e2-a54a-8446244224e2',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-5.png?alt=media&token=27d1beda-f085-4aca-bf3f-8c2eb19256d2',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-6.png?alt=media&token=56463740-1c1f-4445-83d3-eead7de79617',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-7.png?alt=media&token=94123e7e-84da-4025-b3bb-093c46825e46',
+      'https://firebasestorage.googleapis.com/v0/b/kkz-blog.appspot.com/o/-LQ_pokng5L5aXFvCFb5-8.png?alt=media&token=747e8caa-7961-47be-b526-01770e879679',
     ],
-    name : "curt. x Van rose edition.",
-    slug : "curt. x van rose edition.-men",
-    base : null,
-    price : 2300,
-    brand : "Vans",
-    gender : "men",
-    size : 6.5,
-    imageUrl : "http://localhost:3000/mocks/slip-on-white-1.jpeg",
+    name: 'curt. x Van rose edition.',
+    slug: 'curt. x van rose edition.-men',
+    base: null,
+    price: 2300,
+    brand: 'Vans',
+    gender: 'men',
+    size: 6.5,
+    imageUrl: `${config.FRONTEND_URL}/mocks/slip-on-white-1.jpeg`,
   },
   {
     name: 'Slip On White',
