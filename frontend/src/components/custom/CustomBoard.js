@@ -9,6 +9,7 @@ import CustomPane from './CustomPane'
 import fabricLib from '../../lib/fabric'
 import firebase from '../../lib/firebase'
 import Spinner from '../common/Loading'
+import curtApi from '../../api'
 
 const Header = styled.div`
   display: flex;
@@ -61,7 +62,9 @@ class CustomBoard extends React.Component {
   }
 
   fetchProduct = async () => {
-    const products = await this.props.fetchProduct(this.props.match.params.slug)
+    const products = await curtApi.products.fetchProduct(
+      this.props.match.params.slug,
+    )
     this.setState({ products, newName: products[0].name })
   }
 
