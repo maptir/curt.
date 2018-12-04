@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import CheckoutImage from '../assets/text/checkout-text.png'
 import ShippingInformation from '../components/checkout/ShippingInformation'
 import Confirmation from '../components/checkout/Confirmation'
-import PaymentMethod from '../components/checkout/PaymentMethod'
 import Summary from '../components/checkout/Summary'
 import Credit from '../components/checkout/Credit'
 
