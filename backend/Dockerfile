@@ -8,4 +8,4 @@ RUN npm install
 
 COPY . ./
 
-CMD sleep 10 && ((sleep 5 && npm run mock) &) && npm start
+CMD sleep 10 && ((sleep 5 && npm run mock:prod) &) && npm start
