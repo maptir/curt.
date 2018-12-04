@@ -31,7 +31,12 @@ class Confirmation extends React.Component {
         <div>{userInfo.address + ' ' + userInfo.district}</div>
         <div>{userInfo.country + ' ' + userInfo.postalCode}</div>
         <div>{userInfo.contact}</div>
-        <Bold>Omise:</Bold>
+        <div style={{ display: 'flex' }}>
+          <input type="checkbox" />
+          <div className="ml-2">Pay at destination</div>
+        </div>
+        <input type="checkbox" />
+        <Bold className="ml-2">Omise:</Bold>
         <Credit onPaymentSuccess={this.completeCheckout} />
         <FlexBox>
           <div
