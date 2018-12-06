@@ -19,7 +19,7 @@ app.post('/orders/payment', async (req, res) => {
     },
     {
       auth: {
-        username: 'skey_test_5e4w5otnueqvo3uvs0s'
+        username: 'skey_test_5e65ne902al2jzbby1m'
       }
     }
   )

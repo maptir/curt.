@@ -45,7 +45,7 @@ injectGlobal`
 const store = configureStore()
 
 // eslint-disable-next-line
-Omise.setPublicKey('pkey_test_5e4walt8si8t1m1zr6l')
+Omise.setPublicKey('pkey_test_5e65ne8zi04ddn5umqj')
 
 ReactDOM.render(
   <Provider store={store}>
